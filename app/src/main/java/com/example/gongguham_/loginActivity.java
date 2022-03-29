@@ -17,7 +17,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class loginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
-    private  static final String TAG = "loginActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,8 +25,17 @@ public class loginActivity extends AppCompatActivity {
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         findViewById(R.id.loginButton).setOnClickListener(onClickListener);
+        findViewById(R.id.gotopasswordResetButton).setOnClickListener(onClickListener);
         findViewById(R.id.gotoSignUpButton).setOnClickListener(onClickListener);
     }
+
+    @Override public void onBackPressed() {
+        super.onBackPressed();
+        moveTaskToBack(true);
+        android.os.Process.killProcess(android.os.Process.myPid());
+        System.exit(1);
+    }
+
 
     @Override
     public void onStart() {
@@ -45,6 +54,10 @@ public class loginActivity extends AppCompatActivity {
                 case R.id.loginButton:
                     Log.e("클릭", "클릭");
                     login();
+                    break;
+                case R.id.gotopasswordResetButton:
+                    Log.e("클릭", "클릭");
+                    startpasswordResetActivity();
                     break;
                 case R.id.gotoSignUpButton:
                     Log.e("클릭", "클릭");
@@ -67,8 +80,9 @@ public class loginActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
-                                startToast("로그인을 성공적으로 마쳤습니다.");
                                 FirebaseUser user = mAuth.getCurrentUser();
+                                startToast("로그인을 성공적으로 마쳤습니다.");
+                                finish();
                             } else {
                                 if (task.getException() != null) {
                                     // If sign in fails, display a message to the user.
@@ -88,6 +102,13 @@ public class loginActivity extends AppCompatActivity {
 
     private  void startSignUpActivity(){
         Intent intent=new Intent(this,SignUpActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    private  void startpasswordResetActivity(){
+        Intent intent=new Intent(this,passwordResetActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 }
