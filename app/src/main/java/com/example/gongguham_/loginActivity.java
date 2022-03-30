@@ -83,6 +83,7 @@ public class loginActivity extends AppCompatActivity {
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 startToast("로그인을 성공적으로 마쳤습니다.");
                                 finish();
+
                             } else {
                                 if (task.getException() != null) {
                                     // If sign in fails, display a message to the user.
@@ -111,4 +112,11 @@ public class loginActivity extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
+    private  void startMainActivity(){
+        Intent intent=new Intent(this,MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+
 }

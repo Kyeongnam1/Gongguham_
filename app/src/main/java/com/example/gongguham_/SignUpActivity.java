@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -52,11 +53,11 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void signUp() {
         EditText emailE = (EditText) findViewById(R.id.emailEditText);
-        String email = emailE.getText().toString();
+        String email = emailE.getText().toString(); //이메일
         EditText passwordE = (EditText) findViewById(R.id.passwordEditText);
-        String password = passwordE.getText().toString();
+        String password = passwordE.getText().toString(); //비밀번호
         EditText passwordCheckE = (EditText) findViewById(R.id.passwordCheckEditText);
-        String passwordCheck = passwordCheckE.getText().toString();
+        String passwordCheck = passwordCheckE.getText().toString(); //비밀번호 체크
 
         if (email.length() > 0 && password.length() > 0 && passwordCheck.length() > 0) {
             if (password.equals(passwordCheck)) {
@@ -69,7 +70,7 @@ public class SignUpActivity extends AppCompatActivity {
                                             // Sign in success, update UI with the signed-in user's information
                                             FirebaseUser user = mAuth.getCurrentUser();
                                             startToast("회원가입을 성공적으로 마쳤습니다.");
-                                            startMainActivity();
+                                            startmemberInitActivity();
                                         } else {
                                             if (task.getException() != null) {
                                                 // If sign in fails, display a message to the user.
@@ -84,6 +85,8 @@ public class SignUpActivity extends AppCompatActivity {
         } else {
             startToast("이메일 또는 비밀번호를 입력해주세요.");
         }
+
+
     }
 
     private  void startToast(String msg){
@@ -92,6 +95,12 @@ public class SignUpActivity extends AppCompatActivity {
 
     private  void startMainActivity(){
         Intent intent=new Intent(this,MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    private  void startmemberInitActivity(){
+        Intent intent=new Intent(this,memberInitActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }

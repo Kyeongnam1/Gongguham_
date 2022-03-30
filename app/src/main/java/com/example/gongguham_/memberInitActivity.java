@@ -16,14 +16,26 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class memberInitActivity extends AppCompatActivity {
-
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_memeber_init);
+        if(user != null){
+            for (UserInfo profile : user.getProviderData()) {
+                String name = profile.getDisplayName();
+                if (name != null) {
+                    if (name.length() == 0) {
+                    }else{
+                        startMainActivity();
+                    }
+                }
+            }
+        }
 
         findViewById(R.id.checkButton).setOnClickListener(onClickListener);
     }
@@ -64,7 +76,7 @@ public class memberInitActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
                                     startToast("회원정보 등록이 완료되었습니다.");
-                                    finish();
+                                    startMainActivity();
                                 }
                             }
                         });
@@ -80,11 +92,6 @@ public class memberInitActivity extends AppCompatActivity {
 
     private  void startMainActivity(){
         Intent intent=new Intent(this,MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-    }
-    private  void startLoginActivity(){
-        Intent intent=new Intent(this,loginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
