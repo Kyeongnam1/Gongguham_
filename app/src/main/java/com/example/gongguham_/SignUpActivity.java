@@ -39,7 +39,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     View.OnClickListener onClickListener =  new View.OnClickListener() {
-            @Override
+        @Override
         public void onClick(View v) {
             switch(v.getId()){
                 case R.id.SignUpButton:
