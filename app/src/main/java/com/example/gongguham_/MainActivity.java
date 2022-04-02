@@ -1,5 +1,6 @@
 package com.example.gongguham_;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,12 +8,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    private static final String TAG = "MainActivity";
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,14 +29,27 @@ public class MainActivity extends AppCompatActivity {
         if(user == null) {
             startLoginActivity();
         }else{
-            for (UserInfo profile : user.getProviderData()) {
-                String name = profile.getDisplayName();
-                if (name != null) {
-                    if (name.length() == 0) {
-                        startmemberInitActivity();
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+            DocumentReference docRef = db.collection("users").document(user.getEmail());
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if(document != null){
+                            if (document.exists()) {
+                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                            } else {
+                                Log.d(TAG, "No such document");
+                                startmemberInitActivity();
+                            }
+                        }
+                    } else {
+                        Log.d(TAG, "get failed with ", task.getException());
                     }
                 }
-            }
+            });
         }
         findViewById(R.id.logoutButton).setOnClickListener(onClickListener);
     }
