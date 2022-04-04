@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         findViewById(R.id.logoutButton).setOnClickListener(onClickListener);
+        findViewById(R.id.chatButton).setOnClickListener(onClickListener);
     }
 
 
@@ -42,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.logoutButton:
                     FirebaseAuth.getInstance().signOut();
                     startLoginActivity();
+                    break;
+                case R.id.chatButton:
+                    startChat();
                     break;
             }
         }
@@ -55,6 +59,12 @@ public class MainActivity extends AppCompatActivity {
 
     private  void startmemberInitActivity(){
         Intent intent=new Intent(this,memberInitActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    private  void startChat(){
+        Intent intent = new Intent(this, ChatActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
