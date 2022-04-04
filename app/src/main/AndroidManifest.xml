@@ -2,17 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.gongguham_">
 
-    <!-- 인터넷 사용 권한 설정-->
     <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@mipmap/ic_main"
+        android:label="공구함"
+        android:roundIcon="@mipmap/ic_main_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Gongguham_"
-        android:name=".kakaoApplication">
+        android:theme="@style/Theme.Gongguham_">
 
         <activity
             android:name=".MainActivity"
@@ -22,22 +19,26 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
-            android:exported="true">
-            <!-- kakao sdk -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth" -->
-                <data android:host="oauth"
-                    android:scheme="kakao0c052ba88bd5263807182a1ac6489dd" />
-
+                <data
+                    android:scheme="http"
+                    android:host="google.com" />
             </intent-filter>
         </activity>
+        <activity android:name=".SignUpActivity">
+        </activity>
+        <activity android:name=".loginActivity">
+        </activity>
+        <activity android:name=".passwordResetActivity">
+        </activity>
+        <activity android:name=".memberInitActivity">
+        </activity>
+
     </application>
 
 </manifest>
