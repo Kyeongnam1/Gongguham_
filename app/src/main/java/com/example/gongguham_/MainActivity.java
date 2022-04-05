@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -45,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
                     startLoginActivity();
                     break;
                 case R.id.chatButton:
-                    startChat();
+                    //FirebaseUser user = mAuth.getCurrentUser();
+                    startChatActivity();
                     break;
             }
         }
@@ -63,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private  void startChat(){
-        Intent intent = new Intent(this, ChatActivity.class);
+    private  void startChatActivity(){
+        Intent intent = new Intent(this, ChatStarterActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }

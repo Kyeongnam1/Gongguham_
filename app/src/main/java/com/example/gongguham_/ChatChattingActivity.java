@@ -18,7 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class ChatRoomActivity extends AppCompatActivity {
+public class ChatChattingActivity extends AppCompatActivity {
 
     private String CHAT_NAME;
     private String USER_NAME;
@@ -33,14 +33,14 @@ public class ChatRoomActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat_intro);
+        setContentView(R.layout.activity_chat_chatting);
 
         // 위젯 ID 참조
         chat_view = (ListView) findViewById(R.id.chat_view);
         chat_edit = (EditText) findViewById(R.id.chat_edit);
         chat_send = (Button) findViewById(R.id.chat_sent);
 
-        // 로그인 화면에서 받아온 채팅방 이름, 유저 이름 저장
+        // 채팅 시작화면에서 받아온 채팅방 이름, 유저 이름 저장
         Intent intent = getIntent();
         CHAT_NAME = intent.getStringExtra("chatName");
         USER_NAME = intent.getStringExtra("userName");

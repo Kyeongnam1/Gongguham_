@@ -39,9 +39,9 @@
         <activity android:name=".memberInitActivity">
         </activity>
         <!--채팅-->
-        <activity android:name=".ChatIntroActivity">
+        <activity android:name=".ChatStarterActivity">
         </activity>
-        <activity android:name=".ChatRoomActivity">
+        <activity android:name=".ChatChattingActivity">
         </activity>
 
 
