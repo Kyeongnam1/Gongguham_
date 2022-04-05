@@ -38,6 +38,14 @@
             android:inputType="phone" />
 
         <EditText
+            android:id="@+id/genderEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="성별"
+            android:inputType="textPersonName" />
+
+        <EditText
             android:id="@+id/birthdayEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

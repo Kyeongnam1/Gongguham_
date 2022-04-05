@@ -67,16 +67,18 @@ public class memberInitActivity extends AppCompatActivity {
         String name = nameE.getText().toString();
         EditText phoneNumberE = (EditText) findViewById(R.id.phoneNumberEditText);
         String phoneNumber = phoneNumberE.getText().toString();
+        EditText genderE = (EditText) findViewById(R.id.genderEditText);
+        String gender = genderE.getText().toString();
         EditText birthdayE = (EditText) findViewById(R.id.birthdayEditText);
         String birthday = birthdayE.getText().toString();
         EditText addressE = (EditText) findViewById(R.id.addressEditText);
         String address = addressE.getText().toString();
 
-        if (name.length() > 0 && phoneNumber.length() > 9 && birthday.length() > 5 && address.length()>0) {
+        if (name.length() > 0 && phoneNumber.length() > 9 && gender.length() > 0 && birthday.length() > 5 && address.length()>0) {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-            MemberInfo memberInfo = new MemberInfo(name, phoneNumber, birthday, address);
+            MemberInfo memberInfo = new MemberInfo(name, phoneNumber,gender, birthday, address);
 
             if (user != null) {
                 db.collection("users").document(user.getEmail()).set(memberInfo)

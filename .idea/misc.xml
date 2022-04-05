@@ -4,7 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/activity_login.xml" value="0.17806484295845998" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/activity_memeber_init.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/activity_password_reset.xml" value="0.17806484295845998" />
+        <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/activity_sign_up.xml" value="0.17806484295845998" />
+        <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/fragment_myinfo.xml" value="0.25" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/menu/bottom_navigation.xml" value="0.17291666666666666" />
       </map>
     </option>

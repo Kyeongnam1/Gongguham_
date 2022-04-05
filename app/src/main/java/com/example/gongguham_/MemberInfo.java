@@ -5,12 +5,14 @@ import android.widget.EditText;
 public class MemberInfo {
     private String name;
     private String phoneNumber;
+    private String gender;
     private String birthday;
     private String address;
 
-    MemberInfo(String name, String phoneNumber, String birthday, String address){
+    MemberInfo(String name, String phoneNumber, String gender, String birthday, String address){
         this.name = name;
         this.phoneNumber = phoneNumber;
+        this.gender = gender;
         this.birthday = birthday;
         this.address = address;
     }
@@ -27,6 +29,13 @@ public class MemberInfo {
     }
     public void setPhoneNumber(String phoneNumber){
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getGender(){
+        return this.gender;
+    }
+    public void setGender(String gender){
+        this.gender = gender;
     }
 
     public String getBirthday(){
