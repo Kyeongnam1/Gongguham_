@@ -38,8 +38,12 @@
         </activity>
         <activity android:name=".memberInitActivity">
         </activity>
-        <activity android:name=".ChatActivity">
+        <!--채팅-->
+        <activity android:name=".ChatIntroActivity">
         </activity>
+        <activity android:name=".ChatRoomActivity">
+        </activity>
+
 
     </application>
 
