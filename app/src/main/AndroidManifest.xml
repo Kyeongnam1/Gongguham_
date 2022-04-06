@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Gongguham_">
         <activity
+            android:name=".StateSelectActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PostDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddPostItem"
+            android:exported="false" />
+        <activity
+            android:name=".PostActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
