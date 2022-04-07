@@ -77,6 +77,7 @@ public class Menu1Fragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         postItems = new ArrayList<>();
 
+//        Sample Data
         for(int i = 0; i<30; i++){
             postItems.add(new PostItem("교촌치킨 드실 분!!", "명덕관 1층", "18:30", "5명", i));
         }
