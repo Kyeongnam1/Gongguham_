@@ -16,9 +16,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
@@ -27,6 +30,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.w3c.dom.Text;
 
@@ -34,6 +40,7 @@ import org.w3c.dom.Text;
 public class ChatStarterFragment extends Fragment {
     private FirebaseAuth mAuth;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    private static final String TAG = "ChartStartFragment";
 
     private EditText chat_name;
     private TextView user_name;
@@ -71,26 +78,42 @@ public class ChatStarterFragment extends Fragment {
 
         chat_name = (EditText) view.findViewById(R.id.chat_name);
 
-        String database_name = user.getDisplayName();
-        user_name = (TextView) view.findViewById(R.id.user_name);
-        user_name.setText(database_name);
+        final TextView name = view.findViewById(R.id.user_name);
 
         user_next = (Button) view.findViewById(R.id.user_next);
         chat_list = (ListView) view.findViewById(R.id.chat_list);
 
+        DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document != null) {
+                        if (document.exists()) {
+                            name.setText(document.getData().get("name").toString());
+                        } else {
+                            Log.e(TAG, "No such document");
+                        }
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
+
         user_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                // username??
-                if (user_name.getText().toString().equals("") || chat_name.getText().toString().equals(""))
-                    return;
-
-                Intent intent = new Intent(getContext(), ChatChattingActivity.class);
-                intent.putExtra("chatName", chat_name.getText().toString());
-                intent.putExtra("userName", user_name.getText().toString());
-                Log.e("LOG", "test : ");
-                startActivity(intent);
+                if(name.getText().toString().equals("") || chat_name.getText().toString().equals("")){
+                    Toast.makeText(getContext(),"채팅방 이름을 입력해주세요.",Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getContext(),"채팅방에 입장하였습니다.",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getContext(), ChatChattingActivity.class);
+                    intent.putExtra("chatName", chat_name.getText().toString());
+                    intent.putExtra("userName", name.getText().toString());
+                    startActivity(intent);
+                }
             }
         });
 
@@ -138,17 +161,18 @@ public class ChatStarterFragment extends Fragment {
 
 
         });
+
         chat_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getContext(),i+1 +"번째 톡방",Toast.LENGTH_LONG).show();
                 chat_name.setText(adapter.getItem(i));
             }
         });
     }
     private  void startMainActivity(){
-        Intent intent=new Intent(getContext(),MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        Intent intent=new Intent(getContext(),ChatChattingActivity.class);
+        intent.putExtra("chatName", "chicken");
+        intent.putExtra("userName", "kim");
         startActivity(intent);
     }
 
