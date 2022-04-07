@@ -7,14 +7,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserInfo;
-import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -54,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
+            // 홈프래그먼트
             HomeFragment homeFragment = new HomeFragment();
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, homeFragment)
@@ -69,15 +67,18 @@ public class MainActivity extends AppCompatActivity {
                                     .replace(R.id.container, homeFragment)
                                     .commit();
                             return true;
+
+                        case R.id.chat:
+
+                            return true;
+
                         case R.id.myInfo:
                             MyInfoFragment myInfoFragment = new MyInfoFragment();
                             getSupportFragmentManager().beginTransaction()
                                     .replace(R.id.container, myInfoFragment)
                                     .commit();
                             return true;
-                        case R.id.userList:
 
-                            return true;
                     }
                     return false;
                 }
