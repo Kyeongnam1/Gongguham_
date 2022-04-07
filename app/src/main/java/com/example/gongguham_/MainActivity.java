@@ -69,7 +69,10 @@ public class MainActivity extends AppCompatActivity {
                             return true;
 
                         case R.id.chat:
-
+                            ChatStarterFragment chatStarterFragment = new ChatStarterFragment();
+                            getSupportFragmentManager().beginTransaction()
+                                    .replace(R.id.container, chatStarterFragment)
+                                    .commit();
                             return true;
 
                         case R.id.myInfo:
