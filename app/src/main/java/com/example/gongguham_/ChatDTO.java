@@ -27,4 +27,3 @@ public class ChatDTO {
         return message;
     }
 }
-
