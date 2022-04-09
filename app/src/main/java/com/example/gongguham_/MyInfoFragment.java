@@ -56,6 +56,8 @@ public class MyInfoFragment extends Fragment {
         final TextView nameTextView = view.findViewById(R.id.nameText);
         final TextView phoneNumberTextView = view.findViewById(R.id.phoneNumberText);
         final TextView genderTextView = view.findViewById(R.id.genderText);
+        final TextView accountValueTextView = view.findViewById(R.id.accountValueText);
+        final TextView accountTextView = view.findViewById(R.id.accountText);
         final TextView emailTextView = view.findViewById(R.id.emailText);
         final TextView birthDayTextView = view.findViewById(R.id.birthdayText);
         final TextView addressTextView = view.findViewById(R.id.addressText);
@@ -73,6 +75,8 @@ public class MyInfoFragment extends Fragment {
                             nameTextView.setText(document.getData().get("name").toString());
                             phoneNumberTextView.setText(document.getData().get("phoneNumber").toString());
                             genderTextView.setText(document.getData().get("gender").toString());
+                            accountValueTextView.setText(document.getData().get("accountValue").toString());
+                            accountTextView.setText(document.getData().get("account").toString());
                             emailTextView.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
                             birthDayTextView.setText(document.getData().get("birthday").toString());
                             addressTextView.setText(document.getData().get("address").toString());

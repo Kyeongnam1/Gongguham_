@@ -37,13 +37,29 @@
             android:hint="전화번호"
             android:inputType="phone" />
 
-        <EditText
-            android:id="@+id/genderEditText"
+        <Spinner
+            android:id="@+id/spinner_gender"
+            android:layout_width="match_parent"
+            android:layout_height="45dp" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="성별"
-            android:inputType="textPersonName" />
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/spinner_account"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+            <EditText
+                android:id="@+id/accountEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="계좌정보"
+                android:inputType="textPersonName" />
+        </LinearLayout>
 
         <EditText
             android:id="@+id/birthdayEditText"
