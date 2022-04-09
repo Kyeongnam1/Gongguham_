@@ -36,7 +36,7 @@
         <TextView
             android:id="@+id/nameText"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_margin="10dp"
             android:gravity="center"
             android:text="이름"
@@ -46,7 +46,7 @@
         <TextView
             android:id="@+id/phoneNumberText"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_margin="10dp"
             android:layout_marginBottom="10dp"
             android:gravity="center"
@@ -57,7 +57,7 @@
         <TextView
             android:id="@+id/genderText"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_margin="10dp"
             android:gravity="center"
             android:text="성별"
@@ -72,7 +72,7 @@
             <TextView
                 android:id="@+id/accountValueText"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:gravity="center"
@@ -83,7 +83,7 @@
             <TextView
                 android:id="@+id/accountText"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:gravity="center"
@@ -95,7 +95,7 @@
         <TextView
             android:id="@+id/emailText"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_margin="10dp"
             android:gravity="center"
             android:text="이메일"
@@ -105,7 +105,7 @@
         <TextView
             android:id="@+id/birthdayText"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_margin="10dp"
             android:gravity="center"
             android:text="생년월일"
@@ -115,7 +115,7 @@
         <TextView
             android:id="@+id/addressText"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_margin="10dp"
             android:gravity="center"
             android:text="주소"
