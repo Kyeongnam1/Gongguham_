@@ -22,39 +22,80 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true">
 
-            <EditText
-                android:id="@+id/chat_name"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="20dp"
-                android:gravity="center"
-                android:hint="CHAT NAME"
-                android:inputType="textPersonName"
-                android:textColor="#000000" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="82dp">
 
-            <TextView
-                android:id="@+id/user_name"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textAlignment="center"
-                android:text="사용자명"
-                android:textStyle="bold"
-                android:layout_marginBottom="20dp"/>
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="150dp"
+                    android:layout_height="36dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="30dp"
+                    android:text="사용자명"
+                    android:textAlignment="center"
+                    android:textStyle="italic" />
 
-            <Button
-                android:id="@+id/user_next"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:text="채팅방 입장"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="150dp"
+                    android:layout_marginTop="30dp"
+                    android:text="님의 채팅방 입장을 환여합니다."
+                    android:textAlignment="center"
+                    android:textStyle="bold"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp">
+
+                <EditText
+                    android:id="@+id/chat_name"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginBottom="15dp"
+                    android:gravity="center"
+                    android:hint="CHAT NAME"
+                    android:inputType="textPersonName"
+                    android:textColor="#000000" />
+
+                <Button
+                    android:id="@+id/user_next"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="120dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="입장" />
+
+                <Button
+                    android:id="@+id/boom_button"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="방폭" />
+
+            </RelativeLayout>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="0.6"
             android:orientation="vertical">
 
             <TextView

@@ -8,7 +8,7 @@
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/activity_char_chatting.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/activity_login.xml" value="0.17806484295845998" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/activity_memeber_init.xml" value="0.1" />
+        <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/activity_memeber_init.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/activity_password_reset.xml" value="0.17806484295845998" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/activity_sign_up.xml" value="0.17806484295845998" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/fragment_chat_starter.xml" value="0.25" />
@@ -17,6 +17,7 @@
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/menu/bottom_navigation.xml" value="0.2" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/mipmap-anydpi-v26/ic_main.xml" value="0.1" />
+        <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/fragment_chat_starter.xml" value="0.1" />
       </map>
     </option>
   </component>
