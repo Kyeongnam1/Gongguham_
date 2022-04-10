@@ -38,13 +38,14 @@ public class TransmissionFragment extends Fragment {
         applicant = new ArrayList<>();
 
 //        Sample Data
-        applicant.add(new Applicant("테스트", "글쓴이")); //추가안됨
 
-        applicant.add(new Applicant("테스트", "글쓴이"));
-        applicant.add(new Applicant("테스트", "참여자"));
-        applicant.add(new Applicant("테스트", "참여자"));
-        applicant.add(new Applicant("테스트", "참여자"));
-        applicant.add(new Applicant("테스트", "참여자"));
+        applicant.add(new Applicant("테스트", "글쓴이","11111111111111","국민"));
+        applicant.add(new Applicant("테스트", "참여자","11111111111111","우리"));
+        applicant.add(new Applicant("테스트", "참여자","11111111111111","우리"));
+        applicant.add(new Applicant("테스트", "참여자","11111111111111","우리"));
+        applicant.add(new Applicant("테스트", "참여자","11111111111111","우리"));
+
+
 
 
         applicantAdapter.setApplicantList(applicant);

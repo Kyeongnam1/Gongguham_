@@ -6,4 +6,48 @@
     android:layout_height="match_parent"
     tools:context=".DeliveryProgressActivity">
 
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_marginBottom="8dp"
+        android:background="#FFC552"
+        app:contentInsetStart="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/progress_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="배달 진행 상황"
+            android:textSize="30dp"
+            tools:layout_editor_absoluteX="111dp"
+            tools:layout_editor_absoluteY="28dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:fontFamily="sans-serif-condensed-medium"
+            />
+
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <FrameLayout
+        android:id="@+id/progress_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="19dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        />
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

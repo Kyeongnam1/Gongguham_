@@ -46,17 +46,21 @@ public class ApplicantAdapter extends RecyclerView.Adapter<ApplicantAdapter.View
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView applicantName, applicantPosition;
+        TextView applicantName, applicantPosition, accountNumber, bankName;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             applicantName = (TextView) itemView.findViewById(R.id.applicant_name_text);
             applicantPosition = (TextView) itemView.findViewById(R.id.applicant_position_text);
+            accountNumber = (TextView) itemView.findViewById(R.id.account_number_text);
+            bankName = (TextView) itemView.findViewById(R.id.bank_name_text);
         }
 
         void onBind(Applicant applicant){
             applicantName.setText(applicant.applicantName);
             applicantPosition.setText((applicant.applicantPosition));
+            accountNumber.setText((applicant.accountNumber));
+            bankName.setText((applicant.bankName));
         }
 
     }
