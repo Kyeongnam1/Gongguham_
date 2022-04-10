@@ -2,6 +2,8 @@
     <string name="app_name">Gongguham_</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
         <string-array name="state">
             <item>서울</item>
             <item>인천</item>

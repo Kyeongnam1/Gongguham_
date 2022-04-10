@@ -2,13 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.gongguham_">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@mipmap/ic_icon"
+        android:label="공구함"
+        android:roundIcon="@mipmap/ic_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Gongguham_">
+
         <activity
             android:name=".StateSelectActivity"
             android:exported="false" />
@@ -29,7 +31,28 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="http"
+                    android:host="google.com" />
+            </intent-filter>
         </activity>
+        <activity android:name=".SignUpActivity">
+        </activity>
+        <activity android:name=".loginActivity">
+        </activity>
+        <activity android:name=".passwordResetActivity">
+        </activity>
+        <activity android:name=".memberInitActivity">
+        </activity>
+        <activity android:name=".ChatChattingActivity">
+        </activity>
+
     </application>
 
 </manifest>
