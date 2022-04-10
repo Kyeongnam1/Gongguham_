@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="array_gender">
+        <item>남자</item>
+        <item>여자</item>
+    </string-array>
+
+    <string-array name="array_account">
+        <item>국민</item>
+        <item>신한</item>
+    </string-array>
+</resources>

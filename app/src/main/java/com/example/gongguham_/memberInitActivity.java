@@ -7,6 +7,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,6 +44,17 @@ public class memberInitActivity extends AppCompatActivity {
                 }
             }
         }
+        Spinner genderSpinner = (Spinner)findViewById(R.id.spinner_gender);
+        ArrayAdapter genderAdapter = ArrayAdapter.createFromResource(this,
+                R.array.array_gender, android.R.layout.simple_spinner_item);
+        genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        genderSpinner.setAdapter(genderAdapter);
+
+        Spinner accountSpinner = (Spinner)findViewById(R.id.spinner_account);
+        ArrayAdapter accountAdapter = ArrayAdapter.createFromResource(this,
+                R.array.array_account, android.R.layout.simple_spinner_item);
+        accountAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        accountSpinner.setAdapter(accountAdapter);
 
         findViewById(R.id.checkButton).setOnClickListener(onClickListener);
     }
@@ -67,18 +82,23 @@ public class memberInitActivity extends AppCompatActivity {
         String name = nameE.getText().toString();
         EditText phoneNumberE = (EditText) findViewById(R.id.phoneNumberEditText);
         String phoneNumber = phoneNumberE.getText().toString();
-        EditText genderE = (EditText) findViewById(R.id.genderEditText);
-        String gender = genderE.getText().toString();
+        EditText accountE = (EditText) findViewById(R.id.accountEditText);
+        String account = accountE.getText().toString();
         EditText birthdayE = (EditText) findViewById(R.id.birthdayEditText);
         String birthday = birthdayE.getText().toString();
         EditText addressE = (EditText) findViewById(R.id.addressEditText);
         String address = addressE.getText().toString();
 
-        if (name.length() > 0 && phoneNumber.length() > 9 && gender.length() > 0 && birthday.length() > 5 && address.length()>0) {
+        Spinner genderS = (Spinner) findViewById(R.id.spinner_gender);
+        String gender = genderS.getSelectedItem().toString();
+        Spinner accountS = (Spinner) findViewById(R.id.spinner_account);
+        String accountValue = accountS.getSelectedItem().toString();
+
+        if (name.length() > 0 && phoneNumber.length() > 9 && gender.length() > 0 && accountValue.length() >0 && account.length()>0  && birthday.length() > 5 && address.length()>0) {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-            MemberInfo memberInfo = new MemberInfo(name, phoneNumber,gender, birthday, address);
+            MemberInfo memberInfo = new MemberInfo(name, phoneNumber,gender, accountValue, account, birthday, address);
 
             if (user != null) {
                 db.collection("users").document(user.getEmail()).set(memberInfo)

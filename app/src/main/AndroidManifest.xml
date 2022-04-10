@@ -5,12 +5,21 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_main"
+        android:icon="@mipmap/ic_icon"
         android:label="공구함"
-        android:roundIcon="@mipmap/ic_main_round"
+        android:roundIcon="@mipmap/ic_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Gongguham_">
 
+        <activity
+            android:name=".StateSelectActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PostDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddPostItem"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
