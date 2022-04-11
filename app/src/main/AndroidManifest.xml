@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.gongguham_">
 
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
@@ -14,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Gongguham_">
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDMqKQdI0GUOKdm6qSk2NkXf1hBhRsB6Fc"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -40,6 +42,8 @@
         <activity android:name=".passwordResetActivity">
         </activity>
         <activity android:name=".memberInitActivity">
+        </activity>
+        <activity android:name=".gpsActivity">
         </activity>
 
     </application>
