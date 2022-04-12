@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "738809970906",
+    "firebase_url": "https://gongguham-7b561-default-rtdb.firebaseio.com",
+    "project_id": "gongguham-7b561",
+    "storage_bucket": "gongguham-7b561.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:738809970906:android:d9a85c788e9364bd3225e3",
+        "android_client_info": {
+          "package_name": "com.example.gongguham_"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "738809970906-0ckliba3nf2m8gn6muet7sb67cg59s06.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcsC6uQnLZIe1lIuCPTuL1GYmEClt7ce8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "738809970906-0ckliba3nf2m8gn6muet7sb67cg59s06.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

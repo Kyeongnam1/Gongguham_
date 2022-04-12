@@ -7,20 +7,28 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class memberInitActivity extends AppCompatActivity {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +44,17 @@ public class memberInitActivity extends AppCompatActivity {
                 }
             }
         }
+        Spinner genderSpinner = (Spinner)findViewById(R.id.spinner_gender);
+        ArrayAdapter genderAdapter = ArrayAdapter.createFromResource(this,
+                R.array.array_gender, android.R.layout.simple_spinner_item);
+        genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        genderSpinner.setAdapter(genderAdapter);
+
+        Spinner accountSpinner = (Spinner)findViewById(R.id.spinner_account);
+        ArrayAdapter accountAdapter = ArrayAdapter.createFromResource(this,
+                R.array.array_account, android.R.layout.simple_spinner_item);
+        accountAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        accountSpinner.setAdapter(accountAdapter);
 
         findViewById(R.id.checkButton).setOnClickListener(onClickListener);
     }
@@ -61,23 +80,39 @@ public class memberInitActivity extends AppCompatActivity {
     private void profileUpdate() {
         EditText nameE = (EditText) findViewById(R.id.nameEditText);
         String name = nameE.getText().toString();
+        EditText phoneNumberE = (EditText) findViewById(R.id.phoneNumberEditText);
+        String phoneNumber = phoneNumberE.getText().toString();
+        EditText accountE = (EditText) findViewById(R.id.accountEditText);
+        String account = accountE.getText().toString();
+        EditText birthdayE = (EditText) findViewById(R.id.birthdayEditText);
+        String birthday = birthdayE.getText().toString();
+        EditText addressE = (EditText) findViewById(R.id.addressEditText);
+        String address = addressE.getText().toString();
 
-        if (name.length() > 0) {
+        Spinner genderS = (Spinner) findViewById(R.id.spinner_gender);
+        String gender = genderS.getSelectedItem().toString();
+        Spinner accountS = (Spinner) findViewById(R.id.spinner_account);
+        String accountValue = accountS.getSelectedItem().toString();
+
+        if (name.length() > 0 && phoneNumber.length() > 9 && gender.length() > 0 && accountValue.length() >0 && account.length()>0  && birthday.length() > 5 && address.length()>0) {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                    .setDisplayName(name)
-                    .build();
+            MemberInfo memberInfo = new MemberInfo(name, phoneNumber,gender, accountValue, account, birthday, address);
 
             if (user != null) {
-                user.updateProfile(profileUpdates)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                db.collection("users").document(user.getEmail()).set(memberInfo)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    startToast("회원정보 등록이 완료되었습니다.");
-                                    startMainActivity();
-                                }
+                            public void onSuccess(Void aVoid) {
+                                startToast("회원정보 등록을 성공하였습니다.");
+                                startMainActivity();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                startToast("회원정보 등록을 실패하였습니다.");
                             }
                         });
             }

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="451dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="117dp"
+        android:max="100"
+        android:progressDrawable="@drawable/custom_progress"
+        app:layout_constraintBottom_toTopOf="@+id/finish_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/progress_text1"
+        android:layout_width="0dp"
+        android:layout_height="119dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="57dp"
+        android:background="@drawable/stroke"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:gravity="center"
+        android:text="주문 접수"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/progress_text2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/progress_text2"
+        android:layout_width="0dp"
+        android:layout_height="119dp"
+        android:layout_marginEnd="56dp"
+        android:background="@drawable/stroke"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:gravity="center"
+        android:text="배달 시작"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/progress_text3"
+        app:layout_constraintStart_toEndOf="@+id/progress_text1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/progress_text3"
+        android:layout_width="0dp"
+        android:layout_height="119dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/stroke"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:gravity="center"
+        android:text="배달 완료"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/progress_text2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/state1_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="31dp"
+        android:text="주문 접수"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+
+    <TextView
+        android:id="@+id/state2_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="13dp"
+        android:text="배달 시작"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@+id/progress_text2"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+
+    <TextView
+        android:id="@+id/state3_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="61dp"
+        android:layout_marginEnd="32dp"
+        android:text="배달 완료"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progress_text3" />
+
+    <Button
+        android:id="@+id/finish_button"
+        android:layout_width="127dp"
+        android:layout_height="78dp"
+        android:layout_marginBottom="105dp"
+        android:text="공동구매 완료"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

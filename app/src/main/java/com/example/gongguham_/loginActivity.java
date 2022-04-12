@@ -82,7 +82,7 @@ public class loginActivity extends AppCompatActivity {
                                 // Sign in success, update UI with the signed-in user's information
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 startToast("로그인을 성공적으로 마쳤습니다.");
-                                finish();
+                                startMainActivity();
 
                             } else {
                                 if (task.getException() != null) {
