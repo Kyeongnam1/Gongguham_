@@ -84,7 +84,7 @@ public class HomeFragment extends Fragment {
         btn_state.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().startActivityForResult(new Intent(getActivity(), StateSelectActivity.class),0);
+                getActivity().startActivityForResult(new Intent(getActivity(), gpsActivity.class),0);
             }
         });
         //        Spinner 생성
