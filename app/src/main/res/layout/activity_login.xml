@@ -2,6 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="#FFFFFF"
+    android:gravity="center"
     android:orientation="vertical">
 
     <TextView
@@ -24,7 +27,12 @@
             android:id="@+id/emailEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="10dp"
             android:ems="10"
             android:hint="이메일"
             android:inputType="textEmailAddress" />
@@ -33,28 +41,64 @@
             android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="30dp"
             android:ems="10"
             android:hint="비밀번호"
             android:inputType="textPassword" />
 
         <Button
             android:id="@+id/loginButton"
-            android:layout_width="match_parent"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="30dp"
+            android:background="@drawable/round_button"
             android:text="로그인" />
 
-        <Button
-            android:id="@+id/gotopasswordResetButton"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="비밀번호 찾기" />
+            android:layout_gravity="center"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/gotoSignUpButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="회원가입하기" />
+            <TextView
+                android:id="@+id/signUpTextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:clickable="true"
+                android:onClick="signUp"
+                android:text="회원가입"
+                android:textColor="#7A7A7A" />
+
+            <TextView
+                android:id="@+id/signUpTextButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="|"
+                android:textColor="#7A7A7A" />
+
+            <TextView
+                android:id="@+id/passwordResetTextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:clickable="true"
+                android:onClick="passwordReset"
+                android:text="비밀번호 찾기"
+                android:textColor="#7A7A7A" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

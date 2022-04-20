@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -22,6 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MyInfoFragment extends Fragment {
     private static final String TAG = "fragmentMyInfo";
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
     public MyInfoFragment() {
@@ -51,6 +54,7 @@ public class MyInfoFragment extends Fragment {
 
 
         view.findViewById(R.id.logoutButton).setOnClickListener(onClickListener);
+        view.findViewById(R.id.userDeleteButton).setOnClickListener(onClickListener);
 
 
         final TextView nameTextView = view.findViewById(R.id.nameText);
@@ -98,6 +102,25 @@ public class MyInfoFragment extends Fragment {
             switch(v.getId()){
                 case R.id.logoutButton:
                     FirebaseAuth.getInstance().signOut();
+                    startMainActivity();
+                    break;
+                case R.id.userDeleteButton:
+                    FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getEmail())
+                            .delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                        }
+                    })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.w(TAG, "Error deleting document", e);
+                                }
+                            });
+                    FirebaseAuth.getInstance().getCurrentUser().delete();
+                    FirebaseAuth.getInstance().signOut();
+
                     startMainActivity();
                     break;
             }
