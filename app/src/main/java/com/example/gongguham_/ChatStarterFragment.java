@@ -30,6 +30,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Objects;
 
 
 public class ChatStarterFragment extends Fragment {
@@ -75,7 +76,7 @@ public class ChatStarterFragment extends Fragment {
 
         chat_name = (EditText) view.findViewById(R.id.chat_name);
 
-        final TextView name = view.findViewById(R.id.user_name);
+        TextView name = view.findViewById(R.id.user_name);
 
         user_next = (Button) view.findViewById(R.id.user_next);
         boom_button = (Button) view.findViewById(R.id.boom_button);
@@ -83,7 +84,7 @@ public class ChatStarterFragment extends Fragment {
         chat_list = (ListView) view.findViewById(R.id.chat_list);
 
 
-        DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+        DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser().getEmail()));
         documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -92,7 +93,7 @@ public class ChatStarterFragment extends Fragment {
                     if (document != null) {
                         if (document.exists()) {
                             name.setText(document.getData().get("name").toString());
-                            //name.setText(MemberInfo.class.getName());
+                            //name.setText(MemberInfo.class.getName().toString());
                         } else {
                             Log.e(TAG, "No such document");
                         }
@@ -180,6 +181,7 @@ public class ChatStarterFragment extends Fragment {
                 chat_name.setText(adapter.getItem(i));
                 Intent intent = new Intent(getContext(), ChatChattingActivity.class);
                 intent.putExtra("chatName", chat_name.getText().toString());
+                intent.putExtra("userName", user.getEmail());
                 startActivity(intent);
             }
         });
