@@ -35,8 +35,8 @@
             android:hint="이름"
             android:inputType="textPersonName" />
 
-        <EditText
-            android:id="@+id/phoneNumberEditText"
+        <TextView
+            android:id="@+id/phoneNumberText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
