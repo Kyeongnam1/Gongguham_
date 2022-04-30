@@ -17,6 +17,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Calendar;
+
 public class ChatChattingActivity extends AppCompatActivity {
 
     private String CHAT_NAME;
@@ -43,6 +45,8 @@ public class ChatChattingActivity extends AppCompatActivity {
         Intent intent = getIntent();
         CHAT_NAME = intent.getStringExtra("chatName");
         USER_NAME = intent.getStringExtra("userName");
+        Calendar calendar= Calendar.getInstance(); //현재 시간을 가지고 있는 객체
+        String time=calendar.get(Calendar.HOUR_OF_DAY)+":"+calendar.get(Calendar.MINUTE); //14:
 
         // 채팅 방 입장
         openChat(CHAT_NAME);
@@ -54,7 +58,7 @@ public class ChatChattingActivity extends AppCompatActivity {
                 if (chat_edit.getText().toString().equals(""))
                     return;
 
-                ChatDTO chat = new ChatDTO(USER_NAME, chat_edit.getText().toString()); //ChatDTO를 이용하여 데이터를 묶는다.
+                ChatDTO chat = new ChatDTO(USER_NAME, chat_edit.getText().toString(), time); //ChatDTO를 이용하여 데이터를 묶는다.
                 databaseReference.child("chat").child(CHAT_NAME).push().setValue(chat); // 데이터 푸쉬
                 chat_edit.setText(""); //입력창 초기화
 
@@ -64,12 +68,12 @@ public class ChatChattingActivity extends AppCompatActivity {
 
     private void addMessage(DataSnapshot dataSnapshot, ArrayAdapter<String> adapter) {
         ChatDTO chatDTO = dataSnapshot.getValue(ChatDTO.class);
-        adapter.add(chatDTO.getUserName() + " : " + chatDTO.getMessage());
+        adapter.add(chatDTO.getUserName() + " : " + chatDTO.getMessage() + chatDTO.getTime());
     }
 
     private void removeMessage(DataSnapshot dataSnapshot, ArrayAdapter<String> adapter) {
         ChatDTO chatDTO = dataSnapshot.getValue(ChatDTO.class);
-        adapter.remove(chatDTO.getUserName() + " : " + chatDTO.getMessage());
+        adapter.remove(chatDTO.getUserName() + " : " + chatDTO.getMessage() + chatDTO.getTime());
     }
 
     private void openChat(String chatName) {

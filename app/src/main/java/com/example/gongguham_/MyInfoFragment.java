@@ -56,7 +56,6 @@ public class MyInfoFragment extends Fragment {
         view.findViewById(R.id.logoutButton).setOnClickListener(onClickListener);
         view.findViewById(R.id.userDeleteButton).setOnClickListener(onClickListener);
 
-
         final TextView nameTextView = view.findViewById(R.id.nameText);
         final TextView phoneNumberTextView = view.findViewById(R.id.phoneNumberText);
         final TextView genderTextView = view.findViewById(R.id.genderText);
@@ -104,28 +103,29 @@ public class MyInfoFragment extends Fragment {
                     FirebaseAuth.getInstance().signOut();
                     startMainActivity();
                     break;
-                case R.id.userDeleteButton:
-                    FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getEmail())
-                            .delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            Log.d(TAG, "DocumentSnapshot successfully deleted!");
-                        }
-                    })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.w(TAG, "Error deleting document", e);
-                                }
-                            });
-                    FirebaseAuth.getInstance().getCurrentUser().delete();
-                    FirebaseAuth.getInstance().signOut();
-
-                    startMainActivity();
-                    break;
             }
         }
     };
+
+    public void userDelete(View v){
+        FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getEmail())
+                .delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "DocumentSnapshot successfully deleted!");
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error deleting document", e);
+                    }
+                });
+        FirebaseAuth.getInstance().getCurrentUser().delete();
+        FirebaseAuth.getInstance().signOut();
+
+        startMainActivity();
+    }
 
     private  void startMainActivity(){
         Intent intent=new Intent(getContext(),MainActivity.class);

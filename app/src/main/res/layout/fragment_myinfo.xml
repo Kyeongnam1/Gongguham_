@@ -38,7 +38,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/myinfo_stroke"
+                    android:background="@drawable/myinfo_stroke_top"
                     android:orientation="horizontal">
 
                     <TextView
@@ -72,7 +72,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/myinfo_stroke"
+                    android:background="@drawable/myinfo_stroke_bottom"
                     android:orientation="horizontal">
 
                     <TextView
@@ -108,7 +108,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/myinfo_stroke"
+                    android:background="@drawable/myinfo_stroke_bottom"
                     android:orientation="horizontal">
 
                     <TextView
@@ -142,7 +142,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/myinfo_stroke"
+                    android:background="@drawable/myinfo_stroke_bottom"
                     android:orientation="horizontal">
 
                     <TextView
@@ -187,7 +187,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/myinfo_stroke"
+                    android:background="@drawable/myinfo_stroke_bottom"
                     android:orientation="horizontal">
 
                     <TextView
@@ -221,7 +221,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/myinfo_stroke"
+                    android:background="@drawable/myinfo_stroke_bottom"
                     android:orientation="horizontal">
 
                     <TextView
@@ -256,7 +256,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/myinfo_stroke"
+                    android:background="@drawable/myinfo_stroke_bottom"
                     android:orientation="horizontal">
 
                     <TextView
