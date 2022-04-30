@@ -3,6 +3,7 @@ package com.example.gongguham_;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -20,6 +21,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -109,7 +111,14 @@ public class gpsActivity extends AppCompatActivity
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-
+        Button imageButton = (Button) findViewById(R.id.btn_locset);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), HomeFragment.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -354,7 +363,7 @@ public class gpsActivity extends AppCompatActivity
 
 
         currentMarker = mMap.addMarker(markerOptions);
-
+        //Toast.makeText(gpsActivity.this, markerTitle, Toast.LENGTH_LONG).show();
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
         mMap.moveCamera(cameraUpdate);
 
