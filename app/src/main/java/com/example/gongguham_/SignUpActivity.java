@@ -26,7 +26,7 @@ public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private TextView phoneNumberTextE;
 
-    private Button SignUpButton, phoneSignUpButton;
+    private Button SignUpButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,14 +39,14 @@ public class SignUpActivity extends AppCompatActivity {
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         findViewById(R.id.SignUpButton).setOnClickListener(onClickListener);
-        findViewById(R.id.phoneSignUpButton).setOnClickListener(onClickListener);
+       // findViewById(R.id.phoneSignUpButton).setOnClickListener(onClickListener);
 
         phoneNumberTextE = findViewById(R.id.phoneNumberText);
         phoneNumberTextE.setText(phonenumber);
 
         SignUpButton = findViewById(R.id.SignUpButton);
-        phoneSignUpButton = findViewById(R.id.phoneSignUpButton);
-
+      //  phoneSignUpButton = findViewById(R.id.phoneSignUpButton);
+/*
         if (phonenumber == null){
             SignUpButton.setVisibility(View.GONE);
             phoneSignUpButton.setVisibility(View.VISIBLE);
@@ -54,6 +54,8 @@ public class SignUpActivity extends AppCompatActivity {
             SignUpButton.setVisibility(View.VISIBLE);
             phoneSignUpButton.setVisibility(View.GONE);
         }
+
+ */
     }
 
     @Override
@@ -73,10 +75,6 @@ public class SignUpActivity extends AppCompatActivity {
                 case R.id.SignUpButton:
                     Log.e("클릭", "클릭");
                     signUp();
-                    break;
-                case R.id.phoneSignUpButton:
-                    Log.e("클릭", "클릭");
-                    startPhoneAuthentication();
                     break;
             }
 
@@ -139,10 +137,4 @@ public class SignUpActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    //전화번호 인증
-    private  void startPhoneAuthentication(){
-        Intent intent = new Intent(this,PhoneAuthenticationActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-    }
 }

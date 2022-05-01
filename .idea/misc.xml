@@ -48,6 +48,8 @@
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/drawable/other_msgbox_theme.xml" value="0.186" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/activity_chat_chatting.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/activity_login.xml" value="0.26927083333333335" />
+        <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/activity_sign_up1.xml" value="0.3292572463768116" />
+        <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/activity_terms_agree.xml" value="0.25" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/activity_transmission.xml" value="0.17806484295845998" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/fragment_chat_starter.xml" value="0.33" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/fragment_myinfo.xml" value="0.13095238095238096" />
@@ -72,9 +74,6 @@
         <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/post_item.xml" value="0.3734375" />
       </map>
     </option>
-  </component>
-  <component name="ProjectPlainTextFileTypeManager">
-    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/myinfo_stroke.xml" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />

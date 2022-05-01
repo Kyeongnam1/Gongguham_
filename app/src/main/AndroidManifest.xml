@@ -55,6 +55,8 @@
         <activity android:name=".ChatChattingActivity">
         </activity>
         <activity android:name=".PhoneAuthenticationActivity"/>
+        <activity android:name=".TermsAgreeActivity">
+        </activity>
 
 
     </application>
