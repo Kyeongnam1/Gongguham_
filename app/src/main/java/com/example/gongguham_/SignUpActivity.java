@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,16 +18,44 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
+// SHA1: DD:FF:8D:F8:C7:0C:7B:01:8E:49:3C:48:B8:8B:B4:6E:8A:E2:95:05
+
+
 public class SignUpActivity extends AppCompatActivity {
+
     private FirebaseAuth mAuth;
+    private TextView phoneNumberTextE;
+
+    private Button SignUpButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Intent intent = getIntent();
+        String phonenumber = intent.getStringExtra("phonenumber");
+
         setContentView(R.layout.activity_sign_up);
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         findViewById(R.id.SignUpButton).setOnClickListener(onClickListener);
+       // findViewById(R.id.phoneSignUpButton).setOnClickListener(onClickListener);
+
+        phoneNumberTextE = findViewById(R.id.phoneNumberText);
+        phoneNumberTextE.setText(phonenumber);
+
+        SignUpButton = findViewById(R.id.SignUpButton);
+      //  phoneSignUpButton = findViewById(R.id.phoneSignUpButton);
+/*
+        if (phonenumber == null){
+            SignUpButton.setVisibility(View.GONE);
+            phoneSignUpButton.setVisibility(View.VISIBLE);
+        }else{
+            SignUpButton.setVisibility(View.VISIBLE);
+            phoneSignUpButton.setVisibility(View.GONE);
+        }
+
+ */
     }
 
     @Override
@@ -59,6 +89,7 @@ public class SignUpActivity extends AppCompatActivity {
         EditText passwordCheckE = (EditText) findViewById(R.id.passwordCheckEditText);
         String passwordCheck = passwordCheckE.getText().toString(); //비밀번호 체크
 
+        // 원본
         if (email.length() > 0 && password.length() > 0 && passwordCheck.length() > 0) {
             if (password.equals(passwordCheck)) {
                 Task<AuthResult> authResultTask = mAuth.createUserWithEmailAndPassword(email, password)
@@ -102,6 +133,8 @@ public class SignUpActivity extends AppCompatActivity {
     private  void startmemberInitActivity(){
         Intent intent=new Intent(this,memberInitActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("phonenumber",phoneNumberTextE.getText().toString());
         startActivity(intent);
     }
+
 }

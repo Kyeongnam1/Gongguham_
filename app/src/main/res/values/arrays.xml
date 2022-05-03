@@ -6,7 +6,38 @@
     </string-array>
 
     <string-array name="array_account">
-        <item>국민</item>
-        <item>신한</item>
+        <item>NH농협은행</item>
+        <item>KB국민은행</item>
+        <item>카카오뱅크</item>
+        <item>신한은행</item>
+        <item>우리은행</item>
+        <item>IBK기업은행</item>
+        <item>하나은행</item>
+        <item>새마을은행</item>
+        <item>대구은행</item>
+        <item>부산은행</item>
+        <item>케이뱅크</item>
+        <item>우체국은행</item>
+        <item>신협은행</item>
+        <item>SC제일은행</item>
+        <item>경남은행</item>
+        <item>수협은행</item>
+        <item>광주은행</item>
+        <item>전북은행</item>
+        <item>토스뱅크</item>
+        <item>저축은행</item>
+        <item>중국공상</item>
+        <item>JP모간</item>
+        <item>BNP파리바</item>
+        <item>씨티</item>
+        <item>제주은행</item>
+        <item>KDB산업</item>
+        <item>SBI저축은행</item>
+        <item>산립조합</item>
+        <item>BOA</item>
+        <item>HSBC</item>
+        <item>중국</item>
+        <item>도이치</item>
+        <item>중국건설</item>
     </string-array>
 </resources>

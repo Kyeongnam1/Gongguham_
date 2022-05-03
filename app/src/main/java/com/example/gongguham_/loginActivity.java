@@ -25,8 +25,6 @@ public class loginActivity extends AppCompatActivity {
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         findViewById(R.id.loginButton).setOnClickListener(onClickListener);
-        findViewById(R.id.gotopasswordResetButton).setOnClickListener(onClickListener);
-        findViewById(R.id.gotoSignUpButton).setOnClickListener(onClickListener);
     }
 
     @Override public void onBackPressed() {
@@ -55,17 +53,14 @@ public class loginActivity extends AppCompatActivity {
                     Log.e("클릭", "클릭");
                     login();
                     break;
-                case R.id.gotopasswordResetButton:
-                    Log.e("클릭", "클릭");
-                    startpasswordResetActivity();
-                    break;
-                case R.id.gotoSignUpButton:
-                    Log.e("클릭", "클릭");
-                    startSignUpActivity();
-                    break;
             }
         }
     };
+
+    public void signUp(View v){ startTermsAgreeActivity(); }
+    public void passwordReset(View v){
+        startpasswordResetActivity();
+    }
 
     private void login() {
         EditText emailE = (EditText) findViewById(R.id.emailEditText);
@@ -101,8 +96,8 @@ public class loginActivity extends AppCompatActivity {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
-    private  void startSignUpActivity(){
-        Intent intent=new Intent(this,SignUpActivity.class);
+    private  void startTermsAgreeActivity(){
+        Intent intent=new Intent(this,TermsAgreeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
@@ -117,6 +112,4 @@ public class loginActivity extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
-
-
 }
