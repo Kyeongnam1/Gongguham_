@@ -39,23 +39,13 @@ public class SignUpActivity extends AppCompatActivity {
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         findViewById(R.id.SignUpButton).setOnClickListener(onClickListener);
-       // findViewById(R.id.phoneSignUpButton).setOnClickListener(onClickListener);
+
 
         phoneNumberTextE = findViewById(R.id.phoneNumberText);
         phoneNumberTextE.setText(phonenumber);
 
         SignUpButton = findViewById(R.id.SignUpButton);
-      //  phoneSignUpButton = findViewById(R.id.phoneSignUpButton);
-/*
-        if (phonenumber == null){
-            SignUpButton.setVisibility(View.GONE);
-            phoneSignUpButton.setVisibility(View.VISIBLE);
-        }else{
-            SignUpButton.setVisibility(View.VISIBLE);
-            phoneSignUpButton.setVisibility(View.GONE);
-        }
 
- */
     }
 
     @Override

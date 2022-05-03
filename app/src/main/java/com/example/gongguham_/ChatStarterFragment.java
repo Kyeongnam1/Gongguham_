@@ -2,8 +2,6 @@ package com.example.gongguham_;
 
 import static com.example.gongguham_.R.*;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -82,8 +79,8 @@ public class ChatStarterFragment extends Fragment {
 
         chat_name = (EditText) view.findViewById(id.chat_name);
 
-        TextView name = view.findViewById(id.user_name);
-        user_name = view.findViewById(id.user_name);
+        TextView name = view.findViewById(id.nameText);
+        user_name = view.findViewById(id.nameText);
 
         user_next = (Button) view.findViewById(id.user_next);
         boom_button = (Button) view.findViewById(id.boom_button);
