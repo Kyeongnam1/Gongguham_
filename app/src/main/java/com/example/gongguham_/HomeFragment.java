@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -84,7 +85,7 @@ public class HomeFragment extends Fragment {
         btn_state.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().startActivityForResult(new Intent(getActivity(), StateSelectActivity.class),0);
+                getActivity().startActivityForResult(new Intent(getActivity(), gpsActivity.class),0);
             }
         });
         //        Spinner 생성
@@ -116,6 +117,8 @@ public class HomeFragment extends Fragment {
         }
         postAdaptor.setPostlist(postItems);
 
+
+
         return rootView;
     }
 
@@ -139,4 +142,6 @@ public class HomeFragment extends Fragment {
             Log.i("StateSelectResult",state);
         }
     }
+
+
 }

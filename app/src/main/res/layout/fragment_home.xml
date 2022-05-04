@@ -28,8 +28,7 @@
                 android:layout_height="50dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/btn_select"
-                android:text="지역 선택"
+                android:text="내 위치"
                 android:textColor="@color/black" />
 
             <Spinner
