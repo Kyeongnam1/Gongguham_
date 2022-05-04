@@ -1,7 +1,11 @@
 package com.example.gongguham_;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -103,6 +107,11 @@ public class MyInfoFragment extends Fragment {
                 case R.id.logoutButton:
                     FirebaseAuth.getInstance().signOut();
                     startMainActivity();
+                    // sharedPreferences 비우기
+                    SharedPreferences preferences = getContext().getSharedPreferences("account",MODE_PRIVATE);
+                    SharedPreferences.Editor editor=preferences.edit();
+                    editor.clear();
+                    editor.commit();
                     break;
                 case R.id.userDeleteButton:
                     FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getEmail())
