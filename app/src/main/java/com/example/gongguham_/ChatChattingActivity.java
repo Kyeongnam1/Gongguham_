@@ -79,6 +79,8 @@ public class ChatChattingActivity extends AppCompatActivity {
                 chat_view.setSelection(chatDTOS.size()-1);
             }
 
+        // 데이터 받아오기 및 어댑터 데이터 추가 및 삭제 등..리스너 관리
+        databaseReference.child("chat").child(chatName).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
