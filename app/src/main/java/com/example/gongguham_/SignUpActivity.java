@@ -16,7 +16,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 
 // SHA1: DD:FF:8D:F8:C7:0C:7B:01:8E:49:3C:48:B8:8B:B4:6E:8A:E2:95:05
 

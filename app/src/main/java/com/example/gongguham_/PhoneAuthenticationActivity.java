@@ -50,11 +50,6 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
         phone_auth_btn = findViewById(R.id.phone_auth_btn);
         request_auth_num_btn = findViewById(R.id.request_auth_num_btn);
 
-        // go back
-        /*
-        gotoLoginButton = findViewById(R.id.gotoLoginButton);
-        gotoSignupButton = findViewById(R.id.gotoSignupButton);
-        */
 
         // 인증 번호 생성 절차
         request_auth_num_btn.setOnClickListener(new View.OnClickListener() {
@@ -83,23 +78,6 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
                 }
             }
         });
-        /*
-        gotoLoginButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(PhoneAuthenticationActivity.this,loginActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-        });
-        gotoSignupButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(PhoneAuthenticationActivity.this,SignUpActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-        });*/
     }
 
     private void signInWithCredential(PhoneAuthCredential credential) {

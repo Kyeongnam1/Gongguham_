@@ -58,6 +58,7 @@
         <activity android:name=".TermsAgreeActivity">
         </activity>
         <activity android:name=".MyInfoActivity"/>
+        <activity android:name=".passwordChangeActivity" android:usesCleartextTraffic="true"/>
 
 
     </application>

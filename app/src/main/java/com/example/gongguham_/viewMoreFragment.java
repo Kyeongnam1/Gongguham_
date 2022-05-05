@@ -25,8 +25,6 @@ public class viewMoreFragment extends Fragment {
     private static final String TAG = "fragmentviewMore";
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    String phonenumber;
-    private TextView phoneNumberTextE;
 
     public viewMoreFragment() {
         // Required empty public constructor
@@ -58,11 +56,7 @@ public class viewMoreFragment extends Fragment {
         view.findViewById(R.id.changesButton).setOnClickListener(onClickListener);
         view.findViewById(R.id.logoutButton).setOnClickListener(onClickListener);
         view.findViewById(R.id.userDeleteButton).setOnClickListener(onClickListener);
-        final TextView nameTextView = view.findViewById(R.id.nameText);
-
-        phoneNumberTextE = view.findViewById(R.id.phoneNumberText);
-
-
+        TextView nameTextView = view.findViewById(R.id.nameText);
 
         DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getEmail());
         documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -91,7 +85,6 @@ public class viewMoreFragment extends Fragment {
         public void onClick(View v){
             switch(v.getId()){
                 case R.id.myInfoButton:
-                    FirebaseAuth.getInstance().signOut();
                     startMyInfoActivity();
                     break;
 
@@ -100,9 +93,11 @@ public class viewMoreFragment extends Fragment {
                     startMainActivity();
                     break;
 
+                case R.id.changesButton:
+                    startpasswordChangeActivity();
+                    break;
 
                 case R.id.userDeleteButton:
-                    FirebaseAuth.getInstance().signOut();
                     FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getEmail())
                         .delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
@@ -134,9 +129,12 @@ public class viewMoreFragment extends Fragment {
     private  void startMyInfoActivity(){
         Intent intent=new Intent(getContext(),MyInfoActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-      //  intent.putExtra("phonenumber",phoneNumberTextE.getText().toString());
         startActivity(intent);
     }
-
+    private  void startpasswordChangeActivity(){
+        Intent intent=new Intent(getContext(),passwordChangeActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
 
 }
