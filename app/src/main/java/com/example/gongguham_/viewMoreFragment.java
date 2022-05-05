@@ -1,6 +1,9 @@
 package com.example.gongguham_;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -90,6 +93,11 @@ public class viewMoreFragment extends Fragment {
 
                 case R.id.logoutButton:
                     FirebaseAuth.getInstance().signOut();
+                    // sharedPreferences 비우기
+                    SharedPreferences preferences = getContext().getSharedPreferences("account",MODE_PRIVATE);
+                    SharedPreferences.Editor editor=preferences.edit();
+                    editor.clear();
+                    editor.commit();
                     startMainActivity();
                     break;
 

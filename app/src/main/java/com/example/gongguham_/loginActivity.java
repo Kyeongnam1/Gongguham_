@@ -78,6 +78,7 @@ public class loginActivity extends AppCompatActivity {
                                 // Sign in success, update UI with the signed-in user's information
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 startToast("로그인을 성공적으로 마쳤습니다.");
+
                                 //sharedpreferences 사용하여 현재 로그인 사용자 이름 저장
                                 SharedPreferences preferences= getSharedPreferences("account",MODE_PRIVATE);
                                 SharedPreferences.Editor editor=preferences.edit();

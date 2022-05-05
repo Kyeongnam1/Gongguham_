@@ -27,7 +27,7 @@
                 android:layout_height="82dp">
 
                 <TextView
-                    android:id="@+id/nameText"
+                    android:id="@+id/user_name"
                     android:layout_width="150dp"
                     android:layout_height="36dp"
                     android:layout_alignParentStart="true"
