@@ -3,6 +3,7 @@ package com.example.gongguham_;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,12 +20,12 @@ import java.util.ArrayList;
 
 public class PostAdaptor extends RecyclerView.Adapter<PostAdaptor.ViewHolder> {
 
-    private ArrayList<PostItem> postlist;
+    private ArrayList<PostInfo> postInfo;
     private Context mContext;
 
-    public PostAdaptor(Context context, ArrayList<PostItem> list){
+    public PostAdaptor(Context context, ArrayList<PostInfo> list){
         this.mContext = context;
-        this.postlist = list;
+        this.postInfo = list;
     }
     @NonNull
     @Override
@@ -35,18 +36,23 @@ public class PostAdaptor extends RecyclerView.Adapter<PostAdaptor.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull PostAdaptor.ViewHolder holder, int position) {
-        holder.onBind(postlist.get(position));
+//        holder.onBind(postInfo.get(position));
+        holder.postTitle.setText(postInfo.get(position).getPostTitle());
+        holder.meetingArea.setText(postInfo.get(position).getMeetingArea());
+        holder.closeTime.setText(postInfo.get(position).getCloseTime());
+        holder.maxPerson.setText(Integer.toString(postInfo.get(position).getMaxPerson()));
+        Log.d("data 확인", postInfo.get(position).getMeetingArea()+"/"+postInfo.get(position).getCloseTime()+"/"+(postInfo.get(position).getMaxPerson())+"/");
     }
 
-    public void setPostlist(ArrayList<PostItem> list){
-        this.postlist = list;
+    public void setPostlist(ArrayList<PostInfo> list){
+        this.postInfo = list;
         notifyDataSetChanged();
     }
 
 
     @Override
     public int getItemCount() {
-        return postlist.size();
+        return postInfo.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -68,7 +74,7 @@ public class PostAdaptor extends RecyclerView.Adapter<PostAdaptor.ViewHolder> {
                     int pos = getAdapterPosition();
                     if(pos != RecyclerView.NO_POSITION){
                         Intent intent = new Intent(mContext, PostDetailActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        intent.putExtra("post_indx", (Parcelable) postlist.get(pos));
+                        intent.putExtra("post_indx", (Parcelable) postInfo.get(pos));
 
                         mContext.startActivity(intent);
                     }
@@ -78,12 +84,12 @@ public class PostAdaptor extends RecyclerView.Adapter<PostAdaptor.ViewHolder> {
 
         }
 
-        void onBind(PostItem item){
-            postImg.setImageResource(item.getPostImg());
-            postTitle.setText(item.postTitle);
-            meetingArea.setText(item.meetingArea);
-            closeTime.setText(item.closeTime);
-            maxPerson.setText(item.maxPerson);
-        }
+//        void onBind(PostInfo item){
+//            postTitle.setText(item.getPostTitle());
+//            meetingArea.setText(item.getMeetingArea());
+//            closeTime.setText(item.getCloseTime());
+//            maxPerson.setText(item.getMaxPerson());
+//
+//        }
     }
 }
