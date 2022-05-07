@@ -115,7 +115,8 @@ public class gpsActivity extends AppCompatActivity
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), HomeFragment.class);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+//                intent.putExtra("location", markerTitle);
                 startActivity(intent);
             }
         });
@@ -363,7 +364,7 @@ public class gpsActivity extends AppCompatActivity
 
 
         currentMarker = mMap.addMarker(markerOptions);
-        //Toast.makeText(gpsActivity.this, markerTitle, Toast.LENGTH_LONG).show();
+        Toast.makeText(gpsActivity.this, markerTitle, Toast.LENGTH_LONG).show();
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
         mMap.moveCamera(cameraUpdate);
 

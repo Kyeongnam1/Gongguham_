@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/hslee98/AndroidStudioProjects/Gongguham_/app/src/main/res/layout/activity_add_post_item.xml" value="0.11302083333333333" />
+        <entry key="..\:/Users/hslee98/AndroidStudioProjects/Gongguham_/app/src/main/res/layout/activity_map.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/hslee98/AndroidStudioProjects/Gongguham_/app/src/main/res/layout/post_item.xml" value="0.264" />
         <entry key="..\:/Users/sokrp/AndroidStudioProjects/Gongguham_/app/src/main/res/drawable/btn_select.xml" value="0.229" />
         <entry key="..\:/Users/sokrp/AndroidStudioProjects/Gongguham_/app/src/main/res/layout/activity_add_post_item.xml" value="0.23278985507246377" />
         <entry key="..\:/Users/sokrp/AndroidStudioProjects/Gongguham_/app/src/main/res/layout/activity_login.xml" value="0.2536231884057971" />

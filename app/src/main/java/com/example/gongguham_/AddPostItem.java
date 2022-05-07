@@ -62,7 +62,7 @@ public class AddPostItem extends AppCompatActivity {
 
         if(title.length()>0 && content.length()>0 && meetingArea.length()>0 && closeTime.length()>0){
             user = FirebaseAuth.getInstance().getCurrentUser();
-            PostInfo postInfo = new PostInfo(title, content, meetingArea, closeTime, maxPerson, user.getUid());
+            PostInfo postInfo = new PostInfo(title, content, meetingArea, closeTime, maxPerson, user.getProviderId());
             uploader(postInfo);
         }
     }

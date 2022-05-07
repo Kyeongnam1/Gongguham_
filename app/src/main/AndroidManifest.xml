@@ -30,6 +30,7 @@
         <activity android:name=".DeliveryProgressActivity"
             android:exported="false"/>
 
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
