@@ -27,16 +27,48 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="만날 장소 입력"/>
-        <EditText
-            android:id="@+id/add_post_close_time"
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="약속 시간 입력"/>
-        <EditText
-            android:id="@+id/add_post_max_person"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/spinner_add_post_close_time_hour"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="10dp" />
+
+            <Spinner
+                android:id="@+id/spinner_add_post_close_time_minute"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="10dp" />
+
+        </LinearLayout>
+
+
+        <Spinner
+            android:id="@+id/spinner_add_post_max_person"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="총 인원 입력"/>
+            android:layout_marginStart="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="10dp"
+            android:layout_height="45dp" />
+
 
         <Button
             android:id="@+id/btn_close"

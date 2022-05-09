@@ -124,12 +124,13 @@ public class HomeFragment extends Fragment {
                             for(QueryDocumentSnapshot document : task.getResult()) {
                                 postInfo.add(new PostInfo(
                                         document.getData().get("postTitle").toString(),
+                                        document.getData().get("postContent").toString(),
                                         document.getData().get("meetingArea").toString(),
-                                        document.getData().get("closeTime").toString(),
+                                        document.getData().get("closeTime_hour").toString(),
+                                        document.getData().get("closeTime_minute").toString(),
                                         document.getData().get("maxPerson").toString(),
-                                        Integer.parseInt(document.getData().get("maxPerson").toString()) ,
                                         document.getData().get("userId").toString()));
-                                Log.d("closeTime 확인", document.getData().get("closeTime").toString());
+                                //Log.d("closeTime 확인", document.getData().get("closeTime").toString());
                                 }
                             mRecyclerView = (RecyclerView) rootView.findViewById(R.id.RecyclePostList);
                             postAdaptor = new PostAdaptor(getActivity(), postInfo);
