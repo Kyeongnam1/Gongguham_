@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -60,12 +61,7 @@ public class AddPostItem extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 addPost();
-                HomeFragment homeFragment = new HomeFragment();
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, homeFragment)
-                        .commit();
-
-                //finish();
+                startMainActivity();
             }
         });
     }
@@ -117,5 +113,12 @@ public class AddPostItem extends AppCompatActivity {
 
                     }
                 });
+    }
+
+
+    private  void startMainActivity(){
+        Intent intent=new Intent(this,MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }
