@@ -83,10 +83,10 @@ public class MainActivity extends AppCompatActivity {
                                     .commit();
                             return true;
 
-                        case R.id.myInfo:
-                            MyInfoFragment myInfoFragment = new MyInfoFragment();
+                        case R.id.viewmore:
+                            viewMoreFragment viewmoreFragment = new viewMoreFragment();
                             getSupportFragmentManager().beginTransaction()
-                                    .replace(R.id.container, myInfoFragment)
+                                    .replace(R.id.container, viewmoreFragment)
                                     .commit();
                             return true;
                     }

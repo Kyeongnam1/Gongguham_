@@ -4,15 +4,17 @@ public class PostInfo {
     private String postTitle;
     private String postContent;
     private String meetingArea;
-    private String closeTime;
-    private int maxPerson;
+    private String closeTime_hour;
+    private String closeTime_minute;
+    private String maxPerson;
     private String userId;
 
-    public PostInfo(String postTitle, String postContent, String meetingArea, String closeTime, int maxPerson, String userId) {
+    public PostInfo(String postTitle, String postContent, String meetingArea, String closeTime_hour, String closeTime_minute, String maxPerson, String userId) {
         this.postTitle = postTitle;
         this.postContent = postContent;
         this.meetingArea = meetingArea;
-        this.closeTime = closeTime;
+        this.closeTime_hour = closeTime_hour;
+        this.closeTime_minute = closeTime_minute;
         this.maxPerson = maxPerson;
         this.userId = userId;
     }
@@ -41,19 +43,25 @@ public class PostInfo {
         this.meetingArea = meetingArea;
     }
 
-    public String getCloseTime() {
-        return closeTime;
+    public String getCloseTime_hour() {
+        return closeTime_hour;
     }
 
-    public void setCloseTime(String closeTime) {
-        this.closeTime = closeTime;
+    public void setCloseTime_hour(String closeTime_hour) {
+        this.closeTime_hour = closeTime_hour;
     }
 
-    public int getMaxPerson() {
+    public String getCloseTime_minute() {
+        return closeTime_minute;
+    }
+
+    public void setCloseTime_minute(String closeTime_minute) { this.closeTime_minute = closeTime_minute; }
+
+    public String getMaxPerson() {
         return maxPerson;
     }
 
-    public void setMaxPerson(int maxPerson) {
+    public void setMaxPerson(String maxPerson) {
         this.maxPerson = maxPerson;
     }
 
@@ -64,4 +72,5 @@ public class PostInfo {
     public void setUserId(String userId) {
         this.userId = userId;
     }
+<<<<<<< HEAD
 }

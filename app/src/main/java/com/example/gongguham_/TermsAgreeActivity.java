@@ -50,28 +50,6 @@ public class TermsAgreeActivity extends AppCompatActivity {
                     break;
             }
         }
-        /*
-        public void onCheckboxClicked(View view) {
-            // Is the view now checked?
-            boolean checked = ((CheckBox) view).isChecked();
-
-            // Check which checkbox was clicked
-            switch(view.getId()) {
-                case R.id.firstCheckBtn:
-                    if (checked){
-                        c2.setChecked(true);
-                        c3.setChecked(true);
-                        c4.setChecked(true);
-                    }
-                    else{
-                        c2.setChecked(false);
-                        c3.setChecked(false);
-                        c4.setChecked(false);
-                    }
-                    break;
-                // TODO: Veggie sandwich
-            }
-        }*/
     };
 
     private  void startToast(String msg){

@@ -3,10 +3,12 @@ package com.example.gongguham_;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -20,6 +22,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -37,25 +40,17 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-
 
 public class gpsActivity extends AppCompatActivity
         implements OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback{
 
-    private FirebaseUser user;
     private GoogleMap mMap;
     private Marker currentMarker = null;
 
@@ -120,11 +115,10 @@ public class gpsActivity extends AppCompatActivity
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
+                Intent intent = new Intent(getApplicationContext(), HomeFragment.class);
+                startActivity(intent);
             }
         });
-
     }
 
     @Override
@@ -369,10 +363,9 @@ public class gpsActivity extends AppCompatActivity
 
 
         currentMarker = mMap.addMarker(markerOptions);
+        //Toast.makeText(gpsActivity.this, markerTitle, Toast.LENGTH_LONG).show();
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
         mMap.moveCamera(cameraUpdate);
-        addLocation(markerTitle);
-        mFusedLocationClient.removeLocationUpdates(locationCallback);
 
     }
 
@@ -485,11 +478,9 @@ public class gpsActivity extends AppCompatActivity
                         }
                     }).show();
                 }
-
             }
 
         }
-
     }
 
 
@@ -544,34 +535,6 @@ public class gpsActivity extends AppCompatActivity
         }
     }
 
-    private void addLocation(String markerTitle){
 
-        String curLoc = markerTitle;
-
-        if(markerTitle.length() > 0){
-            user = FirebaseAuth.getInstance().getCurrentUser();
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-            LocInfo locInfo = new LocInfo(curLoc);
-
-
-            db.collection("locations").add(locInfo)
-                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                        @Override
-                        public void onSuccess(DocumentReference documentReference) {
-                            Log.d("AddLoc Activity", "DocumentSnapShot" + documentReference);
-                        }
-
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Log.e("AddLoc Activity", "Error adding post" + e);
-
-                        }
-                    });
-        }
-
-    }
 
 }
