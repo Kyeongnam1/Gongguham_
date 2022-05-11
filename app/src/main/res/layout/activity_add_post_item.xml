@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddPostItem">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -118,63 +117,70 @@
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textView14"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="공구함은 깨끗한 커뮤니티 환경을 만들기 위하여 커뮤니티 이용규칙을 제정하고 있습니다. 위반 시 게시물이 삭제되고 서비스 이용이 제한될 수 있습니다." />
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textView15"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="아래에 내용은 핵심내용에 대한 요약 사항이며, 게시물 작성 전 이용규칙을 정독하여 주시기 바랍니다." />
+                    <TextView
+                        android:id="@+id/textView14"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="공구함은 깨끗한 커뮤니티 환경을 만들기 위하여 커뮤니티 이용규칙을 제정하고 있습니다. 위반 시 게시물이 삭제되고 서비스 이용이 제한될 수 있습니다." />
 
-                <TextView
-                    android:id="@+id/textView16"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="* 정치, 사회 관련 행위 금지" />
+                    <TextView
+                        android:id="@+id/textView15"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="아래에 내용은 핵심내용에 대한 요약 사항이며, 게시물 작성 전 이용규칙을 정독하여 주시기 바랍니다." />
 
-                <TextView
-                    android:id="@+id/textView17"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="* 홍보 및 판매 관련 행위 금지" />
+                    <TextView
+                        android:id="@+id/textView16"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="* 정치, 사회 관련 행위 금지" />
 
-                <TextView
-                    android:id="@+id/textView18"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="* 타인의 권리를 침해하거나 불쾌감을 주는 행위 금지" />
+                    <TextView
+                        android:id="@+id/textView17"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="* 홍보 및 판매 관련 행위 금지" />
 
-                <TextView
-                    android:id="@+id/textView19"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="* 범죄, 불법 해위 등 법령을 위반하는 행위 금지" />
+                    <TextView
+                        android:id="@+id/textView18"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="* 타인의 권리를 침해하거나 불쾌감을 주는 행위 금지" />
 
-                <TextView
-                    android:id="@+id/textView20"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="* 욕설, 비하, 차별, 혐오, 자살, 폭력 관련 내용을 포함하는 행위 금지" />
+                    <TextView
+                        android:id="@+id/textView19"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="* 범죄, 불법 해위 등 법령을 위반하는 행위 금지" />
 
-        <Button
-            android:id="@+id/btn_close"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="완료"
-            />
+                    <TextView
+                        android:id="@+id/textView20"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="* 욕설, 비하, 차별, 혐오, 자살, 폭력 관련 내용을 포함하는 행위 금지" />
 
+                    <TextView
+                        android:id="@+id/textView21"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="* 음란물, 성적 수치심을 유발하는 행위 금지" />
+
+                    <TextView
+                        android:id="@+id/textView22"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="* 스포일러, 공포, 속임, 놀라게 하는 행위 금지" />
+                </LinearLayout>
+            </ScrollView>
+
+        </LinearLayout>
 
     </LinearLayout>
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

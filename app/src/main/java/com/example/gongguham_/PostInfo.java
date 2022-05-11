@@ -72,5 +72,5 @@ public class PostInfo {
     public void setUserId(String userId) {
         this.userId = userId;
     }
-<<<<<<< HEAD
+
 }

@@ -43,7 +43,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
     implementation 'com.google.firebase:firebase-firestore'
-<<<<<<<<< Temporary merge branch 1
+
     implementation 'androidx.navigation:navigation-fragment:2.3.2'
     implementation 'androidx.navigation:navigation-ui:2.3.2'
     implementation 'com.google.firebase:firebase-appcheck-safetynet:16.0.0-beta05'
