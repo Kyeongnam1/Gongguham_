@@ -40,6 +40,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     private FirebaseAuth mAuth;
     private static final String TAG = "MainActivity";
     SwipeRefreshLayout swipeRefreshLayout;
+    private static ViewGroup viewGroup;
 
 
     //    RecyclerView 생성
@@ -73,10 +74,11 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_home, container, false);
-
+        viewGroup = rootView;
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         swipeRefreshLayout =rootView.findViewById(R.id.swipe_layout);
+        Log.i("layout check", String.valueOf(swipeRefreshLayout));
         swipeRefreshLayout.setOnRefreshListener(this);
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -178,6 +180,8 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             @Override
             public void run() {
                 reload();
+                swipeRefreshLayout = viewGroup.findViewById(R.id.swipe_layout);
+                Log.i("layout check", String.valueOf(swipeRefreshLayout));
                 swipeRefreshLayout.setRefreshing(false);
             }
         }, 500);
