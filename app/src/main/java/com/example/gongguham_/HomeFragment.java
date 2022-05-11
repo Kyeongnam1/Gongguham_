@@ -6,9 +6,12 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,10 +36,10 @@ import java.util.ArrayList;
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
     private FirebaseAuth mAuth;
     private static final String TAG = "MainActivity";
-
+    SwipeRefreshLayout swipeRefreshLayout;
 
 
     //    RecyclerView 생성
@@ -71,8 +74,10 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_home, container, false);
 
-
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        swipeRefreshLayout =rootView.findViewById(R.id.swipe_layout);
+        swipeRefreshLayout.setOnRefreshListener(this);
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 //        Add Post Button onClickListener
@@ -121,32 +126,34 @@ public class HomeFragment extends Fragment {
                         if(task.isSuccessful()){
                             ArrayList<PostInfo> postInfo = new ArrayList<>();
 
+
                             for(QueryDocumentSnapshot document : task.getResult()) {
+                                String hour = document.getData().get("closeTime_hour").toString();
+                                String minute = document.getData().get("closeTime_minute").toString();
+                                String time = hour + minute;
+
                                 postInfo.add(new PostInfo(
                                         document.getData().get("postTitle").toString(),
+                                        document.getData().get("postContent").toString(),
                                         document.getData().get("meetingArea").toString(),
-                                        document.getData().get("closeTime").toString(),
+                                        document.getData().get("closeTime_hour").toString(),
+                                        //document.getData().get("closeTime_minute").toString(),
+                                        time,
                                         document.getData().get("maxPerson").toString(),
-                                        Integer.parseInt(document.getData().get("maxPerson").toString()) ,
                                         document.getData().get("userId").toString()));
-                                Log.d("closeTime 확인", document.getData().get("closeTime").toString());
-                                }
+                                //Log.d("closeTime 확인", document.getData().get("closeTime").toString());
+                            }
                             mRecyclerView = (RecyclerView) rootView.findViewById(R.id.RecyclePostList);
                             postAdaptor = new PostAdaptor(getActivity(), postInfo);
                             mRecyclerView.setHasFixedSize(true);
                             mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                             postAdaptor.setPostlist(postInfo);
                             mRecyclerView.setAdapter(postAdaptor);
-
                         }else{
-                                Log.e("Error", "task Error!");
+                            Log.e("Error", "task Error!");
                         }
                     }
                 });
-
-
-
-
 
         return rootView;
     }
@@ -164,5 +171,20 @@ public class HomeFragment extends Fragment {
     }
 
 
+    @Override
+    public void onRefresh() {
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                reload();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        }, 500);
+    }
+    public void reload(){
+        postItems.clear();
+        postAdaptor.notifyDataSetChanged();
+    }
 
 }
