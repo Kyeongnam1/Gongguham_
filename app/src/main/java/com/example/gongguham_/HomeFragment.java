@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -148,16 +149,11 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                             mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                             postAdaptor.setPostlist(postInfo);
                             mRecyclerView.setAdapter(postAdaptor);
-
                         }else{
                                 Log.e("Error", "task Error!");
                         }
                     }
                 });
-
-
-
-
 
         return rootView;
     }
@@ -181,8 +177,14 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                reload();
                 swipeRefreshLayout.setRefreshing(false);
             }
         }, 500);
     }
+    public void reload(){
+       postItems.clear();
+       postAdaptor.notifyDataSetChanged();
+    }
+
 }
