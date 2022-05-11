@@ -2,68 +2,50 @@ package com.example.gongguham_;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+public class MyInfoActivity extends AppCompatActivity {
 
-public class MyInfoFragment extends Fragment {
-    private static final String TAG = "fragmentMyInfo";
+    private String TAG = "MyInfoActivity";
 
-
-    public MyInfoFragment() {
-        // Required empty public constructor
-    }
-
-
-
-    public static MyInfoFragment newInstance(String param1, String param2) {
-        MyInfoFragment fragment = new MyInfoFragment();
-        Bundle args = new Bundle();
-
-        return fragment;
-    }
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    private DatabaseReference databaseReference = firebaseDatabase.getReference();
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_myinfo);
 
-
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_myinfo, container, false);
-
-
-        view.findViewById(R.id.logoutButton).setOnClickListener(onClickListener);
-
-
-        final TextView nameTextView = view.findViewById(R.id.nameText);
-        final TextView phoneNumberTextView = view.findViewById(R.id.phoneNumberText);
-        final TextView genderTextView = view.findViewById(R.id.genderText);
-        final TextView accountValueTextView = view.findViewById(R.id.accountValueText);
-        final TextView accountTextView = view.findViewById(R.id.accountText);
-        final TextView emailTextView = view.findViewById(R.id.emailText);
-        final TextView birthDayTextView = view.findViewById(R.id.birthdayText);
-        final TextView addressTextView = view.findViewById(R.id.addressText);
+        final TextView nameTextView = findViewById(R.id.nameText);
+        final TextView phoneNumberTextView = findViewById(R.id.phoneNumberText);
+        final TextView genderTextView = findViewById(R.id.genderText);
+        final TextView accountValueTextView = findViewById(R.id.accountValueText);
+        final TextView accountTextView = findViewById(R.id.accountText);
+        final TextView emailTextView = findViewById(R.id.emailText);
+        final TextView birthDayTextView = findViewById(R.id.birthdayText);
+        final TextView addressTextView = findViewById(R.id.addressText);
 
         DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getEmail());
         documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
@@ -89,26 +71,6 @@ public class MyInfoFragment extends Fragment {
                 }
             }
         });
-        return view;
+
     }
-
-    View.OnClickListener onClickListener = new View.OnClickListener(){
-        @Override
-        public void onClick(View v){
-            switch(v.getId()){
-                case R.id.logoutButton:
-                    FirebaseAuth.getInstance().signOut();
-                    startMainActivity();
-                    break;
-            }
-        }
-    };
-
-    private  void startMainActivity(){
-        Intent intent=new Intent(getContext(),MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-    }
-
-
 }

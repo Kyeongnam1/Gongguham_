@@ -1,6 +1,7 @@
 package com.example.gongguham_;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.util.Log;
@@ -25,8 +26,6 @@ public class loginActivity extends AppCompatActivity {
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         findViewById(R.id.loginButton).setOnClickListener(onClickListener);
-        findViewById(R.id.gotopasswordResetButton).setOnClickListener(onClickListener);
-        findViewById(R.id.gotoSignUpButton).setOnClickListener(onClickListener);
     }
 
     @Override public void onBackPressed() {
@@ -55,17 +54,14 @@ public class loginActivity extends AppCompatActivity {
                     Log.e("클릭", "클릭");
                     login();
                     break;
-                case R.id.gotopasswordResetButton:
-                    Log.e("클릭", "클릭");
-                    startpasswordResetActivity();
-                    break;
-                case R.id.gotoSignUpButton:
-                    Log.e("클릭", "클릭");
-                    startSignUpActivity();
-                    break;
             }
         }
     };
+
+    public void signUp(View v){ startTermsAgreeActivity(); }
+    public void passwordReset(View v){
+        startpasswordResetActivity();
+    }
 
     private void login() {
         EditText emailE = (EditText) findViewById(R.id.emailEditText);
@@ -82,6 +78,13 @@ public class loginActivity extends AppCompatActivity {
                                 // Sign in success, update UI with the signed-in user's information
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 startToast("로그인을 성공적으로 마쳤습니다.");
+
+                                //sharedpreferences 사용하여 현재 로그인 사용자 이름 저장
+                                SharedPreferences preferences= getSharedPreferences("account",MODE_PRIVATE);
+                                SharedPreferences.Editor editor=preferences.edit();
+                                editor.putString("userName",G.username);
+                                editor.commit();
+
                                 startMainActivity();
 
                             } else {
@@ -101,8 +104,8 @@ public class loginActivity extends AppCompatActivity {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
-    private  void startSignUpActivity(){
-        Intent intent=new Intent(this,SignUpActivity.class);
+    private  void startTermsAgreeActivity(){
+        Intent intent=new Intent(this,TermsAgreeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
@@ -117,6 +120,4 @@ public class loginActivity extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
-
-
 }

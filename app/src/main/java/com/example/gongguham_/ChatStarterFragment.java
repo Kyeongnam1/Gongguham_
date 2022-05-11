@@ -1,6 +1,10 @@
 package com.example.gongguham_;
 
+import static android.content.Context.MODE_PRIVATE;
+import static com.example.gongguham_.R.*;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,6 +34,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Objects;
 
 
 public class ChatStarterFragment extends Fragment {
@@ -46,13 +51,12 @@ public class ChatStarterFragment extends Fragment {
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = firebaseDatabase.getReference();
 
-
+    // 클릭시 name null방지를 위한 firestore
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public ChatStarterFragment() {
         // Required empty public constructor
     }
-
-
 
     public static ChatStarterFragment newInstance(String param1, String param2) {
         ChatStarterFragment fragment = new ChatStarterFragment();
@@ -71,19 +75,25 @@ public class ChatStarterFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_chat_starter, container, false);
+        View view = inflater.inflate(layout.fragment_chat_starter, container, false);
 
-        chat_name = (EditText) view.findViewById(R.id.chat_name);
-
-        final TextView name = view.findViewById(R.id.user_name);
-
-        user_next = (Button) view.findViewById(R.id.user_next);
-        boom_button = (Button) view.findViewById(R.id.boom_button);
-
-        chat_list = (ListView) view.findViewById(R.id.chat_list);
+        // shared preferences 테스트
+        SharedPreferences preferences = this.getActivity().getSharedPreferences("account", MODE_PRIVATE);
+        loadData();
 
 
-        DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+        chat_name = (EditText) view.findViewById(id.chat_name);
+
+        // 둘다 user_name
+        TextView name = view.findViewById(id.user_name);
+        user_name = view.findViewById(id.user_name);
+
+        user_next = (Button) view.findViewById(id.user_next);
+        boom_button = (Button) view.findViewById(id.boom_button);
+
+        chat_list = (ListView) view.findViewById(id.chat_list);
+
+        DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser().getEmail()));
         documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -92,7 +102,7 @@ public class ChatStarterFragment extends Fragment {
                     if (document != null) {
                         if (document.exists()) {
                             name.setText(document.getData().get("name").toString());
-                            //name.setText(MemberInfo.class.getName());
+                            user_name.setText(document.getData().get("name").toString());
                         } else {
                             Log.e(TAG, "No such document");
                         }
@@ -114,6 +124,8 @@ public class ChatStarterFragment extends Fragment {
                     Intent intent = new Intent(getContext(), ChatChattingActivity.class);
                     intent.putExtra("chatName", chat_name.getText().toString());
                     intent.putExtra("userName", name.getText().toString());
+                    // sharedpreferences 테스트
+                    saveData();
                     startActivity(intent);
                 }
             }
@@ -123,7 +135,7 @@ public class ChatStarterFragment extends Fragment {
             public void onClick(View view) {
                 if(name.getText().toString().equals("") || chat_name.getText().toString().equals("")){
                     Toast.makeText(getContext(),"채팅방 이름을 입력해주세요.",Toast.LENGTH_SHORT).show();
-                }else{ //방폭ㅅ
+                }else{ //방폭
                     Toast.makeText(getContext(), "채팅방이 터졌습니다.", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -138,6 +150,8 @@ public class ChatStarterFragment extends Fragment {
     private void showChatList() {
         //final String[] clicked_chat_room = new String[1];
         // 리스트 어댑터 생성 및 세팅
+        // shared preferences 테스트
+        SharedPreferences preferences = this.getActivity().getSharedPreferences("account", MODE_PRIVATE);
         final ArrayAdapter<String> adapter
 
                 = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, android.R.id.text1);
@@ -178,14 +192,36 @@ public class ChatStarterFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 chat_name.setText(adapter.getItem(i));
+                Toast.makeText(getContext(),"채팅방에 입장하였습니다.",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getContext(), ChatChattingActivity.class);
                 intent.putExtra("chatName", chat_name.getText().toString());
+                intent.putExtra("userName", user_name.getText().toString());
+
+                SharedPreferences.Editor editor = preferences.edit();
+                G.username = user_name.getText().toString();
+                editor.putString("username",G.username);
+                editor.commit();
+
                 startActivity(intent);
             }
         });
+
+
     }
     private void boomRoom(){
 
+    }
+    private void saveData(){
+
+        SharedPreferences preferences= this.getActivity().getSharedPreferences("account",MODE_PRIVATE);
+        SharedPreferences.Editor editor=preferences.edit();
+
+        editor.putString("username",G.username);
+        editor.commit();
+    }
+    private void loadData(){
+        SharedPreferences preferences = this.getActivity().getSharedPreferences("account",MODE_PRIVATE);
+        G.username=preferences.getString("username", null);
     }
 
 

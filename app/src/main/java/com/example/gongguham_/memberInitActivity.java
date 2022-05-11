@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.app.Activity;
 import android.os.Bundle;
@@ -27,12 +28,22 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class memberInitActivity extends AppCompatActivity {
+    String phonenumber;
+    private TextView phoneNumberTextE;
+
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_memeber_init);
+
+        Intent intent = getIntent();
+        phonenumber = intent.getStringExtra("phonenumber");
+        phoneNumberTextE = findViewById(R.id.phoneNumberText);
+        phoneNumberTextE.setText(phonenumber);
+
+
         if(user != null){
             for (UserInfo profile : user.getProviderData()) {
                 String name = profile.getDisplayName();
@@ -80,8 +91,9 @@ public class memberInitActivity extends AppCompatActivity {
     private void profileUpdate() {
         EditText nameE = (EditText) findViewById(R.id.nameEditText);
         String name = nameE.getText().toString();
-        EditText phoneNumberE = (EditText) findViewById(R.id.phoneNumberEditText);
-        String phoneNumber = phoneNumberE.getText().toString();
+        TextView phoneNumberE = (TextView) findViewById(R.id.phoneNumberText);
+        //String phoneNumber = phoneNumberE.getText().toString();
+        phoneNumberE.setText(phonenumber);
         EditText accountE = (EditText) findViewById(R.id.accountEditText);
         String account = accountE.getText().toString();
         EditText birthdayE = (EditText) findViewById(R.id.birthdayEditText);
@@ -94,11 +106,11 @@ public class memberInitActivity extends AppCompatActivity {
         Spinner accountS = (Spinner) findViewById(R.id.spinner_account);
         String accountValue = accountS.getSelectedItem().toString();
 
-        if (name.length() > 0 && phoneNumber.length() > 9 && gender.length() > 0 && accountValue.length() >0 && account.length()>0  && birthday.length() > 5 && address.length()>0) {
+        if (name.length() > 0 /*&& phoneNumber.length() > 9*/ && gender.length() > 0 && accountValue.length() >0 && account.length()>0  && birthday.length() > 5 && address.length()>0) {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-            MemberInfo memberInfo = new MemberInfo(name, phoneNumber,gender, accountValue, account, birthday, address);
+            MemberInfo memberInfo = new MemberInfo(name, phonenumber,gender, accountValue, account, birthday, address);
 
             if (user != null) {
                 db.collection("users").document(user.getEmail()).set(memberInfo)
