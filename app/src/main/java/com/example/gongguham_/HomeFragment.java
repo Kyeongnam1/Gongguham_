@@ -41,7 +41,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     private static final String TAG = "MainActivity";
     SwipeRefreshLayout swipeRefreshLayout;
     private static ViewGroup viewGroup;
-
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     //    RecyclerView 생성
     private RecyclerView mRecyclerView;
@@ -179,16 +179,45 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                reload();
-                swipeRefreshLayout = viewGroup.findViewById(R.id.swipe_layout);
-                Log.i("layout check", String.valueOf(swipeRefreshLayout));
+                db.collection("posts")
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if(task.isSuccessful()){
+                                    ArrayList<PostInfo> postInfo = new ArrayList<>();
+
+
+                                    for(QueryDocumentSnapshot document : task.getResult()) {
+                                        String hour = document.getData().get("closeTime_hour").toString();
+                                        String minute = document.getData().get("closeTime_minute").toString();
+                                        String time = hour + minute;
+
+                                        postInfo.add(new PostInfo(
+                                                document.getData().get("postTitle").toString(),
+                                                document.getData().get("postContent").toString(),
+                                                document.getData().get("meetingArea").toString(),
+                                                document.getData().get("closeTime_hour").toString(),
+                                                //document.getData().get("closeTime_minute").toString(),
+                                                time,
+                                                document.getData().get("maxPerson").toString(),
+                                                document.getData().get("userId").toString()));
+                                    }
+                                    mRecyclerView = (RecyclerView) viewGroup.findViewById(R.id.RecyclePostList);
+                                    postAdaptor = new PostAdaptor(getActivity(), postInfo);
+                                    mRecyclerView.setHasFixedSize(true);
+                                    mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                                    postAdaptor.setPostlist(postInfo);
+                                    mRecyclerView.setAdapter(postAdaptor);
+                                }else{
+                                    Log.e("Error", "task Error!");
+                                }
+                            }
+                        });
                 swipeRefreshLayout.setRefreshing(false);
             }
         }, 500);
     }
-    public void reload(){
-        postItems.clear();
-        postAdaptor.notifyDataSetChanged();
-    }
+
 
 }
