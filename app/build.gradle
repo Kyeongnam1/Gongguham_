@@ -53,4 +53,9 @@ dependencies {
     //cir image
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.google.android.gms:play-services-location:19.0.1'
+    implementation 'com.google.android.gms:play-services-maps:18.0.2'
+    implementation 'com.google.android.material:material:1.5.0'
+    //당겨서 새로고침
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 }
