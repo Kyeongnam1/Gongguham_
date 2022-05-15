@@ -59,6 +59,7 @@ public class viewMoreFragment extends Fragment {
         view.findViewById(R.id.changesButton).setOnClickListener(onClickListener);
         view.findViewById(R.id.logoutButton).setOnClickListener(onClickListener);
         view.findViewById(R.id.userDeleteButton).setOnClickListener(onClickListener);
+        view.findViewById(R.id.payButton).setOnClickListener(onClickListener);  // 페이먼트 시스템
         TextView nameTextView = view.findViewById(R.id.nameText);
 
         DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getEmail());
@@ -124,6 +125,10 @@ public class viewMoreFragment extends Fragment {
 
                     startMainActivity();
                     break;
+
+                case R.id.payButton:
+                    startPaymentSystem();
+                    break;
             }
         }
     };
@@ -141,6 +146,12 @@ public class viewMoreFragment extends Fragment {
     }
     private  void startpasswordChangeActivity(){
         Intent intent=new Intent(getContext(),passwordChangeActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    private void startPaymentSystem(){
+        Intent intent = new Intent(getContext(),PaymentActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
