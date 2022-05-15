@@ -59,16 +59,35 @@
         android:textSize="12dp"
         android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/user_auth_number_edt"
-        android:layout_width="200dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
-        android:hint="숫자 6자리"
-        android:inputType="numberDecimal"
-        android:maxLength="6"
-        android:textSize="16dp" />
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/user_auth_number_edt"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="숫자 6자리"
+            android:inputType="numberDecimal"
+            android:maxLength="6"
+            android:textSize="16dp" />
+
+
+        <TextView
+            android:id="@+id/timeOut"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:hint="남은 시간"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="11dp" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

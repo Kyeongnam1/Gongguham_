@@ -2,10 +2,12 @@ package com.example.gongguham_;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,6 +30,11 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText user_phonenumber_edt, user_auth_number_edt;
 
+
+    // left time
+    String conversionTime = "000060";
+    private TextView timeOut;
+
     private Button phone_auth_btn, request_auth_num_btn;
 
     //private Button gotoLoginButton, gotoSignupButton;
@@ -49,6 +56,9 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
         user_auth_number_edt = findViewById(R.id.user_auth_number_edt);
         phone_auth_btn = findViewById(R.id.phone_auth_btn);
         request_auth_num_btn = findViewById(R.id.request_auth_num_btn);
+
+        // left time
+        timeOut = (TextView) findViewById(R.id.timeOut);
 
 
         // 인증 번호 생성 절차
@@ -128,6 +138,7 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
             Toast.makeText(PhoneAuthenticationActivity.this, "인증번호가 전송되었습니다.", Toast.LENGTH_LONG).show();
             // 코드 전송
             verificationId = s;
+            countDown(conversionTime);
         }
 
         // 성공
@@ -170,5 +181,73 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
         // calling sign in method.
         signInWithCredential(credential);
         Toast.makeText(PhoneAuthenticationActivity.this, "인증번호 확인중..", Toast.LENGTH_SHORT).show();
+    }
+
+    public void countDown(String time) {
+
+        long conversionTime = 0;
+
+        String getHour = time.substring(0, 2);
+        String getMin = time.substring(2, 4);
+        String getSecond = time.substring(4, 6);
+
+        if (getHour.substring(0, 1) == "0") {
+            getHour = getHour.substring(1, 2);
+        }
+
+        if (getMin.substring(0, 1) == "0") {
+            getMin = getMin.substring(1, 2);
+        }
+
+        if (getSecond.substring(0, 1) == "0") {
+            getSecond = getSecond.substring(1, 2);
+        }
+
+        // 변환시간
+        conversionTime = Long.valueOf(getHour) * 1000 * 3600 + Long.valueOf(getMin) * 60 * 1000 + Long.valueOf(getSecond) * 1000;
+
+        // 첫번쨰 인자 : 원하는 시간 (예를들어 30초면 30 x 1000(주기))
+        // 두번쨰 인자 : 주기( 1000 = 1초)
+        new CountDownTimer(conversionTime, 1000) {
+
+            // 특정 시간마다 뷰 변경
+            public void onTick(long millisUntilFinished) {
+
+                // 시간단위
+                String hour = String.valueOf(millisUntilFinished / (60 * 60 * 1000));
+
+                // 분단위
+                long getMin = millisUntilFinished - (millisUntilFinished / (60 * 60 * 1000)) ;
+                String min = String.valueOf(getMin / (60 * 1000)); // 몫
+
+                // 초단위
+                String second = String.valueOf((getMin % (60 * 1000)) / 1000); // 나머지
+
+                // 밀리세컨드 단위
+                String millis = String.valueOf((getMin % (60 * 1000)) % 1000); // 몫
+
+                // 시간이 한자리면 0을 붙인다
+                if (hour.length() == 1) {
+                    hour = "0" + hour;
+                }
+
+                // 분이 한자리면 0을 붙인다
+                if (min.length() == 1) {
+                    min = "0" + min;
+                }
+
+                // 초가 한자리면 0을 붙인다
+                if (second.length() == 1) {
+                    second = "0" + second;
+                }
+
+                timeOut.setText(hour + ":" + min + ":" + second);
+            }
+
+            // 제한시간 종료시
+            public void onFinish() {
+                timeOut.setText("제한시간 초과");
+            }
+        }.start();
     }
 }
