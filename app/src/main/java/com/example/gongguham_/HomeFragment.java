@@ -4,14 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,11 +22,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -36,17 +33,16 @@ import java.util.ArrayList;
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+public class HomeFragment extends Fragment {
     private FirebaseAuth mAuth;
     private static final String TAG = "MainActivity";
-    SwipeRefreshLayout swipeRefreshLayout;
-    private static ViewGroup viewGroup;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
 
     //    RecyclerView 생성
     private RecyclerView mRecyclerView;
     private PostAdaptor postAdaptor;
-    final private ArrayList<PostItem> postItems = new ArrayList<>();
+    private ArrayList<PostItem> postItems;
     private AppCompatButton btn_add;
     private AppCompatButton btn_state;
     private Spinner sort_spinner;
@@ -74,14 +70,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_home, container, false);
-        viewGroup = rootView;
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        swipeRefreshLayout =rootView.findViewById(R.id.swipe_layout);
-        Log.i("layout check", String.valueOf(swipeRefreshLayout));
-        swipeRefreshLayout.setOnRefreshListener(this);
-
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
 //        Add Post Button onClickListener
         btn_add = (AppCompatButton) rootView.findViewById(R.id.btn_add_post);
         btn_add.setOnClickListener(new View.OnClickListener() {
@@ -95,7 +84,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         btn_state.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().startActivityForResult(new Intent(getActivity(), gpsActivity.class),0);
+                getActivity().startActivityForResult(new Intent(getActivity(), StateSelectActivity.class),0);
             }
         });
         //        Spinner 생성
@@ -114,48 +103,18 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             }
         });
 
-
-
-
 //        RecyclerView 생성
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.RecyclePostList);
+        postAdaptor = new PostAdaptor(getActivity(), postItems);
+        mRecyclerView.setAdapter(postAdaptor);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        postItems = new ArrayList<>();
 
-
-        db.collection("posts")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
-                            ArrayList<PostInfo> postInfo = new ArrayList<>();
-
-
-                            for(QueryDocumentSnapshot document : task.getResult()) {
-                                String hour = document.getData().get("closeTime_hour").toString();
-                                String minute = document.getData().get("closeTime_minute").toString();
-                                String time = hour + minute;
-
-                                postInfo.add(new PostInfo(
-                                        document.getData().get("postTitle").toString(),
-                                        document.getData().get("postContent").toString(),
-                                        document.getData().get("meetingArea").toString(),
-                                        document.getData().get("closeTime_hour").toString(),
-                                        //document.getData().get("closeTime_minute").toString(),
-                                        time,
-                                        document.getData().get("maxPerson").toString(),
-                                        document.getData().get("userId").toString()));
-                                //Log.d("closeTime 확인", document.getData().get("closeTime").toString());
-                            }
-                            mRecyclerView = (RecyclerView) rootView.findViewById(R.id.RecyclePostList);
-                            postAdaptor = new PostAdaptor(getActivity(), postInfo);
-                            mRecyclerView.setHasFixedSize(true);
-                            mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                            postAdaptor.setPostlist(postInfo);
-                            mRecyclerView.setAdapter(postAdaptor);
-                        }else{
-                            Log.e("Error", "task Error!");
-                        }
-                    }
-                });
+//        Sample Data
+        for(int i = 0; i<30; i++){
+            postItems.add(new PostItem("교촌치킨 드실 분!!", "명덕관 1층", "18:30", "5명", i));
+        }
+        postAdaptor.setPostlist(postItems);
 
         return rootView;
     }
@@ -172,52 +131,12 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         startActivity(intent);
     }
 
-
     @Override
-    public void onRefresh() {
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                db.collection("posts")
-                        .get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if(task.isSuccessful()){
-                                    ArrayList<PostInfo> postInfo = new ArrayList<>();
-
-
-                                    for(QueryDocumentSnapshot document : task.getResult()) {
-                                        String hour = document.getData().get("closeTime_hour").toString();
-                                        String minute = document.getData().get("closeTime_minute").toString();
-                                        String time = hour + minute;
-
-                                        postInfo.add(new PostInfo(
-                                                document.getData().get("postTitle").toString(),
-                                                document.getData().get("postContent").toString(),
-                                                document.getData().get("meetingArea").toString(),
-                                                document.getData().get("closeTime_hour").toString(),
-                                                //document.getData().get("closeTime_minute").toString(),
-                                                time,
-                                                document.getData().get("maxPerson").toString(),
-                                                document.getData().get("userId").toString()));
-                                    }
-                                    mRecyclerView = (RecyclerView) viewGroup.findViewById(R.id.RecyclePostList);
-                                    postAdaptor = new PostAdaptor(getActivity(), postInfo);
-                                    mRecyclerView.setHasFixedSize(true);
-                                    mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                                    postAdaptor.setPostlist(postInfo);
-                                    mRecyclerView.setAdapter(postAdaptor);
-                                }else{
-                                    Log.e("Error", "task Error!");
-                                }
-                            }
-                        });
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        }, 500);
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == 0){
+            String state = data.getStringExtra("STATE");
+            Log.i("StateSelectResult",state);
+        }
     }
-
-
 }
