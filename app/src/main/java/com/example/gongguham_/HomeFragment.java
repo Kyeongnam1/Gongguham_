@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -50,6 +51,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     private AppCompatButton btn_add;
     private AppCompatButton btn_state;
     private Spinner sort_spinner;
+    private AppCompatButton btn_temp;
 
     String[] sort_by = {"option1", "option2", "option3"};
 
@@ -88,6 +90,14 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             @Override
             public void onClick(View view) {
                 getActivity().startActivity(new Intent(getActivity(), AddPostItem.class));
+            }
+        });
+        //임시 배달진행상황으로 가는 버튼
+        btn_temp = (AppCompatButton) rootView.findViewById(R.id.btn_temp);
+        btn_temp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().startActivity(new Intent(getActivity(), TransmissionActivity.class));
             }
         });
 //        State Select Button onClickListener
