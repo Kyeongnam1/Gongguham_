@@ -83,7 +83,7 @@
                         android:text="마감 시간 : "
                         android:layout_gravity="center"
                         android:textColor="#7F7C82"
-                        android:textSize="16dp"
+                        android:textSize="12dp"
                         />
                     <TextView
                         android:id="@+id/close_time"
@@ -92,7 +92,7 @@
                         android:text="00:00"
                         android:layout_gravity="center"
                         android:textColor="#7F7C82"
-                        android:textSize="16dp"
+                        android:textSize="12dp"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -108,7 +108,7 @@
                         android:text="최대 인원 : "
                         android:layout_gravity="center"
                         android:textColor="#7F7C82"
-                        android:textSize="16dp"
+                        android:textSize="12dp"
                         android:layout_marginLeft="10dp"
                         />
                     <TextView
@@ -118,7 +118,7 @@
                         android:text=""
                         android:layout_gravity="center"
                         android:textColor="#7F7C82"
-                        android:textSize="16dp"
+                        android:textSize="12dp"
                         />
                     <TextView
                         android:layout_width="wrap_content"
@@ -126,7 +126,7 @@
                         android:text="명"
                         android:layout_gravity="center"
                         android:textColor="#7F7C82"
-                        android:textSize="16dp"
+                        android:textSize="12dp"
                         />
                 </LinearLayout>
             </LinearLayout>
