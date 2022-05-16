@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_main"
@@ -26,4 +26,4 @@
             android:layout_marginTop="580dp"
             android:layout_marginRight="20dp"/>
     </FrameLayout>
-</LinearLayout>
+</RelativeLayout>

@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Spinner;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -42,7 +41,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     private static final String TAG = "MainActivity";
     SwipeRefreshLayout swipeRefreshLayout;
     private static ViewGroup viewGroup;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
 
     //    RecyclerView 생성
     private RecyclerView mRecyclerView;
@@ -51,7 +50,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     private AppCompatButton btn_add;
     private AppCompatButton btn_state;
     private Spinner sort_spinner;
-    private AppCompatButton btn_temp;
 
     String[] sort_by = {"option1", "option2", "option3"};
 
@@ -90,14 +88,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             @Override
             public void onClick(View view) {
                 getActivity().startActivity(new Intent(getActivity(), AddPostItem.class));
-            }
-        });
-        //임시 배달진행상황으로 가는 버튼
-        btn_temp = (AppCompatButton) rootView.findViewById(R.id.btn_temp);
-        btn_temp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().startActivity(new Intent(getActivity(), TransmissionActivity.class));
             }
         });
 //        State Select Button onClickListener
@@ -189,45 +179,16 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                db.collection("posts")
-                        .get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if(task.isSuccessful()){
-                                    ArrayList<PostInfo> postInfo = new ArrayList<>();
-
-
-                                    for(QueryDocumentSnapshot document : task.getResult()) {
-                                        String hour = document.getData().get("closeTime_hour").toString();
-                                        String minute = document.getData().get("closeTime_minute").toString();
-                                        String time = hour + minute;
-
-                                        postInfo.add(new PostInfo(
-                                                document.getData().get("postTitle").toString(),
-                                                document.getData().get("postContent").toString(),
-                                                document.getData().get("meetingArea").toString(),
-                                                document.getData().get("closeTime_hour").toString(),
-                                                //document.getData().get("closeTime_minute").toString(),
-                                                time,
-                                                document.getData().get("maxPerson").toString(),
-                                                document.getData().get("userId").toString()));
-                                    }
-                                    mRecyclerView = (RecyclerView) viewGroup.findViewById(R.id.RecyclePostList);
-                                    postAdaptor = new PostAdaptor(getActivity(), postInfo);
-                                    mRecyclerView.setHasFixedSize(true);
-                                    mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                                    postAdaptor.setPostlist(postInfo);
-                                    mRecyclerView.setAdapter(postAdaptor);
-                                }else{
-                                    Log.e("Error", "task Error!");
-                                }
-                            }
-                        });
+                reload();
+                swipeRefreshLayout = viewGroup.findViewById(R.id.swipe_layout);
+                Log.i("layout check", String.valueOf(swipeRefreshLayout));
                 swipeRefreshLayout.setRefreshing(false);
             }
         }, 500);
     }
-
+    public void reload(){
+        postItems.clear();
+        postAdaptor.notifyDataSetChanged();
+    }
 
 }
