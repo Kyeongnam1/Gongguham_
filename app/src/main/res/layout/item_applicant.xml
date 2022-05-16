@@ -14,7 +14,7 @@
         android:layout_marginStart="30dp"
         android:text="name"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/complted_check_box"
+        app:layout_constraintEnd_toStartOf="@+id/complited_check_box"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,7 +30,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <CheckBox
-        android:id="@+id/complted_check_box"
+        android:id="@+id/complited_check_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="30dp"
@@ -42,11 +42,12 @@
         android:id="@+id/account_number_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="76dp"
+        android:layout_marginEnd="68dp"
         android:text="accountnumber"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/applicant_name_text"
-        app:layout_constraintTop_toTopOf="@+id/applicant_name_text" />
+        app:layout_constraintStart_toEndOf="@+id/bank_name_text"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/bank_name_text"
@@ -54,7 +55,11 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:text="bankname"
-        app:layout_constraintBaseline_toBaselineOf="@+id/applicant_name_text"
-        app:layout_constraintEnd_toStartOf="@+id/account_number_text" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.246"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.506" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

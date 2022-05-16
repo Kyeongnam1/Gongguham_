@@ -40,6 +40,7 @@ public class ApplicantAdapter extends RecyclerView.Adapter<ApplicantAdapter.View
         this.ApplicantList = list;
         notifyDataSetChanged();
     }
+
     @Override
     public int getItemCount() {
         return ApplicantList.size();
@@ -55,7 +56,9 @@ public class ApplicantAdapter extends RecyclerView.Adapter<ApplicantAdapter.View
             accountNumber = (TextView) itemView.findViewById(R.id.account_number_text);
             bankName = (TextView) itemView.findViewById(R.id.bank_name_text);
         }
-
+        public TextView getApplicantName(String name){
+            return (TextView) itemView.findViewById(R.id.applicant_name_text);
+        }
         void onBind(Applicant applicant){
             applicantName.setText(applicant.applicantName);
             applicantPosition.setText((applicant.applicantPosition));
