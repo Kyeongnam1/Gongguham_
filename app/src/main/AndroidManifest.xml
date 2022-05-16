@@ -61,6 +61,8 @@
         <activity android:name=".passwordChangeActivity" android:usesCleartextTraffic="true"/>
         <activity android:name=".PayActivity"/>
 
+        <activity android:name=".PayInfoActivity"></activity>
+
 
     </application>
 

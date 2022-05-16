@@ -57,7 +57,6 @@ public class viewMoreFragment extends Fragment {
         view.findViewById(R.id.myInfoButton).setOnClickListener(onClickListener);
         view.findViewById(R.id.myDeliveryButton).setOnClickListener(onClickListener);
         view.findViewById(R.id.changesButton).setOnClickListener(onClickListener);
-        view.findViewById(R.id.payButton).setOnClickListener(onClickListener);
         view.findViewById(R.id.logoutButton).setOnClickListener(onClickListener);
         view.findViewById(R.id.userDeleteButton).setOnClickListener(onClickListener);
         TextView nameTextView = view.findViewById(R.id.nameText);
@@ -106,10 +105,6 @@ public class viewMoreFragment extends Fragment {
                     startpasswordChangeActivity();
                     break;
 
-                case R.id.payButton:
-                    startPayActivity();
-                    break;
-
                 case R.id.userDeleteButton:
                     FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getEmail())
                         .delete().addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -146,12 +141,6 @@ public class viewMoreFragment extends Fragment {
     }
     private  void startpasswordChangeActivity(){
         Intent intent=new Intent(getContext(),passwordChangeActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-    }
-
-    private  void startPayActivity(){
-        Intent intent=new Intent(getContext(),PayActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }

@@ -247,7 +247,9 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
             // 제한시간 종료시
             public void onFinish() {
                 timeOut.setText("제한시간 초과");
+                Toast.makeText(PhoneAuthenticationActivity.this, "인증시간이 초과되었습니다. SMS 인증 코드를 다시 발급받아 주세요.", Toast.LENGTH_LONG).show();
             }
+
         }.start();
     }
 }
