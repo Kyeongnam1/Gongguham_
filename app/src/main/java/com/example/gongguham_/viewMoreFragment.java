@@ -151,7 +151,7 @@ public class viewMoreFragment extends Fragment {
     }
 
     private void startPaymentSystem(){
-        Intent intent = new Intent(getContext(),PaymentActivity.class);
+        Intent intent = new Intent(getContext(), PayInfoActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
