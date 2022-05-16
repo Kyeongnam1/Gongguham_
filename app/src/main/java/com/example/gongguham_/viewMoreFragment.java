@@ -106,6 +106,10 @@ public class viewMoreFragment extends Fragment {
                     startpasswordChangeActivity();
                     break;
 
+                case R.id.payButton:
+                    startPayInfoActivity();
+                    break;
+
                 case R.id.userDeleteButton:
                     FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getEmail())
                         .delete().addOnSuccessListener(new OnSuccessListener<Void>() {
