@@ -12,8 +12,8 @@
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="25dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="공구 페이"
         android:textColor="@color/black"
@@ -60,10 +60,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="25dp"
                         android:layout_marginTop="5dp"
-                        android:hint="잔여 포인트"
-                        android:text="2333333원"
-                        android:textSize="20sp"
-                        android:textColor="#FFFFFF"/>
+                        android:text="0원"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp" />
 
                 </LinearLayout>
 
@@ -74,11 +73,12 @@
                     android:orientation="horizontal">
 
                     <View
-                        android:layout_width="145dp"
-                        android:layout_height="0dp"/>
+                        android:layout_width="50dp"
+                        android:layout_height="0dp" />
 
                     <!--충전 버튼-->
                     <Button
+                        android:id="@+id/chargeButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -87,11 +87,20 @@
 
                     <!--송금 버튼-->
                     <Button
+                        android:id="@+id/sendButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/round_button"
                         android:layout_margin="5dp"
+                        android:background="@drawable/round_button"
                         android:text="송금" />
+
+                    <Button
+                        android:id="@+id/refundButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/round_button"
+                        android:text="환급" />
 
                 </LinearLayout>
 
@@ -120,54 +129,95 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="25dp"
                             android:layout_marginLeft="25dp"
+                            android:layout_marginTop="25dp"
                             android:text="내 계좌"
                             android:textColor="#FFFFFF"
                             android:textSize="25sp"
-                            android:textStyle="bold"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="25dp"
-                            android:layout_marginTop="5dp"
-                            android:hint="잔여 포인트"
-                            android:text="580-85823-5234"
-                            android:textSize="20sp"
-                            android:textColor="#FFFFFF"/>
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/accountValueText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="25dp"
+                                android:layout_marginTop="5dp"
+                                android:text="은행"
+                                android:textColor="#FFFFFF"
+                                android:textSize="20sp" />
+
+                            <TextView
+                                android:id="@+id/accountText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginLeft="25dp"
+                                android:text="계좌번호"
+                                android:textColor="#FFFFFF"
+                                android:textSize="20sp" />
+                        </LinearLayout>
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="50dp"
-                        android:orientation="horizontal">
+                        android:layout_height="130dp"
+                        android:layout_marginTop="30dp"
+                        android:orientation="vertical">
 
-                        <View
-                            android:layout_width="85dp"
-                            android:layout_height="0dp"/>
-
-                        <!--바꿀 계좌번호 edittext-->
-                        <EditText
-                            android:layout_width="150dp"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:textAlignment="center"
-                            android:hint="변경 계좌번호"
-                            android:textColorHint="#FFFFFF"
-                            android:backgroundTint = "#FFFFFF" />
-                        <!--계좌변경 버튼-->
-                        <Button
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/round_button"
-                            android:layout_margin="5dp"
-                            android:text="계좌변경" />
+                            android:orientation="horizontal">
 
+                            <View
+                                android:layout_width="190dp"
+                                android:layout_height="0dp" />
+
+                            <Spinner
+                                android:id="@+id/spinner_account"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="90dp"
+                                android:layout_height="0dp" />
+
+                            <!--바꿀 계좌번호 edittext-->
+
+                            <EditText
+                                android:id="@+id/changeAccountEditText"
+                                android:layout_width="150dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:backgroundTint="#FFFFFF"
+                                android:hint="변경 계좌번호"
+                                android:textAlignment="center"
+                                android:textColorHint="#FFFFFF" />
+                            <!--계좌변경 버튼-->
+                            <Button
+                                android:id="@+id/changeAccountButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:background="@drawable/round_button"
+                                android:text="계좌변경" />
+
+                        </LinearLayout>
                     </LinearLayout>
 
-            </LinearLayout>
+                </LinearLayout>
 
             </LinearLayout>
 
