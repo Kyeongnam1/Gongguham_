@@ -84,6 +84,7 @@
         <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/activity_main.xml" value="0.1641337386018237" />
         <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/activity_myinfo.xml" value="0.17958459979736577" />
+        <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/activity_password_reset.xml" value="0.22916666666666666" />
         <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/activity_payinfo.xml" value="0.25" />
         <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/activity_payment.xml" value="0.21693840579710144" />
         <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/activity_phone_authentication.xml" value="0.33" />
@@ -91,7 +92,7 @@
         <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/activity_state_select.xml" value="0.3734375" />
         <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/chat_password_add.xml" value="0.25" />
         <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/chat_password_check.xml" value="0.25" />
-        <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/chat_password_create.xml" value="0.3734375" />
+        <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/chat_password_create.xml" value="0.33" />
         <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/chat_password_roomdel.xml" value="0.22916666666666666" />
         <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/else_chatbox.xml" value="0.25" />
         <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/fragment_chat_starter.xml" value="0.18" />

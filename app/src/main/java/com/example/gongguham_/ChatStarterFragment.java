@@ -52,8 +52,6 @@ public class ChatStarterFragment extends Fragment {
     private Button boom_button;
     private ListView chat_list;
 
-    //private TextView chat_name_ck, chat_name_cr;
-
     // 채팅방 비밀번호
     EditText create_password , check_password;
     String cr_pass = null, ck_pass = null , del_pass = null;
@@ -107,9 +105,6 @@ public class ChatStarterFragment extends Fragment {
 
         chat_list = (ListView) view.findViewById(id.chat_list);
 
-//        chat_name_ck = (TextView) view.findViewById(id.chat_name_ck);
-//        chat_name_cr = (TextView) view.findViewById(id.chat_name_cr);
-
         DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser().getEmail()));
         documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -153,7 +148,6 @@ public class ChatStarterFragment extends Fragment {
                     Toast.makeText(getContext(),"채팅방 이름을 입력해주세요.",Toast.LENGTH_SHORT).show();
                 }else{ //방폭
                     deleteRoom();
-//                    Toast.makeText(getContext(), "채팅방이 터졌습니다.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -272,6 +266,8 @@ public class ChatStarterFragment extends Fragment {
     // 입장 버튼 클릭시 비번 생성
     private void createPassword(){
         LinearLayout linear = (LinearLayout) View.inflate(getContext(), layout.chat_password_create, null);
+        TextView chat_name_cr = (TextView) linear.findViewById(id.chat_name_cr);
+        chat_name_cr.setText(chat_name.getText().toString());
 
         new AlertDialog.Builder(getContext())
                 .setView(linear)
@@ -303,6 +299,9 @@ public class ChatStarterFragment extends Fragment {
     // 채팅방 리스트 클릭시 비밀번호 체크
     private void checkPassword(){
         LinearLayout linear = (LinearLayout) View.inflate(getContext(), layout.chat_password_check, null);
+        TextView chat_name_ck = (TextView) linear.findViewById(id.chat_name_ck);
+        chat_name_ck.setText(chat_name.getText().toString());
+
         new AlertDialog.Builder(getContext())
                 .setView(linear)
                 .setPositiveButton("확인", new DialogInterface.OnClickListener() {
@@ -336,15 +335,19 @@ public class ChatStarterFragment extends Fragment {
     // 방폭
     private void deleteRoom(){
         LinearLayout linear = (LinearLayout) View.inflate(getContext(), layout.chat_password_roomdel, null);
+        TextView chat_name_rd = (TextView) linear.findViewById(id.chat_name_rd);
+        chat_name_rd.setText(chat_name.getText().toString());
 
         new AlertDialog.Builder(getContext())
                 .setView(linear)
                 .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         EditText del_password = (EditText) linear.findViewById(id.del_password);
+
                         del_pass = del_password.getText().toString();
 
                         CHAT_NAME = chat_name.getText().toString();
+
                         chatRef.child(CHAT_NAME).addChildEventListener(new ChildEventListener() {
                             //새로 추가된 것만 줌 ValueListener는 하나의 값만 바뀌어도 처음부터 다시 값을 줌
                             @Override
