@@ -18,13 +18,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -43,6 +45,8 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     SwipeRefreshLayout swipeRefreshLayout;
     private static ViewGroup viewGroup;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private static String userEmail;
+    private DocumentReference mDatabase;
 
     //    RecyclerView 생성
     private RecyclerView mRecyclerView;
@@ -51,7 +55,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     private AppCompatButton btn_add;
     private AppCompatButton btn_state;
     private Spinner sort_spinner;
-    private AppCompatButton btn_temp;
 
     String[] sort_by = {"option1", "option2", "option3"};
 
@@ -89,15 +92,22 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().startActivity(new Intent(getActivity(), AddPostItem.class));
-            }
-        });
-        //임시 배달진행상황으로 가는 버튼
-        btn_temp = (AppCompatButton) rootView.findViewById(R.id.btn_temp);
-        btn_temp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().startActivity(new Intent(getActivity(), TransmissionActivity.class));
+                mDatabase = db.collection("locations").document(user.getEmail());
+                mDatabase.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document != null) {
+                                if (document.exists()) {
+                                    getActivity().startActivity(new Intent(getActivity(), AddPostItem.class));
+                                } else{
+                                    Toast.makeText(getContext(),"현재 위치를 설정해주세요.", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        }
+                    }
+                });
             }
         });
 //        State Select Button onClickListener
@@ -152,7 +162,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                                         //document.getData().get("closeTime_minute").toString(),
                                         time,
                                         document.getData().get("maxPerson").toString(),
-                                        document.getData().get("userId").toString()));
+                                        document.getData().get("userLocation").toString()));
                                 //Log.d("closeTime 확인", document.getData().get("closeTime").toString());
                             }
                             mRecyclerView = (RecyclerView) rootView.findViewById(R.id.RecyclePostList);
@@ -211,7 +221,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                                                 //document.getData().get("closeTime_minute").toString(),
                                                 time,
                                                 document.getData().get("maxPerson").toString(),
-                                                document.getData().get("userId").toString()));
+                                                document.getData().get("userLocation").toString()));
                                     }
                                     mRecyclerView = (RecyclerView) viewGroup.findViewById(R.id.RecyclePostList);
                                     postAdaptor = new PostAdaptor(getActivity(), postInfo);

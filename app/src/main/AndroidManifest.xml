@@ -3,7 +3,10 @@
     package="com.example.gongguham_">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
     <application
+
         android:allowBackup="true"
         android:icon="@mipmap/ic_icon"
         android:label="공구함"
@@ -44,6 +47,7 @@
                     android:host="google.com" />
             </intent-filter>
         </activity>
+        <activity android:name=".gpsActivity"/>
         <activity android:name=".SignUpActivity">
         </activity>
         <activity android:name=".loginActivity">
@@ -61,7 +65,10 @@
         <activity android:name=".passwordChangeActivity" android:usesCleartextTraffic="true"/>
         <activity android:name=".PayActivity"/>
 
-
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDMqKQdI0GUOKdm6qSk2NkXf1hBhRsB6Fc"/>
     </application>
+
 
 </manifest>
