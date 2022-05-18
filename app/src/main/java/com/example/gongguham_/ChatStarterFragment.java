@@ -3,6 +3,7 @@ package com.example.gongguham_;
 import static android.content.Context.MODE_PRIVATE;
 import static com.example.gongguham_.R.*;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,11 +15,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -48,8 +52,18 @@ public class ChatStarterFragment extends Fragment {
     private Button boom_button;
     private ListView chat_list;
 
+    //private TextView chat_name_ck, chat_name_cr;
+
+    // 채팅방 비밀번호
+    EditText create_password , check_password;
+    String cr_pass = null, ck_pass = null , del_pass = null;
+    String CHAT_NAME;
+
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = firebaseDatabase.getReference();
+    private DatabaseReference chatRef;
+
+
 
     // 클릭시 name null방지를 위한 firestore
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -93,6 +107,9 @@ public class ChatStarterFragment extends Fragment {
 
         chat_list = (ListView) view.findViewById(id.chat_list);
 
+//        chat_name_ck = (TextView) view.findViewById(id.chat_name_ck);
+//        chat_name_cr = (TextView) view.findViewById(id.chat_name_cr);
+
         DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser().getEmail()));
         documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -119,24 +136,24 @@ public class ChatStarterFragment extends Fragment {
                 // 공백 입력시
                 if(name.getText().toString().equals("") || chat_name.getText().toString().equals("")){
                     Toast.makeText(getContext(),"채팅방 이름을 입력해주세요.",Toast.LENGTH_SHORT).show();
-                } else{ //방 입장
-                    Toast.makeText(getContext(),"채팅방에 입장하였습니다.",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getContext(), ChatChattingActivity.class);
-                    intent.putExtra("chatName", chat_name.getText().toString());
-                    intent.putExtra("userName", name.getText().toString());
-                    // sharedpreferences 테스트
-                    saveData();
-                    startActivity(intent);
+                } else{ //방 입장(생성)
+                    // alertdialog로 비밀번호 설정하기
+                    createPassword();
+//                    if(cr_pass != null) {
+//                    }
                 }
             }
         });
+
+
         boom_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(name.getText().toString().equals("") || chat_name.getText().toString().equals("")){
                     Toast.makeText(getContext(),"채팅방 이름을 입력해주세요.",Toast.LENGTH_SHORT).show();
                 }else{ //방폭
-                    Toast.makeText(getContext(), "채팅방이 터졌습니다.", Toast.LENGTH_SHORT).show();
+                    deleteRoom();
+//                    Toast.makeText(getContext(), "채팅방이 터졌습니다.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -192,17 +209,44 @@ public class ChatStarterFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 chat_name.setText(adapter.getItem(i));
-                Toast.makeText(getContext(),"채팅방에 입장하였습니다.",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getContext(), ChatChattingActivity.class);
-                intent.putExtra("chatName", chat_name.getText().toString());
-                intent.putExtra("userName", user_name.getText().toString());
+                CHAT_NAME = adapter.getItem(i);
+//                Toast.makeText(getContext(),CHAT_NAME,Toast.LENGTH_SHORT).show();
+                chatRef = firebaseDatabase.getReference("chat");
+                chatRef.child(CHAT_NAME).addChildEventListener(new ChildEventListener() {
+                    //새로 추가된 것만 줌 ValueListener는 하나의 값만 바뀌어도 처음부터 다시 값을 줌
+                    @Override
+                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                        ChatDTO chatDTO = dataSnapshot.getValue(ChatDTO.class);
+                        cr_pass = chatDTO.getPassword();
+
+                    }
+
+                    @Override
+                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                    }
+
+                    @Override
+                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+                    }
+
+                    @Override
+                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+                checkPassword();
 
                 SharedPreferences.Editor editor = preferences.edit();
                 G.username = user_name.getText().toString();
-                editor.putString("username",G.username);
+                editor.putString("username", G.username);
                 editor.commit();
-
-                startActivity(intent);
             }
         });
 
@@ -224,5 +268,133 @@ public class ChatStarterFragment extends Fragment {
         G.username=preferences.getString("username", null);
     }
 
+
+    // 입장 버튼 클릭시 비번 생성
+    private void createPassword(){
+        LinearLayout linear = (LinearLayout) View.inflate(getContext(), layout.chat_password_create, null);
+
+        new AlertDialog.Builder(getContext())
+                .setView(linear)
+                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        EditText createpassword = (EditText) linear.findViewById(id.create_password);
+                        cr_pass = createpassword.getText().toString();
+                        Intent intent = new Intent(getContext(), ChatChattingActivity.class);
+                        intent.putExtra("chatName", chat_name.getText().toString());
+                        intent.putExtra("userName", user_name.getText().toString());
+                        intent.putExtra("password",cr_pass);
+                        // sharedpreferences 테스트
+                        saveData();
+                        startActivity(intent);
+                        Toast.makeText(getContext(), cr_pass, Toast.LENGTH_SHORT).show();
+                        intent.putExtra("userName", user_name.getText().toString());
+                        cr_pass = null;
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+    }
+
+    // 채팅방 리스트 클릭시 비밀번호 체크
+    private void checkPassword(){
+        LinearLayout linear = (LinearLayout) View.inflate(getContext(), layout.chat_password_check, null);
+        new AlertDialog.Builder(getContext())
+                .setView(linear)
+                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        EditText check_password = (EditText) linear.findViewById(id.check_password);
+                        ck_pass = check_password.getText().toString();
+                        if(ck_pass.equals(cr_pass)){
+                            Toast.makeText(getContext(),"채팅방에 입장하였습니다.",Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getContext(), ChatChattingActivity.class);
+                            intent.putExtra("chatName", chat_name.getText().toString());
+                            intent.putExtra("userName", user_name.getText().toString());
+                            intent.putExtra("password",ck_pass);
+                            G.username = user_name.getText().toString();
+                            startActivity(intent);
+                            ck_pass = null;
+                        }else{
+                            Toast.makeText(getContext(),"비밀번호가 일치하지 않습니다.",Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getContext(),cr_pass,Toast.LENGTH_SHORT).show();
+                        }
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+    }
+
+    // 방폭
+    private void deleteRoom(){
+        LinearLayout linear = (LinearLayout) View.inflate(getContext(), layout.chat_password_roomdel, null);
+
+        new AlertDialog.Builder(getContext())
+                .setView(linear)
+                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        EditText del_password = (EditText) linear.findViewById(id.del_password);
+                        del_pass = del_password.getText().toString();
+
+                        CHAT_NAME = chat_name.getText().toString();
+                        chatRef.child(CHAT_NAME).addChildEventListener(new ChildEventListener() {
+                            //새로 추가된 것만 줌 ValueListener는 하나의 값만 바뀌어도 처음부터 다시 값을 줌
+                            @Override
+                            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                                ChatDTO chatDTO = dataSnapshot.getValue(ChatDTO.class);
+                                cr_pass = chatDTO.getPassword();
+                            }
+
+                            @Override
+                            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                            }
+
+                            @Override
+                            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+                            }
+
+                            @Override
+                            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
+                        if(del_pass.equals(cr_pass)){
+                            Toast.makeText(getContext(),"채팅방이 삭제되었습니다.",Toast.LENGTH_SHORT).show();
+                            chatRef = firebaseDatabase.getReference("chat");
+                            chatRef.child(CHAT_NAME).removeValue();
+
+                        }else{
+                            Toast.makeText(getContext(),"비밀번호가 일치하지 않습니다.",Toast.LENGTH_SHORT).show();
+                        }
+
+                        // 방폭 이후 초기화
+                        dialog.dismiss();
+                        del_pass = null;
+                        cr_pass = null;
+                    }
+                })
+                .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+    }
 
 }

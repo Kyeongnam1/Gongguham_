@@ -58,4 +58,8 @@ dependencies {
     //당겨서 새로고침
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
+
+    implementation 'com.google.android.gms:play-services-maps:9.8.0'
+    implementation 'com.google.android.gms:play-services-location:9.8.0'
+
 }
