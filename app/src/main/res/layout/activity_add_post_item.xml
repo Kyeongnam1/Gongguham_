@@ -121,10 +121,18 @@
 
                 <EditText
                     android:id="@+id/add_post_chatCreate"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="생성할 채팅방 명을 입력해 주세요"
                     android:textAlignment="center"
+                    android:textSize="16sp" />
+                <EditText
+                    android:id="@+id/add_post_chatPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="비밀번호"
+                    android:textAlignment="center"
+                    android:inputType="textPassword"
                     android:textSize="16sp" />
 
             </LinearLayout>
