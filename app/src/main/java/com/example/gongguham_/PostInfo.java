@@ -7,13 +7,14 @@ public class PostInfo {
     private String closeTime_hour;
     private String closeTime_minute;
     private int maxPerson;
+    private String postEmail;
 
     //채팅방명 추가
     private String ChatTitle;
 
     private String userLocation;
 
-    public PostInfo(String postTitle, String postContent, String meetingArea, String closeTime_hour, String closeTime_minute, int maxPerson, String userLocation, String ChatTitle) {
+    public PostInfo(String postTitle, String postContent, String meetingArea, String closeTime_hour, String closeTime_minute, int maxPerson, String userLocation, String ChatTitle, String postEmail) {
         this.postTitle = postTitle;
         this.postContent = postContent;
         this.meetingArea = meetingArea;
@@ -22,6 +23,7 @@ public class PostInfo {
         this.maxPerson = maxPerson;
         this.userLocation = userLocation;
         this.ChatTitle = ChatTitle;
+        this.postEmail = postEmail;
     }
 
     public String getUserLocation() {
@@ -84,4 +86,10 @@ public class PostInfo {
     }
 
     public void setChatTitle(String ChatTitle) { this.ChatTitle = ChatTitle; }
+
+    public String getpostEmail() {
+        return postEmail;
+    }
+
+    public void setpostEmail(String postEmail) { this.postEmail = postEmail; }
 }

@@ -193,7 +193,8 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                                                 time,
                                                 Integer.parseInt(document.getData().get("maxPerson").toString()),
                                                 document.getData().get("userLocation").toString(),
-                                                document.getData().get("chatTitle").toString()
+                                                document.getData().get("chatTitle").toString(),
+                                                document.getData().get("postEmail").toString()
                                         ));
                                         //Log.d("closeTime 확인", document.getData().get("closeTime").toString());
                                     }
@@ -258,7 +259,8 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                                                         time,
                                                         Integer.parseInt(document.getData().get("maxPerson").toString()),
                                                         document.getData().get("userLocation").toString(),
-                                                        document.getData().get("ChatTitle").toString()
+                                                        document.getData().get("chatTitle").toString(),
+                                                        document.getData().get("postEmail").toString()
                                                 ));
                                                 //Log.d("closeTime 확인", document.getData().get("closeTime").toString());
                                             }

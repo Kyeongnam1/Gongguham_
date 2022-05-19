@@ -51,6 +51,7 @@ public class PostDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_post_detail);
 
         final TextView titleTextView = findViewById(R.id.post_detail_title);
+        final TextView emailTextView = findViewById(R.id.post_detail_email);
         final TextView contentTextView = findViewById(R.id.post_detail_content);
         final TextView placeTextView = findViewById(R.id.post_detail_place);
         final TextView hourTextView = findViewById(R.id.post_detail_time_hour);
@@ -73,6 +74,7 @@ public class PostDetailActivity extends AppCompatActivity {
                     if (document != null) {
                         if (document.exists()) {
                             titleTextView.setText(document.getData().get("postTitle").toString());
+                            emailTextView.setText(document.getData().get("postEmail").toString());
                             contentTextView.setText(document.getData().get("postContent").toString());
                             placeTextView.setText(document.getData().get("meetingArea").toString());
                             hourTextView.setText(document.getData().get("closeTime_hour").toString());

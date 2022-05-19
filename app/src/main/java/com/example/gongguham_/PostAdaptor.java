@@ -42,7 +42,6 @@ public class PostAdaptor extends RecyclerView.Adapter<PostAdaptor.ViewHolder> {
         holder.closeTime.setText(postInfo.get(position).getCloseTime_hour());
         holder.closeTime.setText(postInfo.get(position).getCloseTime_minute());
         holder.maxPerson.setText(postInfo.get(position).getMaxPerson()+"");
-      //  Log.d("data 확인", postInfo.get(position).getMeetingArea()+"/"+postInfo.get(position).getCloseTime()+"/"+(postInfo.get(position).getMaxPerson())+"/");
     }
 
     public void setPostlist(ArrayList<PostInfo> list){
