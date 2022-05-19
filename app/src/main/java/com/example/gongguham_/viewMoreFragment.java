@@ -57,8 +57,8 @@ public class viewMoreFragment extends Fragment {
         view.findViewById(R.id.myInfoButton).setOnClickListener(onClickListener);
         view.findViewById(R.id.myDeliveryButton).setOnClickListener(onClickListener);
         view.findViewById(R.id.changesButton).setOnClickListener(onClickListener);
-        view.findViewById(R.id.payButton).setOnClickListener(onClickListener);
         view.findViewById(R.id.logoutButton).setOnClickListener(onClickListener);
+        view.findViewById(R.id.payButton).setOnClickListener(onClickListener);
         view.findViewById(R.id.userDeleteButton).setOnClickListener(onClickListener);
         TextView nameTextView = view.findViewById(R.id.nameText);
 
@@ -107,7 +107,7 @@ public class viewMoreFragment extends Fragment {
                     break;
 
                 case R.id.payButton:
-                    startPayActivity();
+                    startPayInfoActivity();
                     break;
 
                 case R.id.userDeleteButton:
@@ -150,8 +150,8 @@ public class viewMoreFragment extends Fragment {
         startActivity(intent);
     }
 
-    private  void startPayActivity(){
-        Intent intent=new Intent(getContext(),PayActivity.class);
+    private  void startPayInfoActivity(){
+        Intent intent=new Intent(getContext(),PayInfoActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }

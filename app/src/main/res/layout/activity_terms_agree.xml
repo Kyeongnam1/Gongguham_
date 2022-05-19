@@ -47,6 +47,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|right"
+                android:clickable="true"
+                android:onClick="TermsDetail"
                 android:text="자세히보기" />
         </LinearLayout>
 
@@ -71,6 +73,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|right"
+                android:clickable="true"
+                android:onClick="TermsDetail"
                 android:text="자세히보기" />
         </LinearLayout>
 
@@ -95,6 +99,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|right"
+                android:clickable="true"
+                android:onClick="TermsDetail"
                 android:text="자세히보기" />
         </LinearLayout>
 
@@ -119,6 +125,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|right"
+                android:clickable="true"
+                android:onClick="TermsDetail"
                 android:text="자세히보기" />
         </LinearLayout>
 

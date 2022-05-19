@@ -47,7 +47,9 @@
                     android:host="google.com" />
             </intent-filter>
         </activity>
-        <activity android:name=".gpsActivity"/>
+        <activity android:name=".gpsActivity"
+            android:requestLegacyExternalStorage="true">
+        </activity>
         <activity android:name=".SignUpActivity">
         </activity>
         <activity android:name=".loginActivity">
@@ -64,6 +66,8 @@
         <activity android:name=".MyInfoActivity"/>
         <activity android:name=".passwordChangeActivity" android:usesCleartextTraffic="true"/>
         <activity android:name=".PayActivity"/>
+        <activity android:name=".TermsDetail"></activity>
+        <activity android:name=".PayInfoActivity"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

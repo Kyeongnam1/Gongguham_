@@ -19,37 +19,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class PayActivity extends AppCompatActivity {
 
-    private String TAG = "PayActivity";
-
-    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    private DatabaseReference databaseReference = firebaseDatabase.getReference();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay);
-
-        DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getEmail());
-        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document != null) {
-                        if (document.exists()) {
-                            Log.e(TAG, "DocumentSnapshot data: " + document.getData());
-
-                        } else {
-                            Log.e(TAG, "No such document");
-                        }
-                    }
-                } else {
-                    Log.d(TAG, "get failed with ", task.getException());
-                }
-            }
-        });
 
     }
 }

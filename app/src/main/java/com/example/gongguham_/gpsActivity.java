@@ -125,7 +125,7 @@ public class gpsActivity extends AppCompatActivity
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startMainActivity();
 
             }
         });
@@ -581,5 +581,12 @@ public class gpsActivity extends AppCompatActivity
         }
 
     }
+
+    private  void startMainActivity(){
+        Intent intent=new Intent(this,MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
 
 }

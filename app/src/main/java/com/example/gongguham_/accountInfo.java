@@ -4,6 +4,11 @@ public class accountInfo {
     private String accountValue;
     private String account;
 
+    accountInfo(String accountValue, String account){
+        this.accountValue = accountValue;
+        this.account = account;
+    }
+
     public String getAccountValue(){
         return this.accountValue;
     }

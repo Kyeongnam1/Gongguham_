@@ -175,8 +175,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                             ArrayList<PostInfo> postInfo = new ArrayList<>();
 
                             if(curUserLocation != null){
-
-
                                 for(QueryDocumentSnapshot document : task.getResult()) {
                                     Log.e(TAG, "테스트: " + document.getData().get("userLocation").toString());
 
@@ -193,8 +191,10 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                                                 document.getData().get("closeTime_hour").toString(),
                                                 //document.getData().get("closeTime_minute").toString(),
                                                 time,
-                                                document.getData().get("maxPerson").toString(),
-                                                document.getData().get("userLocation").toString()));
+                                                Integer.parseInt(document.getData().get("maxPerson").toString()),
+                                                document.getData().get("userLocation").toString(),
+                                                document.getData().get("chatTitle").toString()
+                                        ));
                                         //Log.d("closeTime 확인", document.getData().get("closeTime").toString());
                                     }
                                 }
@@ -256,8 +256,10 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                                                         document.getData().get("closeTime_hour").toString(),
                                                         //document.getData().get("closeTime_minute").toString(),
                                                         time,
-                                                        document.getData().get("maxPerson").toString(),
-                                                        document.getData().get("userLocation").toString()));
+                                                        Integer.parseInt(document.getData().get("maxPerson").toString()),
+                                                        document.getData().get("userLocation").toString(),
+                                                        document.getData().get("ChatTitle").toString()
+                                                ));
                                                 //Log.d("closeTime 확인", document.getData().get("closeTime").toString());
                                             }
                                         }

@@ -34,6 +34,7 @@ public class ChatChattingActivity extends AppCompatActivity {
     // starter 에서 get위해(intent)
     private String CHAT_NAME;
     private String USER_NAME;
+    private String password;
 
     //Firebase Database 관리 객체참조변수
     FirebaseDatabase firebaseDatabase;
@@ -59,6 +60,9 @@ public class ChatChattingActivity extends AppCompatActivity {
         Intent intent = getIntent();
         CHAT_NAME = intent.getStringExtra("chatName");
         USER_NAME = intent.getStringExtra("userName");
+
+        // 비밀번호 가져오기
+        password = intent.getStringExtra("password");
 
 
         //firebaseDB에서 채팅 메세지들 실시간 읽어오기..
@@ -119,7 +123,7 @@ public class ChatChattingActivity extends AppCompatActivity {
         String time=calendar.get(Calendar.HOUR_OF_DAY)+":"+calendar.get(Calendar.MINUTE); // hour : minute
 
         //firebase DB에 저장할 값(MessageItem객체) 설정
-        ChatDTO chat = new ChatDTO(username, chat_edit.getText().toString(), time); //ChatDTO를 이용하여 데이터를 묶는다.
+        ChatDTO chat = new ChatDTO(username, chat_edit.getText().toString(), time, password); //ChatDTO를 이용하여 데이터를 묶는다.
         chatRef.child(CHAT_NAME).push().setValue(chat); // 데이터 푸쉬
         chat_edit.setText("");
 
