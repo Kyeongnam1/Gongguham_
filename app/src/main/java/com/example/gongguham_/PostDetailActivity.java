@@ -39,7 +39,11 @@ public class PostDetailActivity extends AppCompatActivity {
         final TextView maxPersonTextView = findViewById(R.id.post_detail_maxperson);
         tmBtn = findViewById(R.id.tmbtn);
 
-        DocumentReference documentReference = FirebaseFirestore.getInstance().collection("posts").document(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+        Intent intent = getIntent();
+        String key = intent.getStringExtra("KEY");
+
+
+        DocumentReference documentReference = FirebaseFirestore.getInstance().collection("posts").document(key);
         documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {

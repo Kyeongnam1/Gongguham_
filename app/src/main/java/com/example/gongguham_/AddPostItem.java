@@ -71,7 +71,7 @@ public class AddPostItem extends AppCompatActivity {
         postTitle = (EditText) findViewById(R.id.add_post_title);
         String title = postTitle.getText().toString();
         postContent = (EditText) findViewById(R.id.add_post_content);
-        String content = postTitle.getText().toString();
+        String content = postContent.getText().toString();
         postMeetingArea = (EditText) findViewById(R.id.add_post_meeting_area);
         String meetingArea = postMeetingArea.getText().toString();
         // postCloseTime = (EditText) findViewById(R.id.add_post_close_time);

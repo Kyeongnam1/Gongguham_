@@ -75,7 +75,7 @@ public class PostAdaptor extends RecyclerView.Adapter<PostAdaptor.ViewHolder> {
                     int pos = getAdapterPosition();
                     if(pos != RecyclerView.NO_POSITION){
                         Intent intent = new Intent(mContext, PostDetailActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
+                        intent.putExtra("KEY", postInfo.get(pos).getPostTitle() + postInfo.get(pos).getPostContent() + postInfo.get(pos).getMeetingArea());
                         mContext.startActivity(intent);
                     }
                 }

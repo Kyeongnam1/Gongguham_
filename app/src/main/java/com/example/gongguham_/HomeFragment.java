@@ -175,8 +175,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                             ArrayList<PostInfo> postInfo = new ArrayList<>();
 
                             if(curUserLocation != null){
-
-
                                 for(QueryDocumentSnapshot document : task.getResult()) {
                                     Log.e(TAG, "테스트: " + document.getData().get("userLocation").toString());
 
