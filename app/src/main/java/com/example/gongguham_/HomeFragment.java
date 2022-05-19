@@ -47,6 +47,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private static String userEmail;
     private DocumentReference mDatabase;
+    private String curUserLocation;
 
     //    RecyclerView 생성
     private RecyclerView mRecyclerView;
@@ -140,6 +141,31 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 //        RecyclerView 생성
 
 
+        userEmail = user.getEmail();
+
+        mDatabase = FirebaseFirestore.getInstance().collection("locations").document(userEmail);
+        mDatabase.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document != null) {
+                        if (document.exists()) {
+                            //Log.e(TAG, "DocumentSnapshot data: " + document.getData());
+
+                            curUserLocation = slicingLocation(document.getData().get("curLoc").toString());
+                            Log.e(TAG, "제발" + curUserLocation );
+
+                        }
+                    }
+                }
+            }
+
+        });
+
+
+
+
         db.collection("posts")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -148,22 +174,30 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                         if(task.isSuccessful()){
                             ArrayList<PostInfo> postInfo = new ArrayList<>();
 
+                            if(curUserLocation != null){
 
-                            for(QueryDocumentSnapshot document : task.getResult()) {
-                                String hour = document.getData().get("closeTime_hour").toString();
-                                String minute = document.getData().get("closeTime_minute").toString();
-                                String time = hour + minute;
 
-                                postInfo.add(new PostInfo(
-                                        document.getData().get("postTitle").toString(),
-                                        document.getData().get("postContent").toString(),
-                                        document.getData().get("meetingArea").toString(),
-                                        document.getData().get("closeTime_hour").toString(),
-                                        //document.getData().get("closeTime_minute").toString(),
-                                        time,
-                                        document.getData().get("maxPerson").toString(),
-                                        document.getData().get("userLocation").toString()));
-                                //Log.d("closeTime 확인", document.getData().get("closeTime").toString());
+                                for(QueryDocumentSnapshot document : task.getResult()) {
+                                    Log.e(TAG, "테스트: " + document.getData().get("userLocation").toString());
+
+                                    if(curUserLocation.equals(slicingLocation(document.getData().get("userLocation").toString()))) {
+
+                                        String hour = document.getData().get("closeTime_hour").toString();
+                                        String minute = document.getData().get("closeTime_minute").toString();
+                                        String time = hour + minute;
+
+                                        postInfo.add(new PostInfo(
+                                                document.getData().get("postTitle").toString(),
+                                                document.getData().get("postContent").toString(),
+                                                document.getData().get("meetingArea").toString(),
+                                                document.getData().get("closeTime_hour").toString(),
+                                                //document.getData().get("closeTime_minute").toString(),
+                                                time,
+                                                document.getData().get("maxPerson").toString(),
+                                                document.getData().get("userLocation").toString()));
+                                        //Log.d("closeTime 확인", document.getData().get("closeTime").toString());
+                                    }
+                                }
                             }
                             mRecyclerView = (RecyclerView) rootView.findViewById(R.id.RecyclePostList);
                             postAdaptor = new PostAdaptor(getActivity(), postInfo);
@@ -207,21 +241,26 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                                 if(task.isSuccessful()){
                                     ArrayList<PostInfo> postInfo = new ArrayList<>();
 
+                                    if(curUserLocation != null) {
+                                        for (QueryDocumentSnapshot document : task.getResult()) {
+                                            if (curUserLocation.equals(slicingLocation(document.getData().get("userLocation").toString()))) {
 
-                                    for(QueryDocumentSnapshot document : task.getResult()) {
-                                        String hour = document.getData().get("closeTime_hour").toString();
-                                        String minute = document.getData().get("closeTime_minute").toString();
-                                        String time = hour + minute;
+                                                String hour = document.getData().get("closeTime_hour").toString();
+                                                String minute = document.getData().get("closeTime_minute").toString();
+                                                String time = hour + minute;
 
-                                        postInfo.add(new PostInfo(
-                                                document.getData().get("postTitle").toString(),
-                                                document.getData().get("postContent").toString(),
-                                                document.getData().get("meetingArea").toString(),
-                                                document.getData().get("closeTime_hour").toString(),
-                                                //document.getData().get("closeTime_minute").toString(),
-                                                time,
-                                                document.getData().get("maxPerson").toString(),
-                                                document.getData().get("userLocation").toString()));
+                                                postInfo.add(new PostInfo(
+                                                        document.getData().get("postTitle").toString(),
+                                                        document.getData().get("postContent").toString(),
+                                                        document.getData().get("meetingArea").toString(),
+                                                        document.getData().get("closeTime_hour").toString(),
+                                                        //document.getData().get("closeTime_minute").toString(),
+                                                        time,
+                                                        document.getData().get("maxPerson").toString(),
+                                                        document.getData().get("userLocation").toString()));
+                                                //Log.d("closeTime 확인", document.getData().get("closeTime").toString());
+                                            }
+                                        }
                                     }
                                     mRecyclerView = (RecyclerView) viewGroup.findViewById(R.id.RecyclePostList);
                                     postAdaptor = new PostAdaptor(getActivity(), postInfo);
@@ -239,5 +278,16 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         }, 500);
     }
 
+    private String slicingLocation(String curUserLocation){
 
+        String temp = "";
+
+        String[] slicedLocation = curUserLocation.split(" ");
+        slicedLocation[0] = null;
+        for(int i = 1 ; i < slicedLocation.length; i++){
+            temp += slicedLocation[i];
+        }
+
+        return temp;
+    }
 }
