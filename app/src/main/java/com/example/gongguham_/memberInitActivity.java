@@ -100,6 +100,7 @@ public class memberInitActivity extends AppCompatActivity {
         String birthday = birthdayE.getText().toString();
         EditText addressE = (EditText) findViewById(R.id.addressEditText);
         String address = addressE.getText().toString();
+        int point = 0;
 
         Spinner genderS = (Spinner) findViewById(R.id.spinner_gender);
         String gender = genderS.getSelectedItem().toString();
@@ -110,7 +111,7 @@ public class memberInitActivity extends AppCompatActivity {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-            MemberInfo memberInfo = new MemberInfo(name, phonenumber,gender, accountValue, account, birthday, address);
+            MemberInfo memberInfo = new MemberInfo(name, phonenumber,gender, accountValue, account, birthday, address, point);
 
             if (user != null) {
                 db.collection("users").document(user.getEmail()).set(memberInfo)

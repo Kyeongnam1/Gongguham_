@@ -10,8 +10,9 @@ public class MemberInfo {
     private String account;
     private String birthday;
     private String address;
+    private int point;
 
-    MemberInfo(String name, String phoneNumber, String gender,String accountValue, String account, String birthday, String address){
+    MemberInfo(String name, String phoneNumber, String gender,String accountValue, String account, String birthday, String address, int point){
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.gender = gender;
@@ -19,6 +20,7 @@ public class MemberInfo {
         this.account = account;
         this.birthday = birthday;
         this.address = address;
+        this.point = point;
     }
 
     public String getName(){
@@ -69,4 +71,7 @@ public class MemberInfo {
     public void setAddress(String address){
         this.address = address;
     }
+
+    public int getPoint(){ return this.point;}
+    public void setPoint(int point){ this.point = point; }
 }
