@@ -162,7 +162,9 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                                         //document.getData().get("closeTime_minute").toString(),
                                         time,
                                         document.getData().get("maxPerson").toString(),
-                                        document.getData().get("userLocation").toString()));
+                                        document.getData().get("userLocation").toString(),
+                                        document.getData().get("ChatTitle").toString()  // 채팅방 info add
+                                ));
                                 //Log.d("closeTime 확인", document.getData().get("closeTime").toString());
                             }
                             mRecyclerView = (RecyclerView) rootView.findViewById(R.id.RecyclePostList);
@@ -221,7 +223,9 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                                                 //document.getData().get("closeTime_minute").toString(),
                                                 time,
                                                 document.getData().get("maxPerson").toString(),
-                                                document.getData().get("userLocation").toString()));
+                                                document.getData().get("userLocation").toString(),
+                                                document.getData().get("ChatTitle").toString()
+                                        ));
                                     }
                                     mRecyclerView = (RecyclerView) viewGroup.findViewById(R.id.RecyclePostList);
                                     postAdaptor = new PostAdaptor(getActivity(), postInfo);

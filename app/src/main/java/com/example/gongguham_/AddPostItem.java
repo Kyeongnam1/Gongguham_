@@ -32,6 +32,9 @@ public class AddPostItem extends AppCompatActivity {
     private DocumentReference mDatabase;
     private static String userLocation;
 
+    // 채팅방 명 입력창 추가
+    private EditText post_chatCreate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +59,9 @@ public class AddPostItem extends AppCompatActivity {
         personSpinner.setAdapter(personAdapter);
 
         btnClose = (Button) findViewById(R.id.btn_close);
+
+        // add_post_chatCreate 등록
+        post_chatCreate = (EditText) findViewById(R.id.add_post_chatCreate);
 
         btnClose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +94,9 @@ public class AddPostItem extends AppCompatActivity {
         Spinner personS = (Spinner) findViewById(R.id.spinner_add_post_max_person);
         String maxPerson = personS.getSelectedItem().toString();
 
+        // 데이터에 입력위한 chatTitle
+        String chatCreate = post_chatCreate.getText().toString();
+
 //        userEmail 얻어오기
 
         userEmail = user.getEmail();
@@ -103,8 +112,8 @@ public class AddPostItem extends AppCompatActivity {
                             Log.e(TAG, "DocumentSnapshot data: " + document.getData());
 
                             userLocation = document.getData().get("curLoc").toString();
-                            if(title.length()>0 && content.length()>0 && meetingArea.length()>0 && closeTime_hour.length()>0 && closeTime_minute.length()>0){
-                                PostInfo postInfo = new PostInfo(title, content, meetingArea, closeTime_hour, closeTime_minute, maxPerson, userLocation);
+                            if(title.length()>0 && content.length()>0 && meetingArea.length()>0 && closeTime_hour.length()>0 && closeTime_minute.length()>0 && chatCreate.length()>0){
+                                PostInfo postInfo = new PostInfo(title, content, meetingArea, closeTime_hour, closeTime_minute, maxPerson, userLocation, chatCreate);
                                 uploader(postInfo);
                             }
                             Log.i("TAG", userLocation);
