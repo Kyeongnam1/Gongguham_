@@ -86,7 +86,7 @@ public class AddPostItem extends AppCompatActivity {
         String closeTime_minute = minuteS.getSelectedItem().toString();
 
         Spinner personS = (Spinner) findViewById(R.id.spinner_add_post_max_person);
-        String maxPerson = personS.getSelectedItem().toString();
+        int maxPerson = Integer.parseInt(personS.getSelectedItem().toString());
 
 //        userEmail 얻어오기
 

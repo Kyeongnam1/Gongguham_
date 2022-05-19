@@ -161,7 +161,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                                         document.getData().get("closeTime_hour").toString(),
                                         //document.getData().get("closeTime_minute").toString(),
                                         time,
-                                        document.getData().get("maxPerson").toString(),
+                                        Integer.parseInt(document.getData().get("maxPerson").toString()),
                                         document.getData().get("userLocation").toString()));
                                 //Log.d("closeTime 확인", document.getData().get("closeTime").toString());
                             }
@@ -220,7 +220,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                                                 document.getData().get("closeTime_hour").toString(),
                                                 //document.getData().get("closeTime_minute").toString(),
                                                 time,
-                                                document.getData().get("maxPerson").toString(),
+                                                Integer.parseInt(document.getData().get("maxPerson").toString()),
                                                 document.getData().get("userLocation").toString()));
                                     }
                                     mRecyclerView = (RecyclerView) viewGroup.findViewById(R.id.RecyclePostList);

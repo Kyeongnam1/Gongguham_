@@ -52,6 +52,8 @@ public class TermsAgreeActivity extends AppCompatActivity {
         }
     };
 
+    public void TermsDetail(View v){ startTermsDetail(); }
+
     private  void startToast(String msg){
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
@@ -59,6 +61,12 @@ public class TermsAgreeActivity extends AppCompatActivity {
     //전화번호 인증
     private  void startPhoneAuthentication(){
         Intent intent = new Intent(this,PhoneAuthenticationActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    private  void startTermsDetail(){
+        Intent intent = new Intent(this,TermsDetail.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }

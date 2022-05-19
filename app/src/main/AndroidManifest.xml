@@ -64,7 +64,7 @@
         <activity android:name=".MyInfoActivity"/>
         <activity android:name=".passwordChangeActivity" android:usesCleartextTraffic="true"/>
         <activity android:name=".PayActivity"/>
-
+        <activity android:name=".TermsDetail"></activity>
         <activity android:name=".PayInfoActivity"></activity>
 
         <meta-data
