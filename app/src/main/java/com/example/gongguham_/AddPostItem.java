@@ -135,7 +135,7 @@ public class AddPostItem extends AppCompatActivity {
 
                             userLocation = document.getData().get("curLoc").toString();
                             if(title.length()>0 && content.length()>0 && meetingArea.length()>0 && closeTime_hour.length()>0 && closeTime_minute.length()>0 && chatCreate.length()>0){
-                                PostInfo postInfo = new PostInfo(title, content, meetingArea, closeTime_hour, closeTime_minute, maxPerson, userLocation, chatCreate);
+                                PostInfo postInfo = new PostInfo(title, content, meetingArea, closeTime_hour, closeTime_minute, maxPerson, userLocation, chatCreate, userEmail);
                                 uploader(postInfo);
                             }
                             Log.i("TAG", userLocation);
