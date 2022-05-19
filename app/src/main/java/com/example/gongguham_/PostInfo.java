@@ -6,14 +6,11 @@ public class PostInfo {
     private String meetingArea;
     private String closeTime_hour;
     private String closeTime_minute;
-    private String maxPerson;
-    //채팅방명 추가
-    private String ChatTitle;
+    private int maxPerson;
 
     private String userLocation;
 
-    // 채팅방 이름 추가
-    public PostInfo(String postTitle, String postContent, String meetingArea, String closeTime_hour, String closeTime_minute, String maxPerson, String userLocation, String ChatTitle) {
+    public PostInfo(String postTitle, String postContent, String meetingArea, String closeTime_hour, String closeTime_minute, int maxPerson, String userLocation) {
         this.postTitle = postTitle;
         this.postContent = postContent;
         this.meetingArea = meetingArea;
@@ -21,7 +18,7 @@ public class PostInfo {
         this.closeTime_minute = closeTime_minute;
         this.maxPerson = maxPerson;
         this.userLocation = userLocation;
-        this.ChatTitle = ChatTitle;
+
     }
 
     public String getUserLocation() {
@@ -70,19 +67,12 @@ public class PostInfo {
 
     public void setCloseTime_minute(String closeTime_minute) { this.closeTime_minute = closeTime_minute; }
 
-    public String getMaxPerson() {
+    public int getMaxPerson() {
         return maxPerson;
     }
 
-    public void setMaxPerson(String maxPerson) {
+    public void setMaxPerson(int maxPerson) {
         this.maxPerson = maxPerson;
     }
-
-    // 채팅방 이름 관련 추가
-    public String getChatTitle() {
-        return ChatTitle;
-    }
-
-    public void setChatTitle(String ChatTitle) { this.ChatTitle = ChatTitle; }
 
 }

@@ -77,7 +77,7 @@ public class AddPostItem extends AppCompatActivity {
         postTitle = (EditText) findViewById(R.id.add_post_title);
         String title = postTitle.getText().toString();
         postContent = (EditText) findViewById(R.id.add_post_content);
-        String content = postTitle.getText().toString();
+        String content = postContent.getText().toString();
         postMeetingArea = (EditText) findViewById(R.id.add_post_meeting_area);
         String meetingArea = postMeetingArea.getText().toString();
         // postCloseTime = (EditText) findViewById(R.id.add_post_close_time);
@@ -92,7 +92,7 @@ public class AddPostItem extends AppCompatActivity {
         String closeTime_minute = minuteS.getSelectedItem().toString();
 
         Spinner personS = (Spinner) findViewById(R.id.spinner_add_post_max_person);
-        String maxPerson = personS.getSelectedItem().toString();
+        int maxPerson = Integer.parseInt(personS.getSelectedItem().toString());
 
         // 데이터에 입력위한 chatTitle
         String chatCreate = post_chatCreate.getText().toString();
@@ -138,7 +138,7 @@ public class AddPostItem extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getEmail());
 
-        db.collection("posts").document(user.getEmail()).set(postInfo)
+        db.collection("posts").document(postInfo.getPostTitle()+postInfo.getPostContent()+postInfo.getMeetingArea()).set(postInfo)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

@@ -41,7 +41,7 @@ public class PostAdaptor extends RecyclerView.Adapter<PostAdaptor.ViewHolder> {
         holder.meetingArea.setText(postInfo.get(position).getMeetingArea());
         holder.closeTime.setText(postInfo.get(position).getCloseTime_hour());
         holder.closeTime.setText(postInfo.get(position).getCloseTime_minute());
-        holder.maxPerson.setText(postInfo.get(position).getMaxPerson());
+        holder.maxPerson.setText(postInfo.get(position).getMaxPerson()+"");
       //  Log.d("data 확인", postInfo.get(position).getMeetingArea()+"/"+postInfo.get(position).getCloseTime()+"/"+(postInfo.get(position).getMaxPerson())+"/");
     }
 
@@ -75,8 +75,7 @@ public class PostAdaptor extends RecyclerView.Adapter<PostAdaptor.ViewHolder> {
                     int pos = getAdapterPosition();
                     if(pos != RecyclerView.NO_POSITION){
                         Intent intent = new Intent(mContext, PostDetailActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                     //   intent.putExtra("post_indx", (Parcelable) postInfo.get(pos));
-
+                        intent.putExtra("KEY", postInfo.get(pos).getPostTitle() + postInfo.get(pos).getPostContent() + postInfo.get(pos).getMeetingArea());
                         mContext.startActivity(intent);
                     }
                 }
