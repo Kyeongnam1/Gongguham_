@@ -47,7 +47,9 @@
                     android:host="google.com" />
             </intent-filter>
         </activity>
-        <activity android:name=".gpsActivity"/>
+        <activity android:name=".gpsActivity"
+            android:requestLegacyExternalStorage="true">
+        </activity>
         <activity android:name=".SignUpActivity">
         </activity>
         <activity android:name=".loginActivity">

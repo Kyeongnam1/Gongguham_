@@ -78,7 +78,7 @@
                     android:layout_width="130dp"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="만날 시간"
+                    android:text="마감 시간"
                     android:textSize="20sp" />
 
                 <Spinner

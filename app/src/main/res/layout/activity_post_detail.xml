@@ -73,11 +73,19 @@
                 android:id="@+id/textView26"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="만나는 시간:"
+                android:text="마감 시간:"
                 android:textSize="24sp" />
 
             <TextView
-                android:id="@+id/post_detail_time"
+                android:id="@+id/post_detail_time_hour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="TextView"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/post_detail_time_minute"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
