@@ -134,6 +134,24 @@
                         android:drawableTop="@drawable/image_button_paying"
                         android:text="공구페이" />
 
+                    <Button
+                        android:id="@+id/userSearchButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/square_button"
+                        android:drawableTop="@drawable/image_button_usersearch"
+                        android:text="유저검색" />
+
+                    <Button
+                        android:id="@+id/friendslistButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/square_button"
+                        android:drawableTop="@drawable/image_button_friends"
+                        android:text="친구목록" />
+
                 </TableRow>
 
             </TableLayout>
