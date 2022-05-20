@@ -90,11 +90,25 @@
                         android:layout_height="45dp"
                         android:layout_weight="1" />
 
+                    <TextView
+                        android:id="@+id/textView25"
+                        android:layout_width="7dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="1"
+                        android:text="시" />
+
                     <Spinner
                         android:id="@+id/spinner_add_post_close_time_minute"
                         android:layout_width="wrap_content"
                         android:layout_height="45dp"
                         android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/textView29"
+                        android:layout_width="7dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="1"
+                        android:text="분" />
 
                 </LinearLayout>
 

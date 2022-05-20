@@ -1,19 +1,18 @@
 package com.example.gongguham_;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -48,8 +47,9 @@ public class PostDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_post_detail);
 
+        //
+        setContentView(R.layout.activity_post_detail);
         final TextView titleTextView = findViewById(R.id.post_detail_title);
         final TextView emailTextView = findViewById(R.id.post_detail_email);
         final TextView contentTextView = findViewById(R.id.post_detail_content);
@@ -60,6 +60,7 @@ public class PostDetailActivity extends AppCompatActivity {
         tmBtn = findViewById(R.id.tmbtn);
 
         enterChat = findViewById(R.id.enterChat);
+
 
         Intent intent = getIntent();
         String key = intent.getStringExtra("KEY");
@@ -83,10 +84,40 @@ public class PostDetailActivity extends AppCompatActivity {
 
                             // 채팅방이름 찾기
                             chatTitle = document.getData().get("chatTitle").toString();
+                            //마감시간일시 transmissionactivity 실행
+                            /*String sCurTime = null;
+                            String pTime = null;
+                            pTime = hourTextView.getText().toString();
+                            pTime += minuteTextView.getText().toString();
+                            sCurTime = new java.text.SimpleDateFormat("HH"+"시"+"mm"+"분",java.util.Locale.KOREA).format(new java.util.Date());
+
+                            if(pTime.equals(sCurTime))
+                            {
+                                Intent intent = new Intent(PostDetailActivity.this, TransmissionActivity.class);
+                                startActivity(intent);
+                            }*/
+                            String sCurTime_Hour = null;
+                            String sCurTime_minute = null;
+                            String pTime_Hour = null;
+                            String pTime_minute = null;
+                            int sCurTime;
+                            int pTime;
+                            sCurTime_Hour = new java.text.SimpleDateFormat("HH",java.util.Locale.KOREA).format(new java.util.Date());
+                            sCurTime_minute = new java.text.SimpleDateFormat("mm",java.util.Locale.KOREA).format(new java.util.Date());
+                            sCurTime = Integer.parseInt(sCurTime_Hour)*60+Integer.parseInt(sCurTime_minute);
+                            pTime_Hour = hourTextView.getText().toString();
+                            pTime_minute = minuteTextView.getText().toString();
+                            pTime = Integer.parseInt(pTime_Hour)*60+Integer.parseInt(pTime_minute);if(sCurTime>=pTime)
+                            {
+                                Intent intent = new Intent(PostDetailActivity.this, TransmissionActivity.class);
+                                startActivity(intent);
+                            }
                         }
+
                     }
                 }
             }
+
         });
         // user 정보(current)
         DocumentReference documentUserReference = FirebaseFirestore.getInstance().collection("users").document(user.getEmail());
