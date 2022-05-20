@@ -163,9 +163,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
         });
 
-
-
-
         db.collection("posts")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -196,7 +193,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                                                 document.getData().get("chatTitle").toString(),
                                                 document.getData().get("postEmail").toString()
                                         ));
-                                        //Log.d("closeTime 확인", document.getData().get("closeTime").toString());
                                     }
                                 }
                             }

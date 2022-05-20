@@ -60,6 +60,7 @@ public class viewMoreFragment extends Fragment {
         view.findViewById(R.id.logoutButton).setOnClickListener(onClickListener);
         view.findViewById(R.id.payButton).setOnClickListener(onClickListener);
         view.findViewById(R.id.userDeleteButton).setOnClickListener(onClickListener);
+        view.findViewById(R.id.userSearchButton).setOnClickListener(onClickListener);
         TextView nameTextView = view.findViewById(R.id.nameText);
 
         DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getEmail());
@@ -110,6 +111,10 @@ public class viewMoreFragment extends Fragment {
                     startPayInfoActivity();
                     break;
 
+                case R.id.userSearchButton:
+                    startuserSearchActivity();
+                    break;
+
                 case R.id.userDeleteButton:
                     FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getEmail())
                         .delete().addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -152,6 +157,11 @@ public class viewMoreFragment extends Fragment {
 
     private  void startPayInfoActivity(){
         Intent intent=new Intent(getContext(),PayInfoActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+    private  void startuserSearchActivity(){
+        Intent intent=new Intent(getContext(),userSearchActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
