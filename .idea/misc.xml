@@ -7,19 +7,29 @@
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/drawable/custom_progress.xml" value="0.196" />
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/drawable/ic_main_background.xml" value="0.1955" />
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/drawable/stroke.xml" value="0.1955" />
+        <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/actest.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/activity_add_post_item.xml" value="0.22" />
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/activity_chat_chatting.xml" value="0.1875" />
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/activity_delivery_progress.xml" value="0.1875" />
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/activity_login.xml" value="0.14447463768115942" />
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/activity_main.xml" value="0.1875" />
+        <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/activity_pay.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/activity_payinfo.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/activity_post.xml" value="0.19270833333333334" />
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/activity_post_detail.xml" value="0.16" />
+        <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/activity_state_select.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/activity_terms_agree.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/activity_terms_detail.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/activity_transmission.xml" value="0.22" />
+        <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/activity_transmission_guest.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/activity_usersearch.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/chat_password_create.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/fragment_chat_starter.xml" value="0.1921875" />
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/fragment_guest.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/fragment_home.xml" value="0.17028985507246377" />
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/fragment_host.xml" value="0.22" />
-        <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/fragment_transmission.xml" value="0.1875" />
+        <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/fragment_transmission.xml" value="0.25" />
+        <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/fragment_user.xml" value="0.17806484295845998" />
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/item_applicant.xml" value="0.33" />
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/list_child.xml" value="0.365036231884058" />
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/post_item.xml" value="0.36141304347826086" />

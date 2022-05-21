@@ -80,6 +80,7 @@ public class TransmissionFragment extends Fragment {
                                        });
 
 
+
         return rootView;
     }
 }
