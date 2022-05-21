@@ -1,5 +1,7 @@
 package com.example.gongguham_;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -18,6 +22,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
@@ -26,6 +33,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
 public class PayInfoActivity extends AppCompatActivity {
+
+    TextView user_cash_amount;
+    int user_cash_amount_s;
 
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -37,6 +47,9 @@ public class PayInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_payinfo);
         final TextView accountValueTextView = findViewById(R.id.accountValueText);
         final TextView accountTextView = findViewById(R.id.accountText);
+
+        // 사용자 금액
+        user_cash_amount = findViewById(R.id.user_cash_amount);
 
 
         Spinner accountSpinner = (Spinner) findViewById(R.id.spinner_account);
@@ -61,12 +74,15 @@ public class PayInfoActivity extends AppCompatActivity {
                         if (document.exists()) {
                             accountValueTextView.setText(document.getData().get("accountValue").toString());
                             accountTextView.setText(document.getData().get("account").toString());
+                            user_cash_amount.setText(document.getData().get("point").toString());
                         }
                     }
                 }
             }
         });
     }
+
+
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
@@ -78,15 +94,15 @@ public class PayInfoActivity extends AppCompatActivity {
                     break;
 
                 case R.id.chargeButton:
-                    startToast("추후 지원예정입니다.");
+                    cashCharge();
                     break;
 
                 case R.id.sendButton:
-                    startToast("추후 지원예정입니다.");
+                    cashSend();
                     break;
 
                 case R.id.refundButton:
-                    startToast("추후 지원예정입니다.");
+                    cashReturn();
                     break;
             }
         }
@@ -130,6 +146,72 @@ public class PayInfoActivity extends AppCompatActivity {
     private  void startToast(String msg){
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
+
+    private void cashCharge(){
+        View dialogView = getLayoutInflater().inflate(R.layout.cash_charge, null);
+        TextView cash_charge_username = (TextView) dialogView.findViewById(R.id.cash_charge_username);
+        EditText charge_cash_amount = (EditText) dialogView.findViewById(R.id.charge_cash_amount);
+
+        //charge_cash_amount.setText(username);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(dialogView);
+        builder.setPositiveButton("충전", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+                dialog.dismiss();
+            }
+        })
+                .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+    }
+
+    private void cashReturn(){
+        View dialogView = getLayoutInflater().inflate(R.layout.cash_return, null);
+        TextView cash_return_username = (TextView) dialogView.findViewById(R.id.cash_return_username);
+        EditText cash_return_money = (EditText) dialogView.findViewById(R.id.cash_return_amount);
+        //cash_return_amount.setText(username);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(dialogView);
+        builder
+                .setPositiveButton("환급", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                dialog.dismiss();
+            }
+        })
+                .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+    }
+
+    private void cashSend(){
+        View dialogView = getLayoutInflater().inflate(R.layout.cash_send, null);
+        TextView cash_send_username = (TextView) dialogView.findViewById(R.id.cash_send_username);
+        EditText cash_send_money = (EditText) dialogView.findViewById(R.id.cash_send_amount);
+        //cash_return_amount.setText(username);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(dialogView);
+        builder
+                .setPositiveButton("송금", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+    }
+
+
 
 
 }
