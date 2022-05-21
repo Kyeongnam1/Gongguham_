@@ -20,7 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class TransmissionGuestActivity extends AppCompatActivity {
 
     Button payButton, completeButton;
-    TextView positionText, nameText, bankText, accountNumberText;
+    TextView positionText, nameText, bankText, accountNumberText, emailText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +32,7 @@ public class TransmissionGuestActivity extends AppCompatActivity {
         nameText = findViewById(R.id.applicant_name_text);
         bankText = findViewById(R.id.bank_name_text);
         accountNumberText = findViewById(R.id.account_number_text);
+        emailText = findViewById(R.id.applicant_email_text);
         completeButton = findViewById(R.id.complete_Button);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("posts").document(dbTitle)
@@ -45,6 +46,7 @@ public class TransmissionGuestActivity extends AppCompatActivity {
                         nameText.setText(document.getData().get("name1").toString());
                         bankText.setText(document.getData().get("accountValue1").toString());
                         accountNumberText.setText(document.getData().get("account1").toString());
+                        emailText.setText(document.getData().get("postEmail").toString());
                     }
                     else {
                         Log.d(TAG, "No such document");
