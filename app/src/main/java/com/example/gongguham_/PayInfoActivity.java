@@ -448,14 +448,5 @@ public class PayInfoActivity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
-
-
-
-
 }
-
-
-
