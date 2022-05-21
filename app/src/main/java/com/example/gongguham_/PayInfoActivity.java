@@ -179,7 +179,7 @@ public class PayInfoActivity extends AppCompatActivity {
                                     int plus = point + amount_I;
                                     user_cash_amount.setText(Integer.toString(plus));
                                     Calendar calendar= Calendar.getInstance(); //현재 시간을 가지고 있는 객체
-                                    String time = calendar.get(	Calendar.YEAR)+ "." + calendar.get(Calendar.MONTH) + "." + calendar.get(Calendar.DAY_OF_MONTH) + "." + calendar.get(Calendar.HOUR_OF_DAY) +  "시" + calendar.get(Calendar.MINUTE) + "분" + calendar.get(Calendar.SECOND) + "초";
+                                    String time = calendar.get(Calendar.YEAR)+ "." + (calendar.get(Calendar.MONTH)+1) + "." + calendar.get(Calendar.DAY_OF_MONTH) + "." + calendar.get(Calendar.HOUR_OF_DAY) +  "시" + calendar.get(Calendar.MINUTE) + "분" + calendar.get(Calendar.SECOND) + "초";
 
                                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -255,7 +255,7 @@ public class PayInfoActivity extends AppCompatActivity {
                                     EditText cash_return_money = (EditText) dialogView.findViewById(R.id.cash_return_amount);
                                     String amount = cash_return_money.getText().toString();
                                     Calendar calendar= Calendar.getInstance(); //현재 시간을 가지고 있는 객체
-                                    String time = calendar.get(	Calendar.YEAR)+ "." + calendar.get(Calendar.MONTH) + "." + calendar.get(Calendar.DAY_OF_MONTH) + "." + calendar.get(Calendar.HOUR_OF_DAY) +  "시" + calendar.get(Calendar.MINUTE) + "분" + calendar.get(Calendar.SECOND) + "초";
+                                    String time = calendar.get(Calendar.YEAR)+ "." + (calendar.get(Calendar.MONTH)+1) + "." + calendar.get(Calendar.DAY_OF_MONTH) + "." + calendar.get(Calendar.HOUR_OF_DAY) +  "시" + calendar.get(Calendar.MINUTE) + "분" + calendar.get(Calendar.SECOND) + "초";
 
                                     int amount_I = Integer.parseInt(amount);
                                     int minus = point - amount_I;
@@ -344,7 +344,7 @@ public class PayInfoActivity extends AppCompatActivity {
                                     String amount = cash_send_money.getText().toString();
 
                                     Calendar calendar= Calendar.getInstance(); //현재 시간을 가지고 있는 객체
-                                    String time = calendar.get(	Calendar.YEAR)+ "." + calendar.get(Calendar.MONTH) + "." + calendar.get(Calendar.DAY_OF_MONTH) + "." + calendar.get(Calendar.HOUR_OF_DAY) +  "시" + calendar.get(Calendar.MINUTE) + "분" + calendar.get(Calendar.SECOND) + "초";
+                                    String time = calendar.get(Calendar.YEAR)+ "." + (calendar.get(Calendar.MONTH)+1) + "." + calendar.get(Calendar.DAY_OF_MONTH) + "." + calendar.get(Calendar.HOUR_OF_DAY) +  "시" + calendar.get(Calendar.MINUTE) + "분" + calendar.get(Calendar.SECOND) + "초";
 
                                     int amount_I = Integer.parseInt(amount);
                                     int minus = point - amount_I;
