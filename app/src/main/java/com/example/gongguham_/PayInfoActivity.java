@@ -47,6 +47,8 @@ public class PayInfoActivity extends AppCompatActivity {
         final TextView accountValueTextView = findViewById(R.id.accountValueText);
         final TextView accountTextView = findViewById(R.id.accountText);
 
+        final String username;
+
         // 사용자 금액
         user_cash_amount = findViewById(R.id.user_cash_amount);
 
@@ -192,7 +194,10 @@ public class PayInfoActivity extends AppCompatActivity {
     private void cashSend(){
         View dialogView = getLayoutInflater().inflate(R.layout.cash_send, null);
         TextView cash_send_username = (TextView) dialogView.findViewById(R.id.cash_send_username);
+
+        EditText cash_send_email = (EditText) dialogView.findViewById(R.id.cash_send_email);
         EditText cash_send_money = (EditText) dialogView.findViewById(R.id.cash_send_amount);
+
         //cash_return_amount.setText(username);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(dialogView);
