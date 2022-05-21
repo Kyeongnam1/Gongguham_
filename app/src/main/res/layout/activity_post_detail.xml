@@ -120,12 +120,29 @@
                     android:textSize="24sp" />
 
                 <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="시"
+                    android:textSize="24sp"
+                    />
+
+                <TextView
                     android:id="@+id/post_detail_time_minute"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text="TextView"
                     android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/textView31"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="분"
+                    android:textSize="24sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -143,11 +160,11 @@
                     android:textSize="24sp" />
 
                 <TextView
-                    android:id="@+id/textView31"
+                    android:id="@+id/post_detail_curperson"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="명수"
+                    android:text=""
                     android:textSize="24sp" />
 
                 <TextView

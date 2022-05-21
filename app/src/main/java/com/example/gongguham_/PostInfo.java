@@ -8,13 +8,14 @@ public class PostInfo {
     private String closeTime_minute;
     private int maxPerson;
     private String postEmail;
+    private int curPerson;
 
     //채팅방명 추가
     private String ChatTitle;
 
     private String userLocation;
 
-    public PostInfo(String postTitle, String postContent, String meetingArea, String closeTime_hour, String closeTime_minute, int maxPerson, String userLocation, String ChatTitle, String postEmail) {
+    public PostInfo(String postTitle, String postContent, String meetingArea, String closeTime_hour, String closeTime_minute, int maxPerson, String userLocation, String ChatTitle, String postEmail, int curPerson) {
         this.postTitle = postTitle;
         this.postContent = postContent;
         this.meetingArea = meetingArea;
@@ -24,6 +25,7 @@ public class PostInfo {
         this.userLocation = userLocation;
         this.ChatTitle = ChatTitle;
         this.postEmail = postEmail;
+        this.curPerson = curPerson;
     }
 
     public String getUserLocation() {
@@ -76,8 +78,16 @@ public class PostInfo {
         return maxPerson;
     }
 
-    public void setMaxPerson(int maxPerson) {
+    public void setMaxPerson(int curPerson) {
         this.maxPerson = maxPerson;
+    }
+
+    public int getCurPerson() {
+        return curPerson;
+    }
+
+    public void setCurPerson(int curPerson) {
+        this.curPerson = curPerson;
     }
 
     // 채팅방 이름 관련 추가

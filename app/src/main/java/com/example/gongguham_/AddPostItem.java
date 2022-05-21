@@ -1,18 +1,16 @@
 package com.example.gongguham_;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -20,18 +18,15 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Objects;
 
 public class AddPostItem extends AppCompatActivity {
 
@@ -96,6 +91,7 @@ public class AddPostItem extends AppCompatActivity {
 
 
     private void addPost(){
+
         postTitle = (EditText) findViewById(R.id.add_post_title);
         String title = postTitle.getText().toString();
         postContent = (EditText) findViewById(R.id.add_post_content);
@@ -115,7 +111,7 @@ public class AddPostItem extends AppCompatActivity {
 
         Spinner personS = (Spinner) findViewById(R.id.spinner_add_post_max_person);
         int maxPerson = Integer.parseInt(personS.getSelectedItem().toString());
-
+        int curPerson = 1;
         // 데이터에 입력위한 chatTitle
         String chatCreate = post_chatCreate.getText().toString();
 
@@ -135,7 +131,7 @@ public class AddPostItem extends AppCompatActivity {
 
                             userLocation = document.getData().get("curLoc").toString();
                             if(title.length()>0 && content.length()>0 && meetingArea.length()>0 && closeTime_hour.length()>0 && closeTime_minute.length()>0 && chatCreate.length()>0){
-                                PostInfo postInfo = new PostInfo(title, content, meetingArea, closeTime_hour, closeTime_minute, maxPerson, userLocation, chatCreate, userEmail);
+                                PostInfo postInfo = new PostInfo(title, content, meetingArea, closeTime_hour, closeTime_minute, maxPerson, userLocation, chatCreate, userEmail, curPerson);
                                 uploader(postInfo);
                             }
                             Log.i("TAG", userLocation);
@@ -157,6 +153,8 @@ public class AddPostItem extends AppCompatActivity {
     }
 
     private void uploader(PostInfo postInfo){
+
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getEmail());
 
@@ -175,6 +173,42 @@ public class AddPostItem extends AppCompatActivity {
 
                     }
                 });
+        DocumentReference documentUserReference = FirebaseFirestore.getInstance().collection("users").document(user.getEmail());
+        documentUserReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document != null) {
+                        if (document.exists()) {
+                            String name = document.getData().get("name").toString();
+                            String account = document.getData().get("account").toString();
+                            String accountValue = document.getData().get("accountValue").toString();
+                            int curPerson=1;
+                            UserInfo userInfo = new UserInfo(name, accountValue, account, curPerson);
+                            db.collection("posts").document(postInfo.getPostTitle()+postInfo.getPostContent()+postInfo.getMeetingArea()).set(userInfo, SetOptions.merge())
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Log.d("AddPost Activity", "DocumentSnapShot" + documentReference);
+                                        }
+
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.e("AddPost Activity", "Error adding post" + e);
+
+                                        }
+                                    });
+
+
+                        }
+                    }
+                }
+            }
+        });
+
     }
 
 
