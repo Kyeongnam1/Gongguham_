@@ -189,7 +189,7 @@ public class AddPostItem extends AppCompatActivity {
                             String accountValue1 = "accountValue"+Integer.toString(curPerson);
                             UserInfo userInfo = new UserInfo(name, accountValue, account, curPerson);
                             db.collection("posts").document(postInfo.getPostTitle()+postInfo.getPostContent()+postInfo.getMeetingArea())
-                                    .update(name1, userInfo.getName(),account1,userInfo.getAccount(),accountValue1, userInfo.getAccountValue(),"curPerson",userInfo.getCurPerson())
+                                    .update(name1, userInfo.getName(),account1,userInfo.getAccount(),accountValue1, userInfo.getAccountValue(),"curPerson",userInfo.getCurPerson(),"curSituation", "모집중")
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {

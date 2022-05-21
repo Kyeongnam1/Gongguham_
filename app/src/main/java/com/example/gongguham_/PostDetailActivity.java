@@ -112,9 +112,20 @@ public class PostDetailActivity extends AppCompatActivity {
                             pTime = Integer.parseInt(pTime_Hour)*60+Integer.parseInt(pTime_minute);
                             if(sCurTime>=pTime)
                             {
-                                Intent intent = new Intent(PostDetailActivity.this, TransmissionActivity.class);
-                                intent.putExtra("dbTitle", titleTextView.getText().toString()+contentTextView.getText().toString()+placeTextView.getText().toString());
-                                startActivity(intent);
+                                if(user.getEmail().toString().equals(document.getData().get("postEmail").toString()))
+                                {
+                                    Intent intent = new Intent(PostDetailActivity.this, TransmissionActivity.class);
+                                    intent.putExtra("dbTitle", titleTextView.getText().toString()+contentTextView.getText().toString()+placeTextView.getText().toString());
+                                    startActivity(intent);
+                                }
+                                else
+                                {
+                                    Intent intent = new Intent(PostDetailActivity.this, TransmissionGuestActivity.class);
+                                    intent.putExtra("dbTitle", titleTextView.getText().toString()+contentTextView.getText().toString()+placeTextView.getText().toString());
+                                    startActivity(intent);
+                                }
+
+
                             }
                         }
 
