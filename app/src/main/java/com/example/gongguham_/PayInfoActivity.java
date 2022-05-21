@@ -179,7 +179,7 @@ public class PayInfoActivity extends AppCompatActivity {
                                     int plus = point + amount_I;
                                     user_cash_amount.setText(Integer.toString(plus));
                                     Calendar calendar= Calendar.getInstance(); //현재 시간을 가지고 있는 객체
-                                    String time = calendar.get(	Calendar.YEAR)+ "." + calendar.get(Calendar.MONTH) + "." + calendar.get(Calendar.DAY_OF_MONTH) + "." + calendar.get(Calendar.HOUR_OF_DAY) +  "." + calendar.get(Calendar.MINUTE) + "." + calendar.get(Calendar.SECOND);
+                                    String time = calendar.get(	Calendar.YEAR)+ "." + calendar.get(Calendar.MONTH) + "." + calendar.get(Calendar.DAY_OF_MONTH) + "." + calendar.get(Calendar.HOUR_OF_DAY) +  "시" + calendar.get(Calendar.MINUTE) + "분" + calendar.get(Calendar.SECOND) + "초";
 
                                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -255,7 +255,7 @@ public class PayInfoActivity extends AppCompatActivity {
                                     EditText cash_return_money = (EditText) dialogView.findViewById(R.id.cash_return_amount);
                                     String amount = cash_return_money.getText().toString();
                                     Calendar calendar= Calendar.getInstance(); //현재 시간을 가지고 있는 객체
-                                    String time = calendar.get(	Calendar.YEAR)+ "." + calendar.get(Calendar.MONTH) + "." + calendar.get(Calendar.DAY_OF_MONTH) + "." + calendar.get(Calendar.HOUR_OF_DAY) +  "." + calendar.get(Calendar.MINUTE) + "." + calendar.get(Calendar.SECOND);
+                                    String time = calendar.get(	Calendar.YEAR)+ "." + calendar.get(Calendar.MONTH) + "." + calendar.get(Calendar.DAY_OF_MONTH) + "." + calendar.get(Calendar.HOUR_OF_DAY) +  "시" + calendar.get(Calendar.MINUTE) + "분" + calendar.get(Calendar.SECOND) + "초";
 
                                     int amount_I = Integer.parseInt(amount);
                                     int minus = point - amount_I;
@@ -344,7 +344,7 @@ public class PayInfoActivity extends AppCompatActivity {
                                     String amount = cash_send_money.getText().toString();
 
                                     Calendar calendar= Calendar.getInstance(); //현재 시간을 가지고 있는 객체
-                                    String time = calendar.get(	Calendar.YEAR)+ "." + calendar.get(Calendar.MONTH) + "." + calendar.get(Calendar.DAY_OF_MONTH) + "." + calendar.get(Calendar.HOUR_OF_DAY) +  "." + calendar.get(Calendar.MINUTE) + "." + calendar.get(Calendar.SECOND);
+                                    String time = calendar.get(	Calendar.YEAR)+ "." + calendar.get(Calendar.MONTH) + "." + calendar.get(Calendar.DAY_OF_MONTH) + "." + calendar.get(Calendar.HOUR_OF_DAY) +  "시" + calendar.get(Calendar.MINUTE) + "분" + calendar.get(Calendar.SECOND) + "초";
 
                                     int amount_I = Integer.parseInt(amount);
                                     int minus = point - amount_I;
@@ -359,7 +359,7 @@ public class PayInfoActivity extends AppCompatActivity {
 
                                         PayInfo payInfo1 = new PayInfo(minus);
 
-                                        HistoryInfo historyInfo1 = new HistoryInfo(user.getEmail(), 0, amount_I, minus);
+                                        SenderHistoryInfo senderHistoryInfo = new SenderHistoryInfo(user.getEmail(),0, amount_I, minus, email);
 
                                         if (user != null) {
                                             db.collection("users").document(user.getEmail()).set(payInfo1, SetOptions.merge())
@@ -387,7 +387,7 @@ public class PayInfoActivity extends AppCompatActivity {
                                                                 int plus = pointTo + amount_I;
                                                                 String collection2 = email + "history";
 
-                                                                HistoryInfo historyInfo2 = new HistoryInfo(email, amount_I, 0, plus);
+                                                                RecipientHistoryInfo recipientHistoryInfo = new RecipientHistoryInfo(email, amount_I, 0, plus, user.getEmail());
                                                                 PayInfo payInfo2 = new PayInfo(plus);
 
                                                                 db.collection("users").document(email).set(payInfo2, SetOptions.merge())
@@ -402,7 +402,7 @@ public class PayInfoActivity extends AppCompatActivity {
                                                                             }
                                                                         });
 
-                                                                db.collection(collection2).document(time).set(historyInfo2)
+                                                                db.collection(collection2).document(time).set(recipientHistoryInfo)
                                                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                             @Override
                                                                             public void onSuccess(Void aVoid) {
@@ -419,7 +419,7 @@ public class PayInfoActivity extends AppCompatActivity {
                                                 }
                                             });
 
-                                            db.collection(collection).document(time).set(historyInfo1)
+                                            db.collection(collection).document(time).set(senderHistoryInfo)
                                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                         @Override
                                                         public void onSuccess(Void aVoid) {

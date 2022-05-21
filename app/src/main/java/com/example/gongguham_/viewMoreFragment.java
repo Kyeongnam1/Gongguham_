@@ -131,7 +131,6 @@ public class viewMoreFragment extends Fragment {
                         });
                     FirebaseAuth.getInstance().getCurrentUser().delete();
                     FirebaseAuth.getInstance().signOut();
-
                     startMainActivity();
                     break;
             }
