@@ -35,7 +35,6 @@ import com.google.firebase.firestore.SetOptions;
 public class PayInfoActivity extends AppCompatActivity {
 
     TextView user_cash_amount;
-    int user_cash_amount_s;
 
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -150,7 +149,7 @@ public class PayInfoActivity extends AppCompatActivity {
     private void cashCharge(){
         View dialogView = getLayoutInflater().inflate(R.layout.cash_charge, null);
         TextView cash_charge_username = (TextView) dialogView.findViewById(R.id.cash_charge_username);
-        EditText charge_cash_amount = (EditText) dialogView.findViewById(R.id.charge_cash_amount);
+        EditText charge_cash_amount = (EditText) dialogView.findViewById(R.id.cash_charge_amount);
 
         //charge_cash_amount.setText(username);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

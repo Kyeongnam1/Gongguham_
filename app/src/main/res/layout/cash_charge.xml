@@ -34,7 +34,7 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/charge_cash_amount"
+            android:id="@+id/cash_charge_amount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
