@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -55,6 +55,7 @@ public class ApplicantAdapter extends RecyclerView.Adapter<ApplicantAdapter.View
             applicantPosition = (TextView) itemView.findViewById(R.id.applicant_position_text);
             accountNumber = (TextView) itemView.findViewById(R.id.account_number_text);
             bankName = (TextView) itemView.findViewById(R.id.bank_name_text);
+
         }
         public TextView getApplicantName(String name){
             return (TextView) itemView.findViewById(R.id.applicant_name_text);

@@ -109,9 +109,11 @@ public class PostDetailActivity extends AppCompatActivity {
                             sCurTime = Integer.parseInt(sCurTime_Hour)*60+Integer.parseInt(sCurTime_minute);
                             pTime_Hour = hourTextView.getText().toString();
                             pTime_minute = minuteTextView.getText().toString();
-                            pTime = Integer.parseInt(pTime_Hour)*60+Integer.parseInt(pTime_minute);if(sCurTime>=pTime)
+                            pTime = Integer.parseInt(pTime_Hour)*60+Integer.parseInt(pTime_minute);
+                            if(sCurTime>=pTime)
                             {
                                 Intent intent = new Intent(PostDetailActivity.this, TransmissionActivity.class);
+                                intent.putExtra("dbTitle", titleTextView.getText().toString()+contentTextView.getText().toString()+placeTextView.getText().toString());
                                 startActivity(intent);
                             }
                         }

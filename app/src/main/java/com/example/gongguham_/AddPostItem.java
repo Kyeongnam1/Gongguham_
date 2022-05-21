@@ -23,7 +23,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -181,12 +180,16 @@ public class AddPostItem extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document != null) {
                         if (document.exists()) {
+                            int curPerson=1;
                             String name = document.getData().get("name").toString();
                             String account = document.getData().get("account").toString();
                             String accountValue = document.getData().get("accountValue").toString();
-                            int curPerson=1;
+                            String name1 = "name"+Integer.toString(curPerson);
+                            String account1 = "account"+Integer.toString(curPerson);
+                            String accountValue1 = "accountValue"+Integer.toString(curPerson);
                             UserInfo userInfo = new UserInfo(name, accountValue, account, curPerson);
-                            db.collection("posts").document(postInfo.getPostTitle()+postInfo.getPostContent()+postInfo.getMeetingArea()).set(userInfo, SetOptions.merge())
+                            db.collection("posts").document(postInfo.getPostTitle()+postInfo.getPostContent()+postInfo.getMeetingArea())
+                                    .update(name1, userInfo.getName(),account1,userInfo.getAccount(),accountValue1, userInfo.getAccountValue(),"curPerson",userInfo.getCurPerson())
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {

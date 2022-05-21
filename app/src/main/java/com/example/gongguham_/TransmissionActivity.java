@@ -17,6 +17,8 @@ public class TransmissionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent1 = getIntent();
+        String dbTitle = intent1.getStringExtra("dbTitle");
         setContentView(R.layout.activity_transmission);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.frame_layout, transmissionFragment).commitAllowingStateLoss();
