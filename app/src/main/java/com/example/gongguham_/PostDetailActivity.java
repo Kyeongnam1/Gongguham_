@@ -146,7 +146,8 @@ public class PostDetailActivity extends AppCompatActivity {
         documentUserReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
+                if (task.isSuccessful())
+                {
                     DocumentSnapshot document = task.getResult();
                     if (document != null) {
                         if (document.exists()) {
@@ -178,7 +179,7 @@ public class PostDetailActivity extends AppCompatActivity {
                 if(curPerson<=Integer.parseInt(maxPersonTextView.getText().toString()))
                 {
                     db.collection("posts").document(titleTextView.getText().toString()+contentTextView.getText().toString()+placeTextView.getText().toString())
-                            .update(name, userInfo.getName(),account,userInfo.getAccount(),accountValue, userInfo.getAccountValue(),"curPerson",userInfo.getCurPerson())
+                            .update(name, userInfo.getName(),account,userInfo.getAccount(),accountValue, userInfo.getAccountValue(),"curPerson",userInfo.getCurPerson(), userInfo.getName(), curPerson)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {

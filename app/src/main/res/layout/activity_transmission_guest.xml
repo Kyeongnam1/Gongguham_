@@ -85,7 +85,7 @@
             android:layout_height="wrap_content"
             android:text="Email:"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="90dp"
             android:textStyle="bold"
             />
 
@@ -94,9 +94,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="60dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="90dp"
             android:text="TextView"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView33"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="보낼 금액:"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="130dp"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/send_price_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="130dp"
+            android:textStyle="bold"/>
+
     </FrameLayout>
 
     <Button
