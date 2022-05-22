@@ -58,6 +58,25 @@
                     android:layout_height="wrap_content"
                     android:hint="제목" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textVie"
+                        android:layout_width="130dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="카테고리"
+                        android:textSize="20sp" />
+
+                    <Spinner
+                        android:id="@+id/spinner_add_post_category"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp" />
+                </LinearLayout>
+
                 <EditText
                     android:id="@+id/add_post_meeting_area"
                     android:layout_width="match_parent"
@@ -129,6 +148,30 @@
                         android:id="@+id/spinner_add_post_max_person"
                         android:layout_width="match_parent"
                         android:layout_height="45dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView."
+                        android:layout_width="130dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="배달비"
+                        android:textSize="20sp" />
+
+                    <EditText
+                        android:id="@+id/deliveryFeeEditText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:hint="가격"/>
+
                 </LinearLayout>
 
                 <LinearLayout

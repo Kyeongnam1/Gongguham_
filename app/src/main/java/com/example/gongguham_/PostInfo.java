@@ -2,11 +2,13 @@ package com.example.gongguham_;
 
 public class PostInfo {
     private String postTitle;
+    private String postCategory;
     private String postContent;
     private String meetingArea;
     private String closeTime_hour;
     private String closeTime_minute;
     private int maxPerson;
+    private int deliveryFee;
     private String postEmail;
     private int curPerson;
 
@@ -15,17 +17,35 @@ public class PostInfo {
 
     private String userLocation;
 
-    public PostInfo(String postTitle, String postContent, String meetingArea, String closeTime_hour, String closeTime_minute, int maxPerson, String userLocation, String ChatTitle, String postEmail, int curPerson) {
+    public PostInfo(String postTitle, String postCategory, String postContent, String meetingArea, String closeTime_hour, String closeTime_minute, int maxPerson, int deliveryFee, String userLocation, String ChatTitle, String postEmail, int curPerson) {
         this.postTitle = postTitle;
+        this.postCategory = postCategory;
         this.postContent = postContent;
         this.meetingArea = meetingArea;
         this.closeTime_hour = closeTime_hour;
         this.closeTime_minute = closeTime_minute;
         this.maxPerson = maxPerson;
+        this.deliveryFee = deliveryFee;
         this.userLocation = userLocation;
         this.ChatTitle = ChatTitle;
         this.postEmail = postEmail;
         this.curPerson = curPerson;
+    }
+
+    public String getPostCategory() {
+        return postCategory;
+    }
+
+    public void setPostCategory(String postCategory) {
+        this.postCategory = postCategory;
+    }
+
+    public int getDeliveryFee() {
+        return deliveryFee;
+    }
+
+    public void setDeliveryFee(int deliveryFee) {
+        this.deliveryFee = deliveryFee;
     }
 
     public String getUserLocation() {

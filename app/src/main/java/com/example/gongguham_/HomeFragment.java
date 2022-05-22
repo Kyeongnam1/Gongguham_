@@ -54,7 +54,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     private AppCompatButton btn_state;
     private Spinner sort_spinner;
 
-    String[] sort_by = {"option1", "option2", "option3"};
+    String[] sort_by = {"돈까스, 회, 일식", "중식", "치킨", "백반, 죽, 국수", "카페, 디저트", "분식", "찜, 탕, 찌개", "피자", "양식", "고기, 구이", "족발, 보쌈", "아시안", "패스트푸드", "야식", "도시락"};
 
 
     public HomeFragment() {
@@ -180,12 +180,14 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
                                         postInfo.add(new PostInfo(
                                                 document.getData().get("postTitle").toString(),
+                                                document.getData().get("postCategory").toString(),
                                                 document.getData().get("postContent").toString(),
                                                 document.getData().get("meetingArea").toString(),
                                                 document.getData().get("closeTime_hour").toString(),
                                                 //document.getData().get("closeTime_minute").toString(),
                                                 time,
                                                 Integer.parseInt(document.getData().get("maxPerson").toString()),
+                                                Integer.parseInt(document.getData().get("deliveryFee").toString()),
                                                 document.getData().get("userLocation").toString(),
                                                 document.getData().get("chatTitle").toString(),
                                                 document.getData().get("postEmail").toString(),
@@ -246,17 +248,18 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
                                                 postInfo.add(new PostInfo(
                                                         document.getData().get("postTitle").toString(),
+                                                        document.getData().get("postCategory").toString(),
                                                         document.getData().get("postContent").toString(),
                                                         document.getData().get("meetingArea").toString(),
                                                         document.getData().get("closeTime_hour").toString(),
                                                         //document.getData().get("closeTime_minute").toString(),
                                                         time,
                                                         Integer.parseInt(document.getData().get("maxPerson").toString()),
+                                                        Integer.parseInt(document.getData().get("deliveryFee").toString()),
                                                         document.getData().get("userLocation").toString(),
                                                         document.getData().get("chatTitle").toString(),
                                                         document.getData().get("postEmail").toString(),
                                                         Integer.parseInt(document.getData().get("curPerson").toString())
-
                                                 ));
                                                 //Log.d("closeTime 확인", document.getData().get("closeTime").toString());
                                             }

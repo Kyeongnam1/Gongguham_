@@ -32,7 +32,7 @@ public class AddPostItem extends AppCompatActivity {
     private static final String TAG = "AddPostItemActivity";
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private Button btnClose;
-    private EditText postTitle,postContent, postMeetingArea, postCloseTime, postMaxPerson;
+    private EditText postTitle,postContent, postMeetingArea, postCloseTime, postMaxPerson, deliveryFee;
     private static String userEmail;
     private DocumentReference mDatabase;
     private static String userLocation;
@@ -52,6 +52,12 @@ public class AddPostItem extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_post_item);
+
+        Spinner categorySpinner = (Spinner)findViewById(R.id.spinner_add_post_category);
+        ArrayAdapter categoryAdapter = ArrayAdapter.createFromResource(this,
+                R.array.array_category, android.R.layout.simple_spinner_item);
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categorySpinner.setAdapter(categoryAdapter);
 
         Spinner hourSpinner = (Spinner)findViewById(R.id.spinner_add_post_close_time_hour);
         ArrayAdapter hourAdapter = ArrayAdapter.createFromResource(this,
@@ -97,10 +103,12 @@ public class AddPostItem extends AppCompatActivity {
         String content = postContent.getText().toString();
         postMeetingArea = (EditText) findViewById(R.id.add_post_meeting_area);
         String meetingArea = postMeetingArea.getText().toString();
-        // postCloseTime = (EditText) findViewById(R.id.add_post_close_time);
-        // String closeTime = postCloseTime.getText().toString();
-        //  postMaxPerson = (EditText) findViewById(R.id.add_post_max_person);
-        //    int maxPerson = Integer.parseInt(postMaxPerson.getText().toString());
+        deliveryFee = (EditText) findViewById(R.id.deliveryFeeEditText);
+        String s_fee = deliveryFee.getText().toString();
+        int fee = Integer.parseInt(s_fee);
+
+        Spinner categoryS = (Spinner) findViewById(R.id.spinner_add_post_category);
+        String category = categoryS.getSelectedItem().toString();
 
         Spinner hourS = (Spinner) findViewById(R.id.spinner_add_post_close_time_hour);
         String closeTime_hour = hourS.getSelectedItem().toString();
@@ -130,7 +138,7 @@ public class AddPostItem extends AppCompatActivity {
 
                             userLocation = document.getData().get("curLoc").toString();
                             if(title.length()>0 && content.length()>0 && meetingArea.length()>0 && closeTime_hour.length()>0 && closeTime_minute.length()>0 && chatCreate.length()>0){
-                                PostInfo postInfo = new PostInfo(title, content, meetingArea, closeTime_hour, closeTime_minute, maxPerson, userLocation, chatCreate, userEmail, curPerson);
+                                PostInfo postInfo = new PostInfo(title, category, content, meetingArea, closeTime_hour, closeTime_minute, maxPerson, fee, userLocation, chatCreate, userEmail, curPerson);
                                 uploader(postInfo);
                             }
                             Log.i("TAG", userLocation);
