@@ -2,16 +2,12 @@ package com.example.gongguham_;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class TransmissionActivity extends AppCompatActivity {
 
@@ -21,6 +17,8 @@ public class TransmissionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent1 = getIntent();
+        String dbTitle = intent1.getStringExtra("dbTitle");
         setContentView(R.layout.activity_transmission);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.frame_layout, transmissionFragment).commitAllowingStateLoss();

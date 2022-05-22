@@ -42,93 +42,93 @@
     </string-array>
 
     <string-array name="array_hour">
-        <item>오전12시</item>
-        <item>1시</item>
-        <item>2시</item>
-        <item>3시</item>
-        <item>4시</item>
-        <item>5시</item>
-        <item>6시</item>
-        <item>7시</item>
-        <item>8시</item>
-        <item>9시</item>
-        <item>10시</item>
-        <item>11시</item>
-        <item>오후12시</item>
-        <item>13시</item>
-        <item>14시</item>
-        <item>15시</item>
-        <item>16시</item>
-        <item>17시</item>
-        <item>18시</item>
-        <item>19시</item>
-        <item>20시</item>
-        <item>21시</item>
-        <item>22시</item>
-        <item>23시</item>
+        <item>00</item>
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+        <item>05</item>
+        <item>06</item>
+        <item>07</item>
+        <item>08</item>
+        <item>09</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
     </string-array>
 
     <string-array name="array_minute">
-        <item>00분</item>
-        <item>01분</item>
-        <item>02분</item>
-        <item>03분</item>
-        <item>04분</item>
-        <item>05분</item>
-        <item>06분</item>
-        <item>07분</item>
-        <item>08분</item>
-        <item>09분</item>
-        <item>10분</item>
-        <item>11분</item>
-        <item>12분</item>
-        <item>13분</item>
-        <item>14분</item>
-        <item>15분</item>
-        <item>16분</item>
-        <item>17분</item>
-        <item>18분</item>
-        <item>19분</item>
-        <item>20분</item>
-        <item>21분</item>
-        <item>22분</item>
-        <item>23분</item>
-        <item>24분</item>
-        <item>25분</item>
-        <item>26분</item>
-        <item>27분</item>
-        <item>28분</item>
-        <item>29분</item>
-        <item>30분</item>
-        <item>31분</item>
-        <item>32분</item>
-        <item>33분</item>
-        <item>34분</item>
-        <item>35분</item>
-        <item>36분</item>
-        <item>37분</item>
-        <item>38분</item>
-        <item>39분</item>
-        <item>40분</item>
-        <item>41분</item>
-        <item>42분</item>
-        <item>43분</item>
-        <item>44분</item>
-        <item>45분</item>
-        <item>46분</item>
-        <item>47분</item>
-        <item>48분</item>
-        <item>49분</item>
-        <item>50분</item>
-        <item>51분</item>
-        <item>52분</item>
-        <item>53분</item>
-        <item>54분</item>
-        <item>55분</item>
-        <item>56분</item>
-        <item>57분</item>
-        <item>58분</item>
-        <item>59분</item>
+        <item>00</item>
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+        <item>05</item>
+        <item>06</item>
+        <item>07</item>
+        <item>08</item>
+        <item>09</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
+        <item>32</item>
+        <item>33</item>
+        <item>34</item>
+        <item>35</item>
+        <item>36</item>
+        <item>37</item>
+        <item>38</item>
+        <item>39</item>
+        <item>40</item>
+        <item>41</item>
+        <item>42</item>
+        <item>43</item>
+        <item>44</item>
+        <item>45</item>
+        <item>46</item>
+        <item>47</item>
+        <item>48</item>
+        <item>49</item>
+        <item>50</item>
+        <item>51</item>
+        <item>52</item>
+        <item>53</item>
+        <item>54</item>
+        <item>55</item>
+        <item>56</item>
+        <item>57</item>
+        <item>58</item>
+        <item>59</item>
     </string-array>
 
     <string-array name="array_person">
@@ -136,5 +136,23 @@
         <item>3</item>
         <item>4</item>
         <item>5</item>
+    </string-array>
+
+    <string-array name="array_category">
+        <item>돈까스, 회, 일식</item>
+        <item>중식</item>
+        <item>치킨</item>
+        <item>백반, 죽, 국수</item>
+        <item>카페, 디저트</item>
+        <item>분식</item>
+        <item>찜, 탕, 찌개</item>
+        <item>피자</item>
+        <item>양식</item>
+        <item>고기, 구이</item>
+        <item>족발, 보쌈</item>
+        <item>아시안</item>
+        <item>패스트푸드</item>
+        <item>야식</item>
+        <item>도시락</item>
     </string-array>
 </resources>

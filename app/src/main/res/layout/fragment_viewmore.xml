@@ -86,7 +86,9 @@
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="10dp">
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp">
 
                     <Button
                         android:id="@+id/myInfoButton"
@@ -114,6 +116,42 @@
                         android:background="@drawable/square_button"
                         android:drawableTop="@drawable/image_button_changes"
                         android:text="계정관리" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp">
+
+                    <Button
+                        android:id="@+id/payButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/square_button"
+                        android:drawableTop="@drawable/image_button_paying"
+                        android:text="공구페이" />
+
+                    <Button
+                        android:id="@+id/userSearchButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/square_button"
+                        android:drawableTop="@drawable/image_button_usersearch"
+                        android:text="유저검색" />
+
+                    <Button
+                        android:id="@+id/friendslistButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/square_button"
+                        android:drawableTop="@drawable/image_button_friends"
+                        android:text="친구목록" />
+
                 </TableRow>
 
             </TableLayout>

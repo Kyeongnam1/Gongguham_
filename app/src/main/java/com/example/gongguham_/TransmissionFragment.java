@@ -1,54 +1,85 @@
 package com.example.gongguham_;
 
-import android.content.Intent;
+import static android.content.ContentValues.TAG;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.Toast;
+import android.widget.CheckBox;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
 public class TransmissionFragment extends Fragment {
     private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter adapter;
+    private CheckBox checkBox;
     private ApplicantAdapter applicantAdapter;
-    private ArrayList<Applicant> applicant;
+    private TextView text;
+    private ArrayList<Applicant> applicantList;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     @Nullable
     @Override
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_transmission, container, false);
-
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.RecyleApplicantList);
-        applicantAdapter = new ApplicantAdapter(getActivity(), applicant);
-        mRecyclerView.setAdapter(applicantAdapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        applicant = new ArrayList<>();
-
-//        Sample Data
-
-        applicant.add(new Applicant("테스트", "글쓴이","11111111111111","국민"));
-        applicant.add(new Applicant("테스트", "참여자","11111111111111","우리"));
-        applicant.add(new Applicant("테스트", "참여자","11111111111111","우리"));
-        applicant.add(new Applicant("테스트", "참여자","11111111111111","우리"));
-        applicant.add(new Applicant("테스트", "참여자","11111111111111","우리"));
+        String dbTitle = getActivity().getIntent().getStringExtra("dbTitle");
 
 
+        db.collection("posts").document(dbTitle)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                           @Override
+                                           public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                               if (task.isSuccessful()) {
+                                                   DocumentSnapshot document = task.getResult();
+                                                   if (document.exists()) {
+                                                       ArrayList<Applicant> applicants = new ArrayList<>();
+                                                       for (int i = 1; i <= Integer.parseInt(document.getData().get("curPerson").toString()); i++) {
+                                                           String t_name = "name" + Integer.toString(i);
+                                                           String t_account = "account" + Integer.toString(i);
+                                                           String t_accountValue = "accountValue" + Integer.toString(i);
+                                                           String name = document.getData().get(t_name).toString();
+                                                           String account = document.getData().get(t_account).toString();
+                                                           String accountValue = document.getData().get(t_accountValue).toString();
+                                                           String role;
+                                                           if (i == 1)
+                                                               role = "글쓴이";
+                                                           else
+                                                               role = "참여자";
+                                                           applicants.add(new Applicant(
+                                                                   name, role, account, accountValue));
+                                                       }
+                                                       mRecyclerView = (RecyclerView) rootView.findViewById(R.id.RecyleApplicantList);
+                                                       applicantAdapter = new ApplicantAdapter(getActivity(), applicants);
+                                                       mRecyclerView.setHasFixedSize(true); //리사이클러뷰의 크기가 변할 일이 없다는걸 알려주는 것
+                                                       mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                                                       applicantAdapter.setApplicantList(applicants);
+                                                       mRecyclerView.setAdapter(applicantAdapter);
+
+                                                   } else {
+                                                       Log.d(TAG, "No such document");
+                                                   }
+                                               } else {
+                                                   Log.d(TAG, "get failed with ", task.getException());
+                                               }
+                                           }
+                                       });
 
 
-        applicantAdapter.setApplicantList(applicant);
 
         return rootView;
     }
