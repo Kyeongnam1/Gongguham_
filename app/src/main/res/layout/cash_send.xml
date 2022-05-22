@@ -46,11 +46,11 @@
             android:id="@+id/cash_send_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="15dp"
             android:ems="15"
-            android:hint="충전 금액 입력"
+            android:hint="송금 금액 입력"
             android:inputType="number"
             android:textAlignment="center" />
 

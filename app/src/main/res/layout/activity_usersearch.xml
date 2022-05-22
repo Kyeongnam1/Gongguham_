@@ -35,6 +35,13 @@
             android:layout_weight="1"
             android:text="검색" />
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="10dp"
+        android:background="@color/gray_999999"></View>
+
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"

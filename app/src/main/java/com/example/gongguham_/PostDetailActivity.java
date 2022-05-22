@@ -59,6 +59,7 @@ public class PostDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_post_detail);
         final TextView titleTextView = findViewById(R.id.post_detail_title);
         final TextView emailTextView = findViewById(R.id.post_detail_email);
+        final TextView deliveryFeeTextView = findViewById(R.id.post_detail_delivery_fee);
         final TextView contentTextView = findViewById(R.id.post_detail_content);
         final TextView placeTextView = findViewById(R.id.post_detail_place);
         final TextView hourTextView = findViewById(R.id.post_detail_time_hour);
@@ -81,8 +82,11 @@ public class PostDetailActivity extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document != null) {
                         if (document.exists()) {
+                            int fee = Integer.parseInt(document.getData().get("deliveryFee").toString()) / Integer.parseInt(document.getData().get("curPerson").toString());
+
                             titleTextView.setText(document.getData().get("postTitle").toString());
                             emailTextView.setText(document.getData().get("postEmail").toString());
+                            deliveryFeeTextView.setText(Integer.toString(fee));
                             contentTextView.setText(document.getData().get("postContent").toString());
                             placeTextView.setText(document.getData().get("meetingArea").toString());
                             hourTextView.setText(document.getData().get("closeTime_hour").toString());
@@ -112,9 +116,20 @@ public class PostDetailActivity extends AppCompatActivity {
                             pTime = Integer.parseInt(pTime_Hour)*60+Integer.parseInt(pTime_minute);
                             if(sCurTime>=pTime)
                             {
-                                Intent intent = new Intent(PostDetailActivity.this, TransmissionActivity.class);
-                                intent.putExtra("dbTitle", titleTextView.getText().toString()+contentTextView.getText().toString()+placeTextView.getText().toString());
-                                startActivity(intent);
+                                if(user.getEmail().toString().equals(document.getData().get("postEmail").toString()))
+                                {
+                                    Intent intent = new Intent(PostDetailActivity.this, TransmissionActivity.class);
+                                    intent.putExtra("dbTitle", titleTextView.getText().toString()+contentTextView.getText().toString()+placeTextView.getText().toString());
+                                    startActivity(intent);
+                                }
+                                else
+                                {
+                                    Intent intent = new Intent(PostDetailActivity.this, TransmissionGuestActivity.class);
+                                    intent.putExtra("dbTitle", titleTextView.getText().toString()+contentTextView.getText().toString()+placeTextView.getText().toString());
+                                    startActivity(intent);
+                                }
+
+
                             }
                         }
 

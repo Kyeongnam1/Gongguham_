@@ -26,6 +26,7 @@
         <entry key="..\:/Users/hslee98/AndroidStudioProjects/Gongguham_/app/src/main/res/drawable/ic_baseline_keyboard_arrow_down_24.xml" value="0.3285" />
         <entry key="..\:/Users/hslee98/AndroidStudioProjects/Gongguham_/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1415" />
         <entry key="..\:/Users/hslee98/AndroidStudioProjects/Gongguham_/app/src/main/res/layout/activity_add_post_item.xml" value="0.1" />
+        <entry key="..\:/Users/hslee98/AndroidStudioProjects/Gongguham_/app/src/main/res/layout/activity_friends_list.xml" value="0.264" />
         <entry key="..\:/Users/hslee98/AndroidStudioProjects/Gongguham_/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/hslee98/AndroidStudioProjects/Gongguham_/app/src/main/res/layout/activity_post.xml" value="0.1" />
         <entry key="..\:/Users/hslee98/AndroidStudioProjects/Gongguham_/app/src/main/res/layout/activity_post_detail.xml" value="0.36614583333333334" />
@@ -34,6 +35,8 @@
         <entry key="..\:/Users/hslee98/AndroidStudioProjects/Gongguham_/app/src/main/res/layout/fragment_menu1.xml" value="0.1" />
         <entry key="..\:/Users/hslee98/AndroidStudioProjects/Gongguham_/app/src/main/res/layout/fragment_menu2.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/hslee98/AndroidStudioProjects/Gongguham_/app/src/main/res/layout/fragment_menu3.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/hslee98/AndroidStudioProjects/Gongguham_/app/src/main/res/layout/fragment_viewmore.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/hslee98/AndroidStudioProjects/Gongguham_/app/src/main/res/layout/friend_item.xml" value="0.2" />
         <entry key="..\:/Users/hslee98/AndroidStudioProjects/Gongguham_/app/src/main/res/layout/list_child.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/hslee98/AndroidStudioProjects/Gongguham_/app/src/main/res/layout/post_item.xml" value="0.264" />
         <entry key="..\:/Users/hslee98/AndroidStudioProjects/Gongguham_/app/src/main/res/layout/state_list_header.xml" value="0.36614583333333334" />
@@ -59,7 +62,7 @@
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/activity_password_change.xml" value="0.14583333333333334" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/activity_pay.xml" value="0.25769927536231885" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/activity_payinfo.xml" value="0.20697463768115942" />
-        <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/activity_post_detail.xml" value="0.18" />
+        <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/activity_post_detail.xml" value="0.25" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/activity_sign_up1.xml" value="0.3292572463768116" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/activity_state_select.xml" value="0.20697463768115942" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/activity_terms_agree.xml" value="0.25" />
@@ -67,6 +70,7 @@
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/activity_user.xml" value="0.20697463768115942" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/activity_usersearch.xml" value="0.20697463768115942" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/cash_charge.xml" value="0.20018115942028986" />
+        <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/cash_send.xml" value="0.20018115942028986" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/chat_password_check.xml" value="0.20697463768115942" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/chat_password_create.xml" value="0.20697463768115942" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/chat_password_roomdel.xml" value="0.20697463768115942" />
