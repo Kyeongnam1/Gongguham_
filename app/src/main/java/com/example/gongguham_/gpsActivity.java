@@ -125,7 +125,7 @@ public class gpsActivity extends AppCompatActivity
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startMainActivity();
 
             }
         });
@@ -553,7 +553,7 @@ public class gpsActivity extends AppCompatActivity
     private void addLocation(String markerTitle){
 
         String curLoc = markerTitle;
-        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        //String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
         if(markerTitle.length() > 0){
             user = FirebaseAuth.getInstance().getCurrentUser();
@@ -561,12 +561,12 @@ public class gpsActivity extends AppCompatActivity
 
             DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getEmail());
 
-            LocInfo locInfo = new LocInfo(curLoc, email);
+            LocInfo locInfo = new LocInfo(curLoc);
 
-            db.collection("locations").add(locInfo)
-                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            db.collection("locations").document(user.getEmail()).set(locInfo)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
-                        public void onSuccess(DocumentReference documentReference) {
+                        public void onSuccess(Void aVoid) {
                             Log.d("AddLoc Activity", "DocumentSnapShot" + documentReference);
                         }
 
@@ -582,4 +582,9 @@ public class gpsActivity extends AppCompatActivity
 
     }
 
+    private  void startMainActivity(){
+        Intent intent=new Intent(this,MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
 }

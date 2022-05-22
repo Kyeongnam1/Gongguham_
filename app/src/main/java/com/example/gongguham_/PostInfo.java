@@ -7,16 +7,16 @@ public class PostInfo {
     private String closeTime_hour;
     private String closeTime_minute;
     private String maxPerson;
-    private String userId;
+    private String userLocation;
 
-    public PostInfo(String postTitle, String postContent, String meetingArea, String closeTime_hour, String closeTime_minute, String maxPerson, String userId) {
+    public PostInfo(String postTitle, String postContent, String meetingArea, String closeTime_hour, String closeTime_minute, String maxPerson, String userLocation) {
         this.postTitle = postTitle;
         this.postContent = postContent;
         this.meetingArea = meetingArea;
         this.closeTime_hour = closeTime_hour;
         this.closeTime_minute = closeTime_minute;
         this.maxPerson = maxPerson;
-        this.userId = userId;
+        this.userLocation = userLocation;
     }
 
     public String getPostTitle() {
@@ -65,12 +65,12 @@ public class PostInfo {
         this.maxPerson = maxPerson;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getUserLocation() {
+        return userLocation;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUserLocation(String userLocation) {
+        this.userLocation = userLocation;
     }
 
 }

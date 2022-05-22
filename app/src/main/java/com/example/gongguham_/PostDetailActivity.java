@@ -24,18 +24,7 @@ public class PostDetailActivity extends AppCompatActivity {
 
 
 
-        Intent intent = getIntent();
 
-        PostItem postItem = intent.getParcelableExtra("post_indx");
-        StringBuffer sb = new StringBuffer();
-
-        sb.append("글 제목: " + postItem.getPostTitle() + "\n");
-        sb.append("만남 장소: "+postItem.getMeetingArea() + "\n");
-        sb.append("마감 시간: " + postItem.getCloseTime() + "\n");
-        sb.append("최대 인원: " + postItem.getMaxPerson() + "\n");
-        sb.append("글 인덱스 번호: " + postItem.getPostIdx() + "\n");
-
-        postDetail.setText(sb);
         tmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
