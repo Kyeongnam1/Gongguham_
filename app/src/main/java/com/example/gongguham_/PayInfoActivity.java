@@ -185,7 +185,7 @@ public class PayInfoActivity extends AppCompatActivity {
                                     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
                                     PayInfo payInfo = new PayInfo(plus);
-                                    HistoryInfo historyInfo = new HistoryInfo(user.getEmail(), amount_I, 0, plus, time);
+                                    HistoryInfo historyInfo = new HistoryInfo(user.getEmail(), amount_I, 0, plus, "공구함", time);
 
                                     if (user != null) {
                                         db.collection("users").document(user.getEmail()).set(payInfo, SetOptions.merge())
@@ -268,7 +268,7 @@ public class PayInfoActivity extends AppCompatActivity {
                                         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
                                         PayInfo payInfo = new PayInfo(minus);
-                                        HistoryInfo historyInfo = new HistoryInfo(user.getEmail(), 0, amount_I, minus, time);
+                                        HistoryInfo historyInfo = new HistoryInfo(user.getEmail(), 0, amount_I, minus, "공구함", time);
 
                                         if (user != null) {
                                             db.collection("users").document(user.getEmail()).set(payInfo, SetOptions.merge())
@@ -359,7 +359,7 @@ public class PayInfoActivity extends AppCompatActivity {
 
                                         PayInfo payInfo1 = new PayInfo(minus);
 
-                                        SenderHistoryInfo senderHistoryInfo = new SenderHistoryInfo(user.getEmail(),0, amount_I, minus, email, time);
+                                        HistoryInfo historyInfoS = new HistoryInfo(user.getEmail(), 0, amount_I, minus, email, time);
 
                                         if (user != null) {
                                             db.collection("users").document(user.getEmail()).set(payInfo1, SetOptions.merge())
@@ -387,7 +387,7 @@ public class PayInfoActivity extends AppCompatActivity {
                                                                 int plus = pointTo + amount_I;
                                                                 String collection2 = email + "history";
 
-                                                                RecipientHistoryInfo recipientHistoryInfo = new RecipientHistoryInfo(email, amount_I, 0, plus, user.getEmail(), time);
+                                                                HistoryInfo historyInfoR = new HistoryInfo(email, amount_I, 0, plus, user.getEmail(), time);
                                                                 PayInfo payInfo2 = new PayInfo(plus);
 
                                                                 db.collection("users").document(email).set(payInfo2, SetOptions.merge())
@@ -402,7 +402,7 @@ public class PayInfoActivity extends AppCompatActivity {
                                                                             }
                                                                         });
 
-                                                                db.collection(collection2).document(time).set(recipientHistoryInfo)
+                                                                db.collection(collection2).document(time).set(historyInfoR)
                                                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                             @Override
                                                                             public void onSuccess(Void aVoid) {
@@ -419,7 +419,7 @@ public class PayInfoActivity extends AppCompatActivity {
                                                 }
                                             });
 
-                                            db.collection(collection).document(time).set(senderHistoryInfo)
+                                            db.collection(collection).document(time).set(historyInfoS)
                                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                         @Override
                                                         public void onSuccess(Void aVoid) {

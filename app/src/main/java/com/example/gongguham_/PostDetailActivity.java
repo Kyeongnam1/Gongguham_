@@ -253,7 +253,6 @@ public class PostDetailActivity extends AppCompatActivity {
                 return true;
             }
             else{
-                Toast.makeText(PostDetailActivity.this,temp+user.getEmail().toString(),Toast.LENGTH_SHORT).show();
                 continue;
             }
 
