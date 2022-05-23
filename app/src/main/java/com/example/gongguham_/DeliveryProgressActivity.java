@@ -16,9 +16,16 @@ public class DeliveryProgressActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        String dbTitle=intent.getStringExtra("dbTitle");
         setContentView(R.layout.activity_delivery_progress);
+        Bundle bundle = new Bundle(1);
+        bundle.putString("dbTitle",dbTitle);
+        hostFragment.setArguments(bundle);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.progress_layout, hostFragment).commitAllowingStateLoss();
+
+
 
 
     }

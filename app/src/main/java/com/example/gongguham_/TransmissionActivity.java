@@ -29,6 +29,7 @@ public class TransmissionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(TransmissionActivity.this, DeliveryProgressActivity.class);
+                intent.putExtra("dbTitle", dbTitle);
                 startActivity(intent);
             }
         });

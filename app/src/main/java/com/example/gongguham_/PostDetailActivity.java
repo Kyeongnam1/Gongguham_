@@ -46,6 +46,7 @@ public class PostDetailActivity extends AppCompatActivity {
     int curPerson;
     UserInfo userInfo;
     String user_Name;
+    String doc;
 
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -168,6 +169,8 @@ public class PostDetailActivity extends AppCompatActivity {
             }
         });
 
+        doc = titleTextView.getText().toString()+contentTextView.getText().toString()+placeTextView.getText().toString();
+
 
         //신청하기 버튼 클릭시
         tmBtn.setOnClickListener(new View.OnClickListener() {
@@ -182,7 +185,7 @@ public class PostDetailActivity extends AppCompatActivity {
 
                 if(curPerson<=Integer.parseInt(maxPersonTextView.getText().toString()))
                 {
-                    db.collection("posts").document(titleTextView.getText().toString()+contentTextView.getText().toString()+placeTextView.getText().toString())
+                    db.collection("posts").document(doc)
                             .update(email, user.getEmail(),account,userInfo.getAccount(),accountValue, userInfo.getAccountValue(),"curPerson",userInfo.getCurPerson(), userInfo.getName(), curPerson)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override

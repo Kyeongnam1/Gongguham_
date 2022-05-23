@@ -44,13 +44,17 @@ public class HostFragment extends Fragment {
         pstate2.setTextColor(Color.parseColor("#000000"));
         pstate3.setTextColor(Color.parseColor("#D3D3D3"));
 
+        String dbTitle = getArguments().getString("dbTitle");
+
 
         finish_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(view.getContext(),"이용해주셔서 감사합니다.", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(),ReviewActivity.class);
+                intent.putExtra("dbTitle", dbTitle);
+                getActivity().startActivity(intent);
 
-                getActivity().startActivity(new Intent(getActivity(), MainActivity.class));
             }
         });
 
