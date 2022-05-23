@@ -69,6 +69,7 @@
         <activity android:name=".TermsDetail"></activity>
         <activity android:name=".PayInfoActivity"></activity>
         <activity android:name=".userSearchActivity"></activity>
+        <activity android:name=".FriendsListActivity"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
