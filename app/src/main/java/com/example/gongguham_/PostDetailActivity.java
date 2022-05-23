@@ -43,6 +43,7 @@ public class PostDetailActivity extends AppCompatActivity {
     String accountValue;
     String account;
     String username;
+    String doc;
     int curPerson;
     UserInfo userInfo;
     String user_Name;
@@ -182,7 +183,8 @@ public class PostDetailActivity extends AppCompatActivity {
 
                 if(curPerson<=Integer.parseInt(maxPersonTextView.getText().toString()))
                 {
-                    db.collection("posts").document(titleTextView.getText().toString()+contentTextView.getText().toString()+placeTextView.getText().toString())
+                    doc = titleTextView.getText().toString()+contentTextView.getText().toString()+placeTextView.getText().toString();
+                    db.collection("posts").document(doc)
                             .update(email, user.getEmail(),account,userInfo.getAccount(),accountValue, userInfo.getAccountValue(),"curPerson",userInfo.getCurPerson(), userInfo.getName(), curPerson)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
