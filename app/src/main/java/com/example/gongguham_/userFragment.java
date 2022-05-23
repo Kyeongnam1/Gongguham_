@@ -69,6 +69,8 @@ public class userFragment extends Fragment {
 
         TextView userEmailTextView = view.findViewById(R.id.userEmail);
         TextView userNameTextView = view.findViewById(R.id.userName);
+        TextView userRateTextView = view.findViewById(R.id.userRate);
+
         btn = (Button) view.findViewById(R.id.addFriends);
 
         DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(email);
@@ -83,6 +85,8 @@ public class userFragment extends Fragment {
                             f_name = document.getData().get("name").toString();
                             userEmailTextView.setText(email);
                             userNameTextView.setText(document.getData().get("name").toString());
+                            userRateTextView.setText(document.getData().get("reviewAvScore").toString());
+
 
 
                         } else {

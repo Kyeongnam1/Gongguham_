@@ -37,6 +37,13 @@ public class ReviewActivity extends AppCompatActivity {
 
     Button btn;
 
+    @Override public void onBackPressed() {
+        super.onBackPressed();
+        moveTaskToBack(true);
+        Intent intent=new Intent(this,MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +55,8 @@ public class ReviewActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         });
@@ -67,8 +75,13 @@ public class ReviewActivity extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if(document != null){
                         if(document.exists()){
-                            for(int i=2; i<=Integer.parseInt(document.getData().get("curPerson").toString()); i++){
-                                userName.add(new ReviewUserName(document.getData().get("email"+i).toString()));
+                            for(int i=1; i<=Integer.parseInt(document.getData().get("curPerson").toString()); i++){
+                                if(userEmail.equals(document.getData().get("email"+i).toString())){
+                                    continue;
+                                }else{
+                                    userName.add(new ReviewUserName(document.getData().get("email"+i).toString()));
+                                }
+
                             }
 
                             recyclerView = (RecyclerView) findViewById(R.id.recycler_review_list);
@@ -82,4 +95,5 @@ public class ReviewActivity extends AppCompatActivity {
             }
         });
     }
+
 }

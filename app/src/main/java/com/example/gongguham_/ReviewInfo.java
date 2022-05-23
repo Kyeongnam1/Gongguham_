@@ -2,41 +2,27 @@
 package com.example.gongguham_;
 
 public class ReviewInfo {
-    private int ReviewTotalScore;
-    private int ReviewAvScore;
-    private int ReviewNumber;
+    private String email;
+    private int score;
 
-
-    ReviewInfo(int ReviewTotalScore, int ReviewAvScore, int ReviewNumber) {
-        this.ReviewTotalScore = ReviewTotalScore;
-        this.ReviewAvScore = ReviewAvScore;
-        this.ReviewNumber = ReviewNumber;
-
+    ReviewInfo(String email, int score) {
+        this.email = email;
+        this.score = score;
     }
 
-
-
-    public int getReviewNumber() {
-        return ReviewNumber;
+    public int getScore() {
+        return score;
     }
 
-    public void setReviewNumber(int reviewNumber) {
-        ReviewNumber = reviewNumber;
+    public void setScore(int score) {
+        this.score = score;
     }
 
-    public int getReviewAvScore() {
-        return ReviewAvScore;
+    public String getEmail() {
+        return email;
     }
 
-    public void setReviewAvScore(int reviewAvScore) {
-        ReviewAvScore = reviewAvScore;
-    }
-
-    public int getReviewTotalScore() {
-        return ReviewTotalScore;
-    }
-
-    public void setReviewTotalScore(int reviewTotalScore) {
-        ReviewTotalScore = reviewTotalScore;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
