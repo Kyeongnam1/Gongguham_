@@ -66,6 +66,7 @@ public class PayInfoActivity extends AppCompatActivity {
         findViewById(R.id.chargeButton).setOnClickListener(onClickListener);
         findViewById(R.id.sendButton).setOnClickListener(onClickListener);
         findViewById(R.id.refundButton).setOnClickListener(onClickListener);
+        findViewById(R.id.historyButton).setOnClickListener(onClickListener);
 
         DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getEmail());
         documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -107,9 +108,18 @@ public class PayInfoActivity extends AppCompatActivity {
                 case R.id.refundButton:
                     cashReturn();
                     break;
+                case R.id.historyButton:
+                    cashHistory();
+                    break;
             }
         }
     };
+
+    private void cashHistory(){
+        Intent intent = new Intent(getApplicationContext(), CashHistory.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
 
     private void accountUpdate() {
         EditText accountC = (EditText) findViewById(R.id.changeAccountEditText);
