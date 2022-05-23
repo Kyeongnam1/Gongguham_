@@ -197,7 +197,7 @@ public class AddPostItem extends AppCompatActivity {
                             String accountValue1 = "accountValue"+Integer.toString(curPerson);
                             UserInfo userInfo = new UserInfo(name, accountValue, account, curPerson);
                             db.collection("posts").document(postInfo.getPostTitle()+postInfo.getPostContent()+postInfo.getMeetingArea())
-                                    .update(name1, userInfo.getName(),account1,userInfo.getAccount(),accountValue1, userInfo.getAccountValue(),"curPerson",userInfo.getCurPerson(),"curSituation", "모집중", "chatPass", post_chatPassword.getText().toString())
+                                    .update("email1", user.getEmail(),account1,userInfo.getAccount(),accountValue1, userInfo.getAccountValue(),"curPerson",userInfo.getCurPerson(),"curSituation", "모집중", "chatPass", post_chatPassword.getText().toString())
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
