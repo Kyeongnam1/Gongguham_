@@ -41,6 +41,14 @@
             android:gravity="center"
             android:textAlignment="center" />
 
+        <EditText
+            android:id="@+id/commentEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="리뷰를 남겨주세요."/>
+
     </LinearLayout>
 
     <Button

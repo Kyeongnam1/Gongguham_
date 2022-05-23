@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +33,7 @@ public class RatingActivity extends AppCompatActivity {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference mDatabase;
+    EditText commentE;
     double totalScore;
     double averageScore;
     double number;
@@ -62,7 +64,11 @@ public class RatingActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 int rate = Integer.parseInt(rateS.getSelectedItem().toString());
-                ReviewInfo reviewInfo = new ReviewInfo(user.getEmail(), rate);
+
+                commentE = (EditText) findViewById(R.id.commentEditText);
+                String comment = commentE.getText().toString();
+
+                ReviewInfo reviewInfo = new ReviewInfo(user.getEmail(), rate, comment);
 
                 if (user != null) {
                     Calendar calendar= Calendar.getInstance(); //현재 시간을 가지고 있는 객체
