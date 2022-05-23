@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
@@ -44,6 +45,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private static String userEmail;
     private DocumentReference mDatabase;
+    private DocumentReference pDatabase;
     private String curUserLocation;
 
     //    RecyclerView 생성
@@ -53,6 +55,8 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     private AppCompatButton btn_add;
     private AppCompatButton btn_state;
     private Spinner sort_spinner;
+
+    TextView textView;
 
     String[] sort_by = {"돈까스, 회, 일식", "중식", "치킨", "백반, 죽, 국수", "카페, 디저트", "분식", "찜, 탕, 찌개", "피자", "양식", "고기, 구이", "족발, 보쌈", "아시안", "패스트푸드", "야식", "도시락"};
 
@@ -79,6 +83,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_home, container, false);
         viewGroup = rootView;
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
 
         swipeRefreshLayout =rootView.findViewById(R.id.swipe_layout);
         Log.i("layout check", String.valueOf(swipeRefreshLayout));
@@ -117,18 +122,69 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             }
         });
         //        Spinner 생성
+        pDatabase = db.collection("posts").document(user.getEmail());
+
+
         sort_spinner = (Spinner) rootView.findViewById(R.id.sort_spinner);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item,sort_by);
         sort_spinner.setAdapter(arrayAdapter);
         sort_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.i("spinner Event", "선택됨");
+                String selectedOption = sort_spinner.getSelectedItem().toString();
+                db.collection("posts")
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if(task.isSuccessful()){
+                                    ArrayList<PostInfo> postInfo = new ArrayList<>();
+
+                                    if(curUserLocation != null){
+                                        for(QueryDocumentSnapshot document : task.getResult()) {
+                                            Log.e(TAG, "테스트: " + document.getData().get("userLocation").toString());
+                                            Log.e(TAG, "테스트: " + document.getData().get("postCategory").toString());
+                                            if(curUserLocation.equals(slicingLocation(document.getData().get("userLocation").toString()))) {
+                                                if(selectedOption.equals(document.getData().get("postCategory").toString())) {
+                                                    String hour = document.getData().get("closeTime_hour").toString();
+                                                    String minute = document.getData().get("closeTime_minute").toString();
+                                                    String time = hour + minute;
+
+                                                    postInfo.add(new PostInfo(
+                                                            document.getData().get("postTitle").toString(),
+                                                            document.getData().get("postCategory").toString(),
+                                                            document.getData().get("postContent").toString(),
+                                                            document.getData().get("meetingArea").toString(),
+                                                            document.getData().get("closeTime_hour").toString(),
+                                                            //document.getData().get("closeTime_minute").toString(),
+                                                            time,
+                                                            Integer.parseInt(document.getData().get("maxPerson").toString()),
+                                                            Integer.parseInt(document.getData().get("deliveryFee").toString()),
+                                                            document.getData().get("userLocation").toString(),
+                                                            document.getData().get("chatTitle").toString(),
+                                                            document.getData().get("postEmail").toString(),
+                                                            Integer.parseInt(document.getData().get("curPerson").toString())
+                                                    ));
+                                                }
+                                            }
+                                        }
+                                    }
+                                    mRecyclerView = (RecyclerView) rootView.findViewById(R.id.RecyclePostList);
+                                    postAdaptor = new PostAdaptor(getActivity(), postInfo);
+                                    mRecyclerView.setHasFixedSize(true);
+                                    mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                                    postAdaptor.setPostlist(postInfo);
+                                    mRecyclerView.setAdapter(postAdaptor);
+                                }else{
+                                    Log.e("Error", "task Error!");
+                                }
+                            }
+                        });
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
+                textView.setText("음식 종류");
             }
         });
 
@@ -160,53 +216,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
         });
 
-        db.collection("posts")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
-                            ArrayList<PostInfo> postInfo = new ArrayList<>();
 
-                            if(curUserLocation != null){
-                                for(QueryDocumentSnapshot document : task.getResult()) {
-                                    Log.e(TAG, "테스트: " + document.getData().get("userLocation").toString());
-
-                                    if(curUserLocation.equals(slicingLocation(document.getData().get("userLocation").toString()))) {
-
-                                        String hour = document.getData().get("closeTime_hour").toString();
-                                        String minute = document.getData().get("closeTime_minute").toString();
-                                        String time = hour + minute;
-
-                                        postInfo.add(new PostInfo(
-                                                document.getData().get("postTitle").toString(),
-                                                document.getData().get("postCategory").toString(),
-                                                document.getData().get("postContent").toString(),
-                                                document.getData().get("meetingArea").toString(),
-                                                document.getData().get("closeTime_hour").toString(),
-                                                //document.getData().get("closeTime_minute").toString(),
-                                                time,
-                                                Integer.parseInt(document.getData().get("maxPerson").toString()),
-                                                Integer.parseInt(document.getData().get("deliveryFee").toString()),
-                                                document.getData().get("userLocation").toString(),
-                                                document.getData().get("chatTitle").toString(),
-                                                document.getData().get("postEmail").toString(),
-                                                Integer.parseInt(document.getData().get("curPerson").toString())
-                                        ));
-                                    }
-                                }
-                            }
-                            mRecyclerView = (RecyclerView) rootView.findViewById(R.id.RecyclePostList);
-                            postAdaptor = new PostAdaptor(getActivity(), postInfo);
-                            mRecyclerView.setHasFixedSize(true);
-                            mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                            postAdaptor.setPostlist(postInfo);
-                            mRecyclerView.setAdapter(postAdaptor);
-                        }else{
-                            Log.e("Error", "task Error!");
-                        }
-                    }
-                });
 
         return rootView;
     }
