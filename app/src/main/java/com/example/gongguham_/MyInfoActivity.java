@@ -41,7 +41,6 @@ public class MyInfoActivity extends AppCompatActivity {
         final TextView accountTextView = findViewById(R.id.accountText);
         final TextView emailTextView = findViewById(R.id.emailText);
         final TextView birthDayTextView = findViewById(R.id.birthdayText);
-        final TextView addressTextView = findViewById(R.id.addressText);
 
         DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getEmail());
         documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -61,7 +60,6 @@ public class MyInfoActivity extends AppCompatActivity {
                             accountTextView.setText(document.getData().get("account").toString());
                             emailTextView.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
                             birthDayTextView.setText(document.getData().get("birthday").toString());
-                            addressTextView.setText(document.getData().get("address").toString());
                         } else {
                             Log.e(TAG, "No such document");
                         }

@@ -9,17 +9,15 @@ public class MemberInfo {
     private String accountValue;
     private String account;
     private String birthday;
-    private String address;
     private int point;
 
-    MemberInfo(String name, String phoneNumber, String gender,String accountValue, String account, String birthday, String address, int point){
+    MemberInfo(String name, String phoneNumber, String gender,String accountValue, String account, String birthday, int point){
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.gender = gender;
         this.accountValue = accountValue;
         this.account = account;
         this.birthday = birthday;
-        this.address = address;
         this.point = point;
     }
 
@@ -63,13 +61,6 @@ public class MemberInfo {
     }
     public void setBirthday(String birthday){
         this.birthday = birthday;
-    }
-
-    public String getAddress(){
-        return this.address;
-    }
-    public void setAddress(String address){
-        this.address = address;
     }
 
     public int getPoint(){ return this.point;}
