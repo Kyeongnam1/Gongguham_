@@ -185,7 +185,7 @@ public class PayInfoActivity extends AppCompatActivity {
                                     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
                                     PayInfo payInfo = new PayInfo(plus);
-                                    HistoryInfo historyInfo = new HistoryInfo(user.getEmail(), amount_I, 0, plus);
+                                    HistoryInfo historyInfo = new HistoryInfo(user.getEmail(), amount_I, 0, plus, time);
 
                                     if (user != null) {
                                         db.collection("users").document(user.getEmail()).set(payInfo, SetOptions.merge())
@@ -268,7 +268,7 @@ public class PayInfoActivity extends AppCompatActivity {
                                         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
                                         PayInfo payInfo = new PayInfo(minus);
-                                        HistoryInfo historyInfo = new HistoryInfo(user.getEmail(), 0, amount_I, minus);
+                                        HistoryInfo historyInfo = new HistoryInfo(user.getEmail(), 0, amount_I, minus, time);
 
                                         if (user != null) {
                                             db.collection("users").document(user.getEmail()).set(payInfo, SetOptions.merge())
@@ -359,7 +359,7 @@ public class PayInfoActivity extends AppCompatActivity {
 
                                         PayInfo payInfo1 = new PayInfo(minus);
 
-                                        SenderHistoryInfo senderHistoryInfo = new SenderHistoryInfo(user.getEmail(),0, amount_I, minus, email);
+                                        SenderHistoryInfo senderHistoryInfo = new SenderHistoryInfo(user.getEmail(),0, amount_I, minus, email, time);
 
                                         if (user != null) {
                                             db.collection("users").document(user.getEmail()).set(payInfo1, SetOptions.merge())
@@ -387,7 +387,7 @@ public class PayInfoActivity extends AppCompatActivity {
                                                                 int plus = pointTo + amount_I;
                                                                 String collection2 = email + "history";
 
-                                                                RecipientHistoryInfo recipientHistoryInfo = new RecipientHistoryInfo(email, amount_I, 0, plus, user.getEmail());
+                                                                RecipientHistoryInfo recipientHistoryInfo = new RecipientHistoryInfo(email, amount_I, 0, plus, user.getEmail(), time);
                                                                 PayInfo payInfo2 = new PayInfo(plus);
 
                                                                 db.collection("users").document(email).set(payInfo2, SetOptions.merge())

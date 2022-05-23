@@ -6,14 +6,19 @@ public class SenderHistoryInfo {
     private int minus_point;
     private int current_point;
     private String Recipient;
+    private String time;
 
-    SenderHistoryInfo(String email, int plus_point, int minus_point, int current_point, String Recipient) {
+    SenderHistoryInfo(String email, int plus_point, int minus_point, int current_point, String Recipient, String time) {
         this.email = email;
         this.plus_point = plus_point;
         this.minus_point = minus_point;
         this.current_point = current_point;
         this.Recipient = Recipient;
+        this.time = time;
     }
+
+    public String getTime(){ return this.time; }
+    public void setTime(String time){ this.time = time; }
 
     public String getRecipient(){ return this.Recipient; }
     public void setRecipient(String Recipient){ this.Recipient = Recipient; }
