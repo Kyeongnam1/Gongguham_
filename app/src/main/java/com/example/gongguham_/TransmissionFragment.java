@@ -1,46 +1,27 @@
 package com.example.gongguham_;
 
-import android.content.Intent;
+import static android.content.ContentValues.TAG;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class TransmissionFragment extends Fragment {
     private RecyclerView mRecyclerView;
@@ -55,42 +36,48 @@ public class TransmissionFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_transmission, container, false);
+        String dbTitle = getActivity().getIntent().getStringExtra("dbTitle");
 
-        db.collection("temp")
+
+        db.collection("posts").document(dbTitle)
                 .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
-                            ArrayList<Applicant> applicants = new ArrayList<>();
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                           @Override
+                                           public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                               if (task.isSuccessful()) {
+                                                   DocumentSnapshot document = task.getResult();
+                                                   if (document.exists()) {
+                                                       ArrayList<Applicant> applicants = new ArrayList<>();
+                                                       for (int i = 1; i <= Integer.parseInt(document.getData().get("curPerson").toString()); i++) {
+                                                           String t_name = "name" + Integer.toString(i);
+                                                           String t_account = "account" + Integer.toString(i);
+                                                           String t_accountValue = "accountValue" + Integer.toString(i);
+                                                           String name = document.getData().get(t_name).toString();
+                                                           String account = document.getData().get(t_account).toString();
+                                                           String accountValue = document.getData().get(t_accountValue).toString();
+                                                           String role;
+                                                           if (i == 1)
+                                                               role = "글쓴이";
+                                                           else
+                                                               role = "참여자";
+                                                           applicants.add(new Applicant(
+                                                                   name, role, account, accountValue));
+                                                       }
+                                                       mRecyclerView = (RecyclerView) rootView.findViewById(R.id.RecyleApplicantList);
+                                                       applicantAdapter = new ApplicantAdapter(getActivity(), applicants);
+                                                       mRecyclerView.setHasFixedSize(true); //리사이클러뷰의 크기가 변할 일이 없다는걸 알려주는 것
+                                                       mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                                                       applicantAdapter.setApplicantList(applicants);
+                                                       mRecyclerView.setAdapter(applicantAdapter);
 
-                            for(QueryDocumentSnapshot document : task.getResult()) {
-
-                                String name = document.getData().get("name").toString();
-                                String role;
-                                String account = document.getData().get("account").toString();
-                                String accountValue = document.getData().get("accountValue").toString();
-                                if(document.getData().get("role").equals(true))
-                                    role = "글쓴이";
-                                else
-                                    role = "참여자";
-                                applicants.add(new Applicant(
-                                        name,role,account,accountValue));
-                            }
-
-                            mRecyclerView = (RecyclerView) rootView.findViewById(R.id.RecyleApplicantList);
-                            applicantAdapter = new ApplicantAdapter(getActivity(), applicants);
-                            mRecyclerView.setHasFixedSize(true); //리사이클러뷰의 크기가 변할 일이 없다는걸 알려주는 것
-                            mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                            applicantAdapter.setApplicantList(applicants);
-                            mRecyclerView.setAdapter(applicantAdapter);
-
-                        }else{
-                            Log.e("Error", "task Error!");
-                        }
-                    }
-                });
-
+                                                   } else {
+                                                       Log.d(TAG, "No such document");
+                                                   }
+                                               } else {
+                                                   Log.d(TAG, "get failed with ", task.getException());
+                                               }
+                                           }
+                                       });
 
 
 

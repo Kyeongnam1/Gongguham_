@@ -3,19 +3,17 @@
     package="com.example.gongguham_">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
     <application
+
         android:allowBackup="true"
         android:icon="@mipmap/ic_icon"
         android:label="공구함"
         android:roundIcon="@mipmap/ic_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Gongguham_">
-        <activity
-            android:name=".FriendsListActivity"
-            android:exported="false" />
+
         <activity
             android:name=".StateSelectActivity"
             android:exported="false" />
@@ -25,12 +23,13 @@
         <activity
             android:name=".AddPostItem"
             android:exported="false" />
-        <activity
-            android:name=".TransmissionActivity"
-            android:exported="false" />
-        <activity
-            android:name=".DeliveryProgressActivity"
-            android:exported="false" />
+        <activity android:name=".TransmissionActivity"
+            android:exported="false"/>
+        <activity android:name=".TransmissionGuestActivity"
+            android:exported="false"/>
+        <activity android:name=".DeliveryProgressActivity"
+            android:exported="false"/>
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -46,32 +45,38 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="google.com"
-                    android:scheme="http" />
+                    android:scheme="http"
+                    android:host="google.com" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".gpsActivity"
-            android:requestLegacyExternalStorage="true"></activity>
-        <activity android:name=".SignUpActivity"></activity>
-        <activity android:name=".loginActivity"></activity>
-        <activity android:name=".passwordResetActivity"></activity>
-        <activity android:name=".memberInitActivity"></activity>
-        <activity android:name=".ChatChattingActivity"></activity>
-        <activity android:name=".PhoneAuthenticationActivity" />
-        <activity android:name=".TermsAgreeActivity"></activity>
-        <activity android:name=".MyInfoActivity" />
-        <activity
-            android:name=".passwordChangeActivity"
-            android:usesCleartextTraffic="true" />
-        <activity android:name=".PayActivity" />
-        <activity android:name=".TermsDetail" />
-        <activity android:name=".PayInfoActivity" />
-        <activity android:name=".userSearchActivity" />
+        <activity android:name=".gpsActivity"
+            android:requestLegacyExternalStorage="true">
+        </activity>
+        <activity android:name=".SignUpActivity">
+        </activity>
+        <activity android:name=".loginActivity">
+        </activity>
+        <activity android:name=".passwordResetActivity">
+        </activity>
+        <activity android:name=".memberInitActivity">
+        </activity>
+        <activity android:name=".ChatChattingActivity">
+        </activity>
+        <activity android:name=".PhoneAuthenticationActivity"/>
+        <activity android:name=".TermsAgreeActivity">
+        </activity>
+        <activity android:name=".MyInfoActivity"/>
+        <activity android:name=".passwordChangeActivity" android:usesCleartextTraffic="true"/>
+        <activity android:name=".PayActivity"/>
+        <activity android:name=".TermsDetail"></activity>
+        <activity android:name=".PayInfoActivity"></activity>
+        <activity android:name=".userSearchActivity"></activity>
+        <activity android:name=".FriendsListActivity"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDMqKQdI0GUOKdm6qSk2NkXf1hBhRsB6Fc" />
+            android:value="AIzaSyDMqKQdI0GUOKdm6qSk2NkXf1hBhRsB6Fc"/>
     </application>
+
 
 </manifest>
