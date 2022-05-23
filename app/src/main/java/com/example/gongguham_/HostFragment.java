@@ -43,10 +43,13 @@ public class HostFragment extends Fragment {
         pstate1.setTextColor(Color.parseColor("#D3D3D3"));
         pstate2.setTextColor(Color.parseColor("#000000"));
         pstate3.setTextColor(Color.parseColor("#D3D3D3"));
+
+
         finish_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(view.getContext(),"이용해주셔서 감사합니다.", Toast.LENGTH_SHORT).show();
+
                 getActivity().startActivity(new Intent(getActivity(), MainActivity.class));
             }
         });

@@ -10,8 +10,11 @@ public class MemberInfo {
     private String account;
     private String birthday;
     private int point;
+    private int ReviewTotalScore;
+    private int ReviewAvScore;
+    private int ReviewNumber;
 
-    MemberInfo(String name, String phoneNumber, String gender,String accountValue, String account, String birthday, int point){
+    MemberInfo(String name, String phoneNumber, String gender,String accountValue, String account, String birthday, int point, int ReviewTotalScore, int ReviewAvScore, int ReviewNumber){
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.gender = gender;
@@ -19,6 +22,33 @@ public class MemberInfo {
         this.account = account;
         this.birthday = birthday;
         this.point = point;
+        this.ReviewTotalScore = ReviewTotalScore;
+        this.ReviewAvScore = ReviewAvScore;
+        this.ReviewNumber = ReviewNumber;
+    }
+
+    public int getReviewNumber() {
+        return ReviewNumber;
+    }
+
+    public void setReviewNumber(int reviewNumber) {
+        ReviewNumber = reviewNumber;
+    }
+
+    public int getReviewAvScore() {
+        return ReviewAvScore;
+    }
+
+    public void setReviewAvScore(int reviewAvScore) {
+        ReviewAvScore = reviewAvScore;
+    }
+
+    public int getReviewTotalScore() {
+        return ReviewTotalScore;
+    }
+
+    public void setReviewTotalScore(int reviewTotalScore) {
+        ReviewTotalScore = reviewTotalScore;
     }
 
     public String getName(){
