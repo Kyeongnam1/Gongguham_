@@ -6,11 +6,15 @@ public class ReviewInfo {
     private int ReviewAvScore;
     private int ReviewNumber;
 
+
     ReviewInfo(int ReviewTotalScore, int ReviewAvScore, int ReviewNumber) {
         this.ReviewTotalScore = ReviewTotalScore;
         this.ReviewAvScore = ReviewAvScore;
         this.ReviewNumber = ReviewNumber;
+
     }
+
+
 
     public int getReviewNumber() {
         return ReviewNumber;

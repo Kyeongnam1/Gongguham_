@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Gongguham_">
         <activity
+            android:name=".ReviewActivity"
+            android:exported="false" />
+        <activity
             android:name=".CashHistory"
             android:exported="false" />
         <activity
@@ -55,14 +58,14 @@
         </activity>
         <activity
             android:name=".gpsActivity"
-            android:requestLegacyExternalStorage="true"></activity>
-        <activity android:name=".SignUpActivity"></activity>
-        <activity android:name=".loginActivity"></activity>
-        <activity android:name=".passwordResetActivity"></activity>
-        <activity android:name=".memberInitActivity"></activity>
-        <activity android:name=".ChatChattingActivity"></activity>
+            android:requestLegacyExternalStorage="true" />
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".loginActivity" />
+        <activity android:name=".passwordResetActivity" />
+        <activity android:name=".memberInitActivity" />
+        <activity android:name=".ChatChattingActivity" />
         <activity android:name=".PhoneAuthenticationActivity" />
-        <activity android:name=".TermsAgreeActivity"></activity>
+        <activity android:name=".TermsAgreeActivity" />
         <activity android:name=".MyInfoActivity" />
         <activity
             android:name=".passwordChangeActivity"
