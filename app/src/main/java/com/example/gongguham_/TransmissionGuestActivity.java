@@ -70,7 +70,7 @@ public class TransmissionGuestActivity extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()){
                         positionText.setText("글쓴이");
-                        nameText.setText(document.getData().get("name1").toString());
+                        nameText.setText(document.getData().get("email1").toString());
                         bankText.setText(document.getData().get("accountValue1").toString());
                         accountNumberText.setText(document.getData().get("account1").toString());
                         emailText.setText(document.getData().get("postEmail").toString());

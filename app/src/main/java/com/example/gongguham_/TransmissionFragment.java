@@ -49,10 +49,10 @@ public class TransmissionFragment extends Fragment {
                                                    if (document.exists()) {
                                                        ArrayList<Applicant> applicants = new ArrayList<>();
                                                        for (int i = 1; i <= Integer.parseInt(document.getData().get("curPerson").toString()); i++) {
-                                                           String t_name = "name" + Integer.toString(i);
+                                                           String t_email= "email" + Integer.toString(i);
                                                            String t_account = "account" + Integer.toString(i);
                                                            String t_accountValue = "accountValue" + Integer.toString(i);
-                                                           String name = document.getData().get(t_name).toString();
+                                                           String email = document.getData().get(t_email).toString();
                                                            String account = document.getData().get(t_account).toString();
                                                            String accountValue = document.getData().get(t_accountValue).toString();
                                                            String role;
@@ -61,7 +61,7 @@ public class TransmissionFragment extends Fragment {
                                                            else
                                                                role = "참여자";
                                                            applicants.add(new Applicant(
-                                                                   name, role, account, accountValue));
+                                                                   email, role, account, accountValue));
                                                        }
                                                        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.RecyleApplicantList);
                                                        applicantAdapter = new ApplicantAdapter(getActivity(), applicants);

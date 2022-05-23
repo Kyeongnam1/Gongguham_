@@ -45,6 +45,7 @@ public class PostDetailActivity extends AppCompatActivity {
     String username;
     int curPerson;
     UserInfo userInfo;
+    String user_Name;
 
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -113,6 +114,7 @@ public class PostDetailActivity extends AppCompatActivity {
                             pTime_Hour = hourTextView.getText().toString();
                             pTime_minute = minuteTextView.getText().toString();
                             pTime = Integer.parseInt(pTime_Hour)*60+Integer.parseInt(pTime_minute);
+
                             if(sCurTime>=pTime)
                             {
                                 if(user.getEmail().toString().equals(document.getData().get("postEmail").toString()))
@@ -121,14 +123,16 @@ public class PostDetailActivity extends AppCompatActivity {
                                     intent.putExtra("dbTitle", titleTextView.getText().toString()+contentTextView.getText().toString()+placeTextView.getText().toString());
                                     startActivity(intent);
                                 }
-                                else
+                                else if(check(document))
                                 {
                                     Intent intent = new Intent(PostDetailActivity.this, TransmissionGuestActivity.class);
                                     intent.putExtra("dbTitle", titleTextView.getText().toString()+contentTextView.getText().toString()+placeTextView.getText().toString());
                                     startActivity(intent);
                                 }
-
-
+                                else
+                                {
+                                    Toast.makeText(PostDetailActivity.this,"신청이 마감된 글입니다.",Toast.LENGTH_SHORT).show();
+                                }
                             }
                         }
 
@@ -172,14 +176,14 @@ public class PostDetailActivity extends AppCompatActivity {
 
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 int curPerson = userInfo.getCurPerson();
-                String name = "name"+Integer.toString(curPerson);
+                String email = "email"+Integer.toString(curPerson);
                 String account = "account"+Integer.toString(curPerson);
                 String accountValue = "accountValue"+Integer.toString(curPerson);
 
                 if(curPerson<=Integer.parseInt(maxPersonTextView.getText().toString()))
                 {
                     db.collection("posts").document(titleTextView.getText().toString()+contentTextView.getText().toString()+placeTextView.getText().toString())
-                            .update(name, userInfo.getName(),account,userInfo.getAccount(),accountValue, userInfo.getAccountValue(),"curPerson",userInfo.getCurPerson(), userInfo.getName(), curPerson)
+                            .update(email, user.getEmail(),account,userInfo.getAccount(),accountValue, userInfo.getAccountValue(),"curPerson",userInfo.getCurPerson(), userInfo.getName(), curPerson)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
@@ -216,6 +220,49 @@ public class PostDetailActivity extends AppCompatActivity {
 
 
     }
+    //이름 가져오는 함수
+    private void get_user_name(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DocumentReference documentUserReference = FirebaseFirestore.getInstance().collection("users").document(user.getEmail());
+        documentUserReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful())
+                {
+                    DocumentSnapshot document = task.getResult();
+                    if (document != null) {
+                        if (document.exists()) {
+                            user_Name = document.getData().get("name").toString();
+                        }
+                    }
+                }
+            }
+        });
+    }
+    //이름 바탕으로 신청여부 검사하는 함수
+
+    private boolean check(DocumentSnapshot document){
+        //get_user_name();
+        int curNum = Integer.parseInt(document.getData().get("curPerson").toString());
+        for(int i=2;i<=curNum;i++)
+        {
+            String emailTemp = "email"+Integer.toString(i);
+            String temp = document.getData().get(emailTemp).toString();
+
+            if(temp.equals(user.getEmail().toString())) {
+                return true;
+            }
+            else{
+                Toast.makeText(PostDetailActivity.this,temp+user.getEmail().toString(),Toast.LENGTH_SHORT).show();
+                continue;
+            }
+
+        }
+        return false;
+
+    }
+
+
     //배달메뉴 이름, 가격 받아서 디비에 넣기
     private void menuReceive(String key, int curPerson){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
