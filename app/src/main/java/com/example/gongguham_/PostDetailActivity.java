@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,7 +37,7 @@ public class PostDetailActivity extends AppCompatActivity {
 
     // 채팅방 관련 선언
     private DatabaseReference chatRef;
-    private Button enterChat;
+    private ImageButton back, enterChat;
     private String chatTitle;
     String cr_pass = null, ck_pass = null;
     String name;
@@ -70,6 +71,7 @@ public class PostDetailActivity extends AppCompatActivity {
         tmBtn = findViewById(R.id.tmbtn);
 
         enterChat = findViewById(R.id.enterChat);
+        back = findViewById(R.id.backButton);
 
 
         Intent intent = getIntent();
@@ -216,6 +218,13 @@ public class PostDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 checkPassword();
+            }
+        });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
 
