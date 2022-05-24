@@ -98,20 +98,22 @@ public class memberInitActivity extends AppCompatActivity {
         String account = accountE.getText().toString();
         EditText birthdayE = (EditText) findViewById(R.id.birthdayEditText);
         String birthday = birthdayE.getText().toString();
-        EditText addressE = (EditText) findViewById(R.id.addressEditText);
-        String address = addressE.getText().toString();
+
         int point = 0;
+        int ReviewTotalScore = 0;
+        int ReviewAvScore = 0;
+        int ReviewNumber = 0;
 
         Spinner genderS = (Spinner) findViewById(R.id.spinner_gender);
         String gender = genderS.getSelectedItem().toString();
         Spinner accountS = (Spinner) findViewById(R.id.spinner_account);
         String accountValue = accountS.getSelectedItem().toString();
 
-        if (name.length() > 0 /*&& phoneNumber.length() > 9*/ && gender.length() > 0 && accountValue.length() >0 && account.length()>0  && birthday.length() > 5 && address.length()>0) {
+        if (name.length() > 0 /*&& phoneNumber.length() > 9*/ && gender.length() > 0 && accountValue.length() >0 && account.length()>0  && birthday.length() > 5) {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-            MemberInfo memberInfo = new MemberInfo(name, phonenumber,gender, accountValue, account, birthday, address, point);
+            MemberInfo memberInfo = new MemberInfo(name, phonenumber,gender, accountValue, account, birthday, point, ReviewTotalScore, ReviewAvScore, ReviewNumber);
 
             if (user != null) {
                 db.collection("users").document(user.getEmail()).set(memberInfo)

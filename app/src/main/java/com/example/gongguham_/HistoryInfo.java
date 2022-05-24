@@ -5,13 +5,30 @@ public class HistoryInfo {
     private int plus_point;
     private int minus_point;
     private int current_point;
+    private String Trader;
+    private String time;
 
-    HistoryInfo(String email, int plus_point, int minus_point, int current_point) {
+    HistoryInfo(String email, int plus_point, int minus_point, int current_point, String Trader, String time) {
         this.email = email;
         this.plus_point = plus_point;
         this.minus_point = minus_point;
         this.current_point = current_point;
+        this.Trader = Trader;
+        this.time = time;
     }
+
+    public String getTrader() {
+        return Trader;
+    }
+
+    public void setTrader(String trader) {
+        Trader = trader;
+    }
+
+    public String getTime(){
+        return this.time;
+    }
+    public void setTime(String time){this.time = time;}
 
     public String getEmail(){ return this.email; }
     public void setEmail(String email){ this.email = email; }

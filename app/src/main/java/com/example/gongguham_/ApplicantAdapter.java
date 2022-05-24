@@ -75,6 +75,7 @@ public class ApplicantAdapter extends RecyclerView.Adapter<ApplicantAdapter.View
             }
             else
                 checkBox.setVisibility(View.VISIBLE);
+            //체크박스 클릭시
             checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
