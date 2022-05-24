@@ -43,6 +43,7 @@ public class PostDetailActivity extends AppCompatActivity {
     String accountValue;
     String account;
     String username;
+    String doc;
     int curPerson;
     UserInfo userInfo;
     String user_Name;
@@ -182,7 +183,8 @@ public class PostDetailActivity extends AppCompatActivity {
 
                 if(curPerson<=Integer.parseInt(maxPersonTextView.getText().toString()))
                 {
-                    db.collection("posts").document(titleTextView.getText().toString()+contentTextView.getText().toString()+placeTextView.getText().toString())
+                    doc = titleTextView.getText().toString()+contentTextView.getText().toString()+placeTextView.getText().toString();
+                    db.collection("posts").document(doc)
                             .update(email, user.getEmail(),account,userInfo.getAccount(),accountValue, userInfo.getAccountValue(),"curPerson",userInfo.getCurPerson(), userInfo.getName(), curPerson)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
@@ -342,68 +344,68 @@ public class PostDetailActivity extends AppCompatActivity {
         builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 ck_pass = check_password.getText().toString();
-                            // 채팅방 비밀번호 가져오기
-                            chatRef = firebaseDatabase.getReference("chat");
-                            chatRef.child(chatTitle).addChildEventListener(new ChildEventListener() {
-                                //새로 추가된 것만 줌 ValueListener는 하나의 값만 바뀌어도 처음부터 다시 값을 줌
-                                @Override
-                                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                                    ChatDTO chatDTO = dataSnapshot.getValue(ChatDTO.class);
-                                    cr_pass = chatDTO.getPassword();
+                // 채팅방 비밀번호 가져오기
+                chatRef = firebaseDatabase.getReference("chat");
+                chatRef.child(chatTitle).addChildEventListener(new ChildEventListener() {
+                    //새로 추가된 것만 줌 ValueListener는 하나의 값만 바뀌어도 처음부터 다시 값을 줌
+                    @Override
+                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                        ChatDTO chatDTO = dataSnapshot.getValue(ChatDTO.class);
+                        cr_pass = chatDTO.getPassword();
 
-                                }
+                    }
 
-                                @Override
-                                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                    @Override
+                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                                }
+                    }
 
-                                @Override
-                                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                    @Override
+                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
 
-                                }
+                    }
 
-                                @Override
-                                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                    @Override
+                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                                }
+                    }
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                                }
-                            });
-                            if(ck_pass.equals(cr_pass)){
-                                Toast.makeText(PostDetailActivity.this,"채팅방에 입장하였습니다.",Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(PostDetailActivity.this, ChatChattingActivity.class);
-                                intent.putExtra("chatName", chatTitle);
-                                intent.putExtra("userName", username);
-                                intent.putExtra("password",ck_pass);
-                                G.username = username;
-                                startActivity(intent);
-                                ck_pass = null;
-                            }else{
-                                Toast.makeText(PostDetailActivity.this,"비밀번호가 일치하지 않습니다.",Toast.LENGTH_SHORT).show();
-                            }
-                            dialog.dismiss();
-                        }
-                    })
-                    .setNegativeButton("취소", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
-                            dialog.dismiss();
-                        }
-                    })
-                    .show();
-        }
+                    }
+                });
+                if(ck_pass.equals(cr_pass)){
+                    Toast.makeText(PostDetailActivity.this,"채팅방에 입장하였습니다.",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(PostDetailActivity.this, ChatChattingActivity.class);
+                    intent.putExtra("chatName", chatTitle);
+                    intent.putExtra("userName", username);
+                    intent.putExtra("password",ck_pass);
+                    G.username = username;
+                    startActivity(intent);
+                    ck_pass = null;
+                }else{
+                    Toast.makeText(PostDetailActivity.this,"비밀번호가 일치하지 않습니다.",Toast.LENGTH_SHORT).show();
+                }
+                dialog.dismiss();
+            }
+        })
+                .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+    }
 
-        private void refresh() //새로고침
-        {
-            finish();//인텐트 종료
-            overridePendingTransition(0, 0);//인텐트 효과 없애기
-            Intent intent = getIntent(); //인텐트
-            startActivity(intent); //액티비티 열기
-            overridePendingTransition(0, 0);//인텐트 효과 없애기
-        }
+    private void refresh() //새로고침
+    {
+        finish();//인텐트 종료
+        overridePendingTransition(0, 0);//인텐트 효과 없애기
+        Intent intent = getIntent(); //인텐트
+        startActivity(intent); //액티비티 열기
+        overridePendingTransition(0, 0);//인텐트 효과 없애기
+    }
 
 
 

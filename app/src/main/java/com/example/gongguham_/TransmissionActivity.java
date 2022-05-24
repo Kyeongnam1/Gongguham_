@@ -14,6 +14,14 @@ public class TransmissionActivity extends AppCompatActivity {
     Button finishbtn;
     private FragmentManager fragmentManager = getSupportFragmentManager();
     private  TransmissionFragment transmissionFragment = new TransmissionFragment();
+
+    @Override public void onBackPressed() {
+        super.onBackPressed();
+        moveTaskToBack(true);
+        Intent intent=new Intent(this,MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +37,7 @@ public class TransmissionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(TransmissionActivity.this, DeliveryProgressActivity.class);
+                intent.putExtra("dbTitle", dbTitle);
                 startActivity(intent);
             }
         });
