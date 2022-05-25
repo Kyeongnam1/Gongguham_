@@ -38,12 +38,12 @@ public class TransmissionActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(TransmissionActivity.this, DeliveryProgressActivity.class);
                 intent.putExtra("dbTitle", dbTitle);
+                intent.putExtra("role", "글쓴이");
                 startActivity(intent);
             }
         });
-
-
     }
+
 
 
 }

@@ -64,7 +64,7 @@ public class TransmissionFragment extends Fragment {
                                                                    email, role, account, accountValue));
                                                        }
                                                        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.RecyleApplicantList);
-                                                       applicantAdapter = new ApplicantAdapter(getActivity(), applicants);
+                                                       applicantAdapter = new ApplicantAdapter(getActivity(), applicants, dbTitle);
                                                        mRecyclerView.setHasFixedSize(true); //리사이클러뷰의 크기가 변할 일이 없다는걸 알려주는 것
                                                        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                                                        applicantAdapter.setApplicantList(applicants);

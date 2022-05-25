@@ -185,7 +185,7 @@ public class PostDetailActivity extends AppCompatActivity {
                 {
                     doc = titleTextView.getText().toString()+contentTextView.getText().toString()+placeTextView.getText().toString();
                     db.collection("posts").document(doc)
-                            .update(email, user.getEmail(),account,userInfo.getAccount(),accountValue, userInfo.getAccountValue(),"curPerson",userInfo.getCurPerson(), userInfo.getName(), curPerson)
+                            .update(email, user.getEmail(),account,userInfo.getAccount(),accountValue, userInfo.getAccountValue(),"curPerson",userInfo.getCurPerson(), userInfo.getName(), curPerson, userInfo.getName()+"tmCheck", "false")
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {

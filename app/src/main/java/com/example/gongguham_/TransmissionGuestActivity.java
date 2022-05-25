@@ -119,6 +119,7 @@ public class TransmissionGuestActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(TransmissionGuestActivity.this, DeliveryProgressActivity.class);
                 intent.putExtra("dbTitle", dbTitle);
+                intent.putExtra("role", "참여자");
                 startActivity(intent);
             }
         });

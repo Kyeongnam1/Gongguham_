@@ -1,6 +1,7 @@
 package com.example.gongguham_;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,16 +12,26 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
 
 public class ApplicantAdapter extends RecyclerView.Adapter<ApplicantAdapter.ViewHolder> {
 
     private ArrayList<Applicant> ApplicantList;
     private Context mContext;
-
-    public ApplicantAdapter(Context context, ArrayList<Applicant> applicantList){
+    String dbTitle;
+    String userName;
+    public ApplicantAdapter(Context context, ArrayList<Applicant> applicantList, String dbTitle){
         this.mContext = context;
         this.ApplicantList = applicantList;
+        this.dbTitle = dbTitle;
     }
 
     @NonNull
@@ -79,7 +90,39 @@ public class ApplicantAdapter extends RecyclerView.Adapter<ApplicantAdapter.View
             checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    applicantName.setText("click");
+
+                    DocumentReference documentUserReference = FirebaseFirestore.getInstance().collection("users").document(applicantName.getText().toString());
+                    documentUserReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful())
+                            {
+                                DocumentSnapshot document = task.getResult();
+                                if (document != null) {
+                                    if (document.exists()) {
+                                        userName = document.getData().get("name").toString();
+                                    }
+                                }
+                            }
+                        }
+                    });
+                    String tmCheck = userName+"tmCheck";
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    db.collection("posts").document(dbTitle)
+                            .update(tmCheck, "true")
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d("Adapter check", "Success");
+                                }
+
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.e("Adapter check", "push menu in db fail" + e);
+                                }
+                            });
                 }
             });
 
