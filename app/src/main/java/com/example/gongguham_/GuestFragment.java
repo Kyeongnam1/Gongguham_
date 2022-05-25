@@ -51,7 +51,7 @@ public class GuestFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_guest, container, false);
         mProgressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
         finishButton = (Button)rootView.findViewById(R.id.finish_button_guest);
-        mProgressBar.setProgress(0);
+
         mTextView = (TextView) rootView.findViewById(R.id.progress_text);
         refreshButton = (ImageButton) rootView.findViewById(R.id.refresh_button);
         state0 = (TextView) rootView.findViewById(R.id.state0_textView);
