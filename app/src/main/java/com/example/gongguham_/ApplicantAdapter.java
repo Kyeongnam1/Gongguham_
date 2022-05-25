@@ -29,10 +29,12 @@ public class ApplicantAdapter extends RecyclerView.Adapter<ApplicantAdapter.View
     String dbTitle;
     String userName;
     String tmCheck;
-    public ApplicantAdapter(Context context, ArrayList<Applicant> applicantList, String dbTitle){
+    String check;
+    public ApplicantAdapter(Context context, ArrayList<Applicant> applicantList, String dbTitle, String check){
         this.mContext = context;
         this.ApplicantList = applicantList;
         this.dbTitle = dbTitle;
+        this.check = check;
     }
 
     @NonNull
@@ -81,6 +83,12 @@ public class ApplicantAdapter extends RecyclerView.Adapter<ApplicantAdapter.View
             applicantPosition.setText((applicant.applicantPosition));
             accountNumber.setText((applicant.accountNumber));
             bankName.setText((applicant.bankName));
+            if(check.equals("true"))
+            {
+                checkBox.setChecked(true);
+            }
+
+
             if(applicantPosition.getText().toString().equals("글쓴이"))
             {
                 checkBox.setVisibility(View.INVISIBLE);
