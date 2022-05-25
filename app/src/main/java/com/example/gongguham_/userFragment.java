@@ -95,8 +95,9 @@ public class userFragment extends Fragment {
                             f_name = document.getData().get("name").toString();
                             userEmailTextView.setText(email);
                             userNameTextView.setText(document.getData().get("name").toString());
-                            userRateTextView.setText(String.format("%.2f",document.getData().get("reviewAvScore")));
-
+                            double av = Double.parseDouble(document.getData().get("reviewAvScore").toString());
+                            double average = (double) Math.round(av*100)/100;
+                            userRateTextView.setText(Double.toString(average));
 
 
                         } else {
