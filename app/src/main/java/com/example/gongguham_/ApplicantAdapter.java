@@ -28,6 +28,7 @@ public class ApplicantAdapter extends RecyclerView.Adapter<ApplicantAdapter.View
     private Context mContext;
     String dbTitle;
     String userName;
+    String tmCheck;
     public ApplicantAdapter(Context context, ArrayList<Applicant> applicantList, String dbTitle){
         this.mContext = context;
         this.ApplicantList = applicantList;
@@ -101,28 +102,29 @@ public class ApplicantAdapter extends RecyclerView.Adapter<ApplicantAdapter.View
                                 if (document != null) {
                                     if (document.exists()) {
                                         userName = document.getData().get("name").toString();
+                                        tmCheck = userName+"tmCheck";
+                                        FirebaseFirestore db = FirebaseFirestore.getInstance();
+                                        db.collection("posts").document(dbTitle)
+                                                .update(tmCheck, "true")
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        Log.d("Adapter check", "Success");
+                                                    }
+
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        Log.e("Adapter check", "push menu in db fail" + e);
+                                                    }
+                                                });
                                     }
                                 }
                             }
                         }
                     });
-                    String tmCheck = userName+"tmCheck";
-                    FirebaseFirestore db = FirebaseFirestore.getInstance();
-                    db.collection("posts").document(dbTitle)
-                            .update(tmCheck, "true")
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Log.d("Adapter check", "Success");
-                                }
 
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.e("Adapter check", "push menu in db fail" + e);
-                                }
-                            });
                 }
             });
 
