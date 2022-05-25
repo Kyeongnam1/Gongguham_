@@ -78,6 +78,14 @@ public class TransmissionGuestActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()){
+                        if(document.getData().get(userName+"tmCheck").toString().equals("true"))
+                        {
+                            Intent intent = new Intent(TransmissionGuestActivity.this, DeliveryProgressActivity.class);
+                            intent.putExtra("dbTitle", dbTitle);
+                            intent.putExtra("role", "참여자");
+                            startActivity(intent);
+                        }
+
                         positionText.setText("글쓴이");
                         nameText.setText(document.getData().get("email1").toString());
                         bankText.setText(document.getData().get("accountValue1").toString());
@@ -117,6 +125,7 @@ public class TransmissionGuestActivity extends AppCompatActivity {
         completeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent(TransmissionGuestActivity.this, DeliveryProgressActivity.class);
                 intent.putExtra("dbTitle", dbTitle);
                 intent.putExtra("role", "참여자");
