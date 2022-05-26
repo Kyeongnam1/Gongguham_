@@ -79,6 +79,9 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDMqKQdI0GUOKdm6qSk2NkXf1hBhRsB6Fc" />
+
+        <!--  푸쉬 알림 테스트   -->
+        <receiver android:name=".ReminderBroadcast"/>
     </application>
 
 </manifest>

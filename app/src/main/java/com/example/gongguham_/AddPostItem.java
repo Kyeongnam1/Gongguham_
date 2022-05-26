@@ -1,6 +1,11 @@
 package com.example.gongguham_;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -8,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +30,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -36,6 +43,11 @@ public class AddPostItem extends AppCompatActivity {
     private static String userEmail;
     private DocumentReference mDatabase;
     private static String userLocation;
+
+    // 추가
+    private String closeTime_hour, closeTime_minute;
+
+
 
 
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -83,12 +95,36 @@ public class AddPostItem extends AppCompatActivity {
         post_chatCreate = (EditText) findViewById(R.id.add_post_chatCreate);
         post_chatPassword = (EditText) findViewById(R.id.add_post_chatPassword);
 
+        // 푸쉬알림 선언
+        createNotificationChannel();
+
         btnClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addPost();
                 // 채팅방 자동 생성
                 chatCreate();
+
+                // 알림 계산하고 알람 설정
+                Intent intent = new Intent(AddPostItem.this,ReminderBroadcast.class);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(AddPostItem.this,0,intent,0);
+
+                AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+                //long timeAtButtonClick = System.currentTimeMillis();
+                // 1밀리초 -> 1초 = 1000 * 1밀초 -> 1분 = 60 * 1초 -> 1시간 = 60 * 1분
+                // 마감시간 밀리초로 closeTime_hour, closeTime_minute 사용
+                Calendar calendar= Calendar.getInstance();
+
+                long leftsecondmillis = Long.parseLong(closeTime_hour) * 60 * 60 * 1000 +
+                        Long.parseLong(closeTime_minute) * 60 * 1000 - (calendar.get(Calendar.HOUR_OF_DAY) * 60 * 60 * 1000 +
+                        calendar.get(Calendar.MINUTE) * 60 * 1000);
+                Toast.makeText(getApplicationContext(),"남시"+leftsecondmillis,Toast.LENGTH_SHORT).show();
+
+                // 1초 = 1000 * 10
+
+                alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + leftsecondmillis ,pendingIntent);
+
                 startMainActivity();
             }
         });
@@ -111,10 +147,10 @@ public class AddPostItem extends AppCompatActivity {
         String category = categoryS.getSelectedItem().toString();
 
         Spinner hourS = (Spinner) findViewById(R.id.spinner_add_post_close_time_hour);
-        String closeTime_hour = hourS.getSelectedItem().toString();
+        closeTime_hour = hourS.getSelectedItem().toString();
 
         Spinner minuteS = (Spinner) findViewById(R.id.spinner_add_post_close_time_minute);
-        String closeTime_minute = minuteS.getSelectedItem().toString();
+        closeTime_minute = minuteS.getSelectedItem().toString();
 
         Spinner personS = (Spinner) findViewById(R.id.spinner_add_post_max_person);
         int maxPerson = Integer.parseInt(personS.getSelectedItem().toString());
@@ -250,6 +286,20 @@ public class AddPostItem extends AppCompatActivity {
         chatRef.child(chatName).push().setValue(chat); // 데이터 푸쉬
 
 
+    }
+
+    // 푸쉬 알림 채널 설정
+    private void createNotificationChannel(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            CharSequence name = "LemubitReminderChannel";
+            String description = "Channel for Lemubit Reminder";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("notifyLemubit",name,importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
 }
