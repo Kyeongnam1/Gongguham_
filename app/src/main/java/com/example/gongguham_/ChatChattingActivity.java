@@ -1,8 +1,11 @@
 package com.example.gongguham_;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -13,12 +16,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -40,6 +47,8 @@ public class ChatChattingActivity extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     //'chat'노드의 참조객체 참조변수
     DatabaseReference chatRef;
+
+    // push 알림관련 선언
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +90,9 @@ public class ChatChattingActivity extends AppCompatActivity {
 
                 adapter.notifyDataSetChanged();
                 chat_view.setSelection(chatDTOS.size()-1);
+
+                // child가 바뀌면 알림 뜨게?
+
             }
 
             @Override
@@ -103,6 +115,8 @@ public class ChatChattingActivity extends AppCompatActivity {
 
             }
         });
+
+
 
     }
 
@@ -130,5 +144,27 @@ public class ChatChattingActivity extends AppCompatActivity {
         InputMethodManager imm=(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
 
+//        FirebaseMessaging.getInstance().getToken()
+//                .addOnCompleteListener(new OnCompleteListener<String>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<String> task) {
+//                        if (!task.isSuccessful()) {
+//                            System.out.println("Fetching FCM registration token failed");
+//                            return;
+//                        }
+//
+//                        // Get new FCM registration token
+//                        String token = task.getResult();
+//
+//                        // Log and toast
+//                        System.out.println(token);
+//                        Toast.makeText(getApplicationContext(), "Your device registration token is" + token
+//                                , Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+
+
     }
+
+
 }

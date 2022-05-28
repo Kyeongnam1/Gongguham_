@@ -1,7 +1,12 @@
 package com.example.gongguham_;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -30,6 +36,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Calendar;
 
 public class PostDetailActivity extends AppCompatActivity {
 
@@ -54,9 +62,14 @@ public class PostDetailActivity extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = firebaseDatabase.getReference();
 
+    // 추가
+    private String closeTime_hour, closeTime_minute;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
 
         setContentView(R.layout.activity_post_detail);
         final TextView titleTextView = findViewById(R.id.post_detail_title);
@@ -76,6 +89,10 @@ public class PostDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String key = intent.getStringExtra("KEY");
+
+//        // 푸쉬알림 선언
+//        createNotificationChannel();
+
         // post 정보
         DocumentReference documentReference = FirebaseFirestore.getInstance().collection("posts").document(key);
         documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -96,6 +113,11 @@ public class PostDetailActivity extends AppCompatActivity {
                             minuteTextView.setText(document.getData().get("closeTime_minute").toString());
                             maxPersonTextView.setText(document.getData().get("maxPerson").toString());
                             curPersonTextView.setText(document.getData().get("curPerson").toString());
+
+                            // 추가
+                            // 푸쉬 알림 위해 추가
+                            closeTime_hour = document.getData().get("closeTime_hour").toString();
+                            closeTime_minute = document.getData().get("closeTime_minute").toString();
                             if(maxPersonTextView.getText().equals(curPersonTextView.getText()))
                             {
                                 tmBtn.setVisibility(View.INVISIBLE);
@@ -218,6 +240,7 @@ public class PostDetailActivity extends AppCompatActivity {
 
 
                             }
+
                         }
 
                     }
@@ -285,6 +308,25 @@ public class PostDetailActivity extends AppCompatActivity {
 
                                 }
                             });
+                    // 알림 계산하고 알람 설정
+                    Intent intent = new Intent(PostDetailActivity.this,ReminderBroadcast.class);
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(PostDetailActivity.this,0,intent,0);
+
+                    AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+                    //long timeAtButtonClick = System.currentTimeMillis();
+                    // 1밀리초 -> 1초 = 1000 * 1밀초 -> 1분 = 60 * 1초 -> 1시간 = 60 * 1분
+                    // 마감시간 밀리초로 closeTime_hour, closeTime_minute 사용
+                    Calendar calendar= Calendar.getInstance();
+
+                    long leftsecondmillis = Long.parseLong(closeTime_hour) * 60 * 60 * 1000 +
+                            Long.parseLong(closeTime_minute) * 60 * 1000 - (calendar.get(Calendar.HOUR_OF_DAY) * 60 * 60 * 1000 +
+                            calendar.get(Calendar.MINUTE) * 60 * 1000);
+                    Toast.makeText(getApplicationContext(),"남시"+leftsecondmillis,Toast.LENGTH_SHORT).show();
+
+                    // 1초 = 1000 * 10
+
+                    alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + leftsecondmillis ,pendingIntent);
                 }
                 else
                 {
@@ -498,6 +540,33 @@ public class PostDetailActivity extends AppCompatActivity {
     }
 
 
+    // 알림 채널 생성
+//    private void createNotificationChannel(){
+//        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+//            CharSequence name = "LemubitReminderChannel";
+//            String description = "Channel for Lemubit Reminder";
+//            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+//            NotificationChannel channel = new NotificationChannel("notifyLemubit",name,importance);
+//            channel.setDescription(description);
+//
+//            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+//            notificationManager.createNotificationChannel(channel);
+//        }
+//    }
+
+    // 푸쉬 알림 채널 설정
+    private void createNotificationChannel(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            CharSequence name = "LemubitReminderChannel";
+            String description = "Channel for Lemubit Reminder";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("notifyLemubit",name,importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
 
 
 
