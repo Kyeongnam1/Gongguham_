@@ -20,7 +20,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -159,6 +158,7 @@ public class PostDetailActivity extends AppCompatActivity {
                                     }
                                     else
                                     {
+                                        tmBtn.setVisibility(View.INVISIBLE);
                                         Toast.makeText(PostDetailActivity.this,"신청이 마감된 글입니다.",Toast.LENGTH_SHORT).show();
                                     }
                                 }
@@ -310,7 +310,7 @@ public class PostDetailActivity extends AppCompatActivity {
                             });
                     // 알림 계산하고 알람 설정
                     Intent intent = new Intent(PostDetailActivity.this,ReminderBroadcast.class);
-                    PendingIntent pendingIntent = PendingIntent.getBroadcast(PostDetailActivity.this,0,intent,0);
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(PostDetailActivity.this,0,intent,PendingIntent.FLAG_IMMUTABLE);
 
                     AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 

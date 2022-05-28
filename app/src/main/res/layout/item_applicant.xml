@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:background="@drawable/stroke">
+    android:background="@drawable/stroke"
+    android:layout_margin="3dp">
 
 
     <TextView
@@ -62,6 +63,6 @@
         app:layout_constraintHorizontal_bias="0.028"
         app:layout_constraintStart_toEndOf="@+id/applicant_name_text"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.506" />
+        app:layout_constraintVertical_bias="0.506"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
