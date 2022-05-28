@@ -30,7 +30,6 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -233,7 +232,7 @@ public class AddPostItem extends AppCompatActivity {
                             String accountValue1 = "accountValue"+Integer.toString(curPerson);
                             UserInfo userInfo = new UserInfo(name, accountValue, account, curPerson);
                             db.collection("posts").document(postInfo.getPostTitle()+postInfo.getPostContent()+postInfo.getMeetingArea())
-                                    .update("email1", user.getEmail(),account1,userInfo.getAccount(),accountValue1, userInfo.getAccountValue(),"curPerson",userInfo.getCurPerson(),"curSituation", "모집중", "chatPass", post_chatPassword.getText().toString())
+                                    .update("email1", user.getEmail(),account1,userInfo.getAccount(),accountValue1, userInfo.getAccountValue(),"curPerson",userInfo.getCurPerson(),"curSituation", "모집중", "chatPass", post_chatPassword.getText().toString(), name+"tmCheck", true)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
