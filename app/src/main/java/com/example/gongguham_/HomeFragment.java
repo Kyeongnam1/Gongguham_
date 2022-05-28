@@ -236,6 +236,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
     @Override
     public void onRefresh() {
+        String selectedOption = sort_spinner.getSelectedItem().toString();
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -248,33 +249,36 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                                 if(task.isSuccessful()){
                                     ArrayList<PostInfo> postInfo = new ArrayList<>();
 
-                                    if(curUserLocation != null) {
-                                        for (QueryDocumentSnapshot document : task.getResult()) {
-                                            if (curUserLocation.equals(slicingLocation(document.getData().get("userLocation").toString()))) {
+                                    if(curUserLocation != null){
+                                        for(QueryDocumentSnapshot document : task.getResult()) {
+                                            Log.e(TAG, "테스트: " + document.getData().get("userLocation").toString());
+                                            Log.e(TAG, "테스트: " + document.getData().get("postCategory").toString());
+                                            if(curUserLocation.equals(slicingLocation(document.getData().get("userLocation").toString()))) {
+                                                if(selectedOption.equals(document.getData().get("postCategory").toString())) {
+                                                    String hour = document.getData().get("closeTime_hour").toString();
+                                                    String minute = document.getData().get("closeTime_minute").toString();
+                                                    String time = hour + minute;
 
-                                                String hour = document.getData().get("closeTime_hour").toString();
-                                                String minute = document.getData().get("closeTime_minute").toString();
-                                                String time = hour + minute;
-
-                                                postInfo.add(new PostInfo(
-                                                        document.getData().get("postTitle").toString(),
-                                                        document.getData().get("postCategory").toString(),
-                                                        document.getData().get("postContent").toString(),
-                                                        document.getData().get("meetingArea").toString(),
-                                                        document.getData().get("closeTime_hour").toString(),
-                                                        //document.getData().get("closeTime_minute").toString(),
-                                                        time,
-                                                        Integer.parseInt(document.getData().get("maxPerson").toString()),
-                                                        Integer.parseInt(document.getData().get("deliveryFee").toString()),
-                                                        document.getData().get("userLocation").toString(),
-                                                        document.getData().get("chatTitle").toString(),
-                                                        document.getData().get("postEmail").toString(),
-                                                        Integer.parseInt(document.getData().get("curPerson").toString())
-                                                ));
-                                                //Log.d("closeTime 확인", document.getData().get("closeTime").toString());
+                                                    postInfo.add(new PostInfo(
+                                                            document.getData().get("postTitle").toString(),
+                                                            document.getData().get("postCategory").toString(),
+                                                            document.getData().get("postContent").toString(),
+                                                            document.getData().get("meetingArea").toString(),
+                                                            document.getData().get("closeTime_hour").toString(),
+                                                            //document.getData().get("closeTime_minute").toString(),
+                                                            time,
+                                                            Integer.parseInt(document.getData().get("maxPerson").toString()),
+                                                            Integer.parseInt(document.getData().get("deliveryFee").toString()),
+                                                            document.getData().get("userLocation").toString(),
+                                                            document.getData().get("chatTitle").toString(),
+                                                            document.getData().get("postEmail").toString(),
+                                                            Integer.parseInt(document.getData().get("curPerson").toString())
+                                                    ));
+                                                }
                                             }
                                         }
                                     }
+
                                     mRecyclerView = (RecyclerView) viewGroup.findViewById(R.id.RecyclePostList);
                                     postAdaptor = new PostAdaptor(getActivity(), postInfo);
                                     mRecyclerView.setHasFixedSize(true);
