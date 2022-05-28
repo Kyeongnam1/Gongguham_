@@ -107,7 +107,7 @@ public class AddPostItem extends AppCompatActivity {
 
                 // 알림 계산하고 알람 설정
                 Intent intent = new Intent(AddPostItem.this,ReminderBroadcast.class);
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(AddPostItem.this,0,intent,0);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(AddPostItem.this,0,intent,PendingIntent.FLAG_IMMUTABLE);
 
                 AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
