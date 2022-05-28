@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="400dp"
+    android:layout_height="wrap_content"
+    android:padding="5dp">
+
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="공동구매 채팅방 정보"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/chat_id_text"
+            android:layout_width="108dp"
+            android:layout_height="34dp"
+            android:layout_margin="6dp"
+            android:text="채팅방 ID:"
+            android:textAlignment="center"
+            android:textSize="17dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/chat_id_show_text"
+            android:layout_width="160dp"
+            android:layout_height="34dp"
+            android:layout_margin="6dp"
+            android:layout_weight="1"
+            android:text=""
+            android:textAlignment="textStart"
+            android:textSize="17dp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/chat_pw_text"
+            android:layout_width="108dp"
+            android:layout_height="34dp"
+            android:layout_margin="6dp"
+            android:text="채팅방 PW:"
+            android:textAlignment="center"
+            android:textSize="17dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/chat_pw_show_text"
+            android:layout_width="160dp"
+            android:layout_height="34dp"
+            android:layout_margin="6dp"
+            android:layout_weight="1"
+            android:text=""
+            android:textAlignment="textStart"
+            android:textSize="17dp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

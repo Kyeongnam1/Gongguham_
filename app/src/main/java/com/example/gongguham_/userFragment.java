@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -25,6 +27,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 
 
 public class userFragment extends Fragment {
@@ -33,6 +39,9 @@ public class userFragment extends Fragment {
     String f_name;
     String myemail;
     String collection;
+
+    RecyclerView recyclerView;
+    UserReviewAdaptor userReviewAdaptor;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -69,6 +78,9 @@ public class userFragment extends Fragment {
 
         TextView userEmailTextView = view.findViewById(R.id.userEmail);
         TextView userNameTextView = view.findViewById(R.id.userName);
+        TextView userRateTextView = view.findViewById(R.id.userRate);
+
+
         btn = (Button) view.findViewById(R.id.addFriends);
 
         DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(email);
@@ -83,6 +95,9 @@ public class userFragment extends Fragment {
                             f_name = document.getData().get("name").toString();
                             userEmailTextView.setText(email);
                             userNameTextView.setText(document.getData().get("name").toString());
+                            double av = Double.parseDouble(document.getData().get("reviewAvScore").toString());
+                            double average = (double) Math.round(av*100)/100;
+                            userRateTextView.setText(Double.toString(average));
 
 
                         } else {
@@ -121,6 +136,30 @@ public class userFragment extends Fragment {
                 }
             }
         });
+
+        db.collection(email + "review")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            ArrayList<UserReviewInfo> userReviewInfo = new ArrayList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()){
+                                userReviewInfo.add(new UserReviewInfo(
+                                        document.getData().get("comment").toString(),
+                                        document.getData().get("email").toString(),
+                                        Integer.parseInt(document.getData().get("score").toString())
+                                ));
+                            }
+                            Log.i("user정보", String.valueOf(userReviewInfo));
+                            recyclerView = (RecyclerView) view.findViewById(R.id.recycler_review_result);
+                            userReviewAdaptor = new UserReviewAdaptor(getContext(),userReviewInfo);
+                            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                            recyclerView.setAdapter(userReviewAdaptor);
+                        }
+                    }
+                });
+
         return view;
     }
 
