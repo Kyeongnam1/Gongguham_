@@ -159,6 +159,7 @@ public class PostDetailActivity extends AppCompatActivity {
                                     }
                                     else
                                     {
+                                        tmBtn.setVisibility(View.INVISIBLE);
                                         Toast.makeText(PostDetailActivity.this,"신청이 마감된 글입니다.",Toast.LENGTH_SHORT).show();
                                     }
                                 }
