@@ -13,10 +13,9 @@
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/activity_post.xml" value="0.19270833333333334" />
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/activity_post_detail.xml" value="0.16" />
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/activity_transmission.xml" value="0.22" />
-        <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/fragment_guest.xml" value="0.33" />
+        <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/fragment_guest.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/fragment_host.xml" value="0.22" />
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/fragment_transmission.xml" value="0.1875" />
-        <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/fragment_viewmore.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/item_applicant.xml" value="0.33" />
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/post_item.xml" value="0.36141304347826086" />
         <entry key="..\:/Users/hslee98/AndroidStudioProjects/Gongguham_/app/src/main/res/drawable/btn_add_post.xml" value="0.3285" />
@@ -41,6 +40,7 @@
         <entry key="..\:/Users/hslee98/AndroidStudioProjects/Gongguham_/app/src/main/res/menu/bottom_navigation.xml" value="0.2" />
         <entry key="..\:/Users/hslee98/AndroidStudioProjects/Gongguham_/app/src/main/res/menu/footer.xml" value="0.3515625" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/drawable/back.xml" value="0.321" />
+        <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/drawable/bottom_stroke.xml" value="0.1315" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/drawable/ic_baseline_fastfood_24.xml" value="0.1445" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/drawable/image_button_changes.xml" value="0.367" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/drawable/image_button_friends.xml" value="0.367" />
@@ -121,15 +121,12 @@
         <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/activity_main.xml" value="0.1641337386018237" />
         <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/activity_myinfo.xml" value="0.17958459979736577" />
         <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/activity_password_reset.xml" value="0.22916666666666666" />
-        <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/activity_pay.xml" value="0.18161094224924013" />
         <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/activity_payinfo.xml" value="0.25" />
         <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/activity_payment.xml" value="0.21693840579710144" />
         <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/activity_phone_authentication.xml" value="0.33" />
         <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/activity_post_detail.xml" value="0.17958459979736577" />
         <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/activity_sign_up.xml" value="0.1" />
         <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/activity_state_select.xml" value="0.3734375" />
-        <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/activity_terms_agree.xml" value="0.3734375" />
-        <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/activity_transmission.xml" value="0.3734375" />
         <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/chat_password_add.xml" value="0.25" />
         <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/chat_password_check.xml" value="0.25" />
         <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/chat_password_create.xml" value="0.33" />
