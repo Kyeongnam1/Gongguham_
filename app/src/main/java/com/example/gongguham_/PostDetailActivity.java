@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,7 +45,7 @@ public class PostDetailActivity extends AppCompatActivity {
 
     // 채팅방 관련 선언
     private DatabaseReference chatRef;
-    private Button enterChat;
+    private ImageButton back, enterChat;
     private String chatTitle;
     String cr_pass = null, ck_pass = null;
     String name;
@@ -83,6 +84,7 @@ public class PostDetailActivity extends AppCompatActivity {
         tmBtn = findViewById(R.id.tmbtn);
 
         enterChat = findViewById(R.id.enterChat);
+        back = findViewById(R.id.backButton);
 
 
         Intent intent = getIntent();
@@ -137,25 +139,106 @@ public class PostDetailActivity extends AppCompatActivity {
                             pTime_Hour = hourTextView.getText().toString();
                             pTime_minute = minuteTextView.getText().toString();
                             pTime = Integer.parseInt(pTime_Hour)*60+Integer.parseInt(pTime_minute);
+                            String state = document.getData().get("curSituation").toString();
 
                             if(sCurTime>=pTime)
                             {
-                                if(user.getEmail().toString().equals(document.getData().get("postEmail").toString()))
+                                if(state.equals("계좌중계페이지")) //계좌중계페이지까지 진행됐을경우
                                 {
-                                    Intent intent = new Intent(PostDetailActivity.this, TransmissionActivity.class);
-                                    intent.putExtra("dbTitle", titleTextView.getText().toString()+contentTextView.getText().toString()+placeTextView.getText().toString());
-                                    startActivity(intent);
+                                    if(user.getEmail().toString().equals(document.getData().get("postEmail").toString()))
+                                    {
+                                        Intent intent = new Intent(PostDetailActivity.this, TransmissionActivity.class);
+                                        intent.putExtra("dbTitle", titleTextView.getText().toString()+contentTextView.getText().toString()+placeTextView.getText().toString());
+                                        startActivity(intent);
+                                    }
+                                    else if(check(document))
+                                    {
+                                        Intent intent = new Intent(PostDetailActivity.this, TransmissionGuestActivity.class);
+                                        intent.putExtra("dbTitle", titleTextView.getText().toString()+contentTextView.getText().toString()+placeTextView.getText().toString());
+                                        startActivity(intent);
+                                    }
+                                    else
+                                    {
+                                        Toast.makeText(PostDetailActivity.this,"신청이 마감된 글입니다.",Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                                else if(check(document))
+                                else if(state.equals("배달진행상황페이지") || state.equals("주문접수")|| state.equals("배달시작") || state.equals("배달완료")) //배달진행상황페이지까지 진행된 경우
                                 {
-                                    Intent intent = new Intent(PostDetailActivity.this, TransmissionGuestActivity.class);
-                                    intent.putExtra("dbTitle", titleTextView.getText().toString()+contentTextView.getText().toString()+placeTextView.getText().toString());
-                                    startActivity(intent);
+                                    if(user.getEmail().toString().equals(document.getData().get("postEmail").toString()))
+                                    {
+                                        Intent intent = new Intent(PostDetailActivity.this, DeliveryProgressActivity.class);
+                                        intent.putExtra("dbTitle", key);
+                                        intent.putExtra("role", "글쓴이");
+                                        startActivity(intent);
+                                    }
+                                    else if(check(document))
+                                    {
+                                        Intent intent = new Intent(PostDetailActivity.this, DeliveryProgressActivity.class);
+                                        intent.putExtra("dbTitle", key);
+                                        intent.putExtra("role", "참여자");
+                                        startActivity(intent);
+                                    }
+                                    else
+                                    {
+                                        Toast.makeText(PostDetailActivity.this,"신청이 마감된 글입니다.",Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                                else
-                                {
-                                    Toast.makeText(PostDetailActivity.this,"신청이 마감된 글입니다.",Toast.LENGTH_SHORT).show();
+                                else{
+                                    if(user.getEmail().toString().equals(document.getData().get("postEmail").toString()))
+                                    {
+                                        FirebaseFirestore db = FirebaseFirestore.getInstance();
+                                        db.collection("posts").document(key)
+                                                .update("curSituation", "계좌중계페이지")
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        Log.d("pda", "pda");
+                                                        //Toast.makeText(view.getContext(),"신청이 완료됐습니다.", Toast.LENGTH_SHORT).show();
+                                                    }
+
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        Log.e("pda", "Error update curSituation" + e);
+
+                                                    }
+                                                });
+                                        Intent intent = new Intent(PostDetailActivity.this, TransmissionActivity.class);
+                                        intent.putExtra("dbTitle", titleTextView.getText().toString()+contentTextView.getText().toString()+placeTextView.getText().toString());
+                                        startActivity(intent);
+                                    }
+                                    else if(check(document))
+                                    {
+                                        FirebaseFirestore db = FirebaseFirestore.getInstance();
+                                        db.collection("posts").document(key)
+                                                .update("curSituation", "계좌중계페이지")
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        Log.d("pda", "pda");
+                                                        //Toast.makeText(view.getContext(),"신청이 완료됐습니다.", Toast.LENGTH_SHORT).show();
+                                                    }
+
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        Log.e("pda", "Error update curSituation" + e);
+
+                                                    }
+                                                });
+                                        Intent intent = new Intent(PostDetailActivity.this, TransmissionGuestActivity.class);
+                                        intent.putExtra("dbTitle", titleTextView.getText().toString()+contentTextView.getText().toString()+placeTextView.getText().toString());
+                                        startActivity(intent);
+                                    }
+                                    else
+                                    {
+                                        Toast.makeText(PostDetailActivity.this,"신청이 마감된 글입니다.",Toast.LENGTH_SHORT).show();
+                                    }
                                 }
+
+
                             }
 
                         }
@@ -208,7 +291,7 @@ public class PostDetailActivity extends AppCompatActivity {
                 {
                     doc = titleTextView.getText().toString()+contentTextView.getText().toString()+placeTextView.getText().toString();
                     db.collection("posts").document(doc)
-                            .update(email, user.getEmail(),account,userInfo.getAccount(),accountValue, userInfo.getAccountValue(),"curPerson",userInfo.getCurPerson(), userInfo.getName(), curPerson)
+                            .update(email, user.getEmail(),account,userInfo.getAccount(),accountValue, userInfo.getAccountValue(),"curPerson",userInfo.getCurPerson(), userInfo.getName(), curPerson, userInfo.getName()+"tmCheck", "false")
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
@@ -258,6 +341,13 @@ public class PostDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 checkPassword();
+            }
+        });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
 

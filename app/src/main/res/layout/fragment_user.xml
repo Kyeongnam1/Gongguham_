@@ -84,4 +84,8 @@
             android:text="점수"
             android:textSize="24sp" />
     </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recycler_review_result"/>
 </LinearLayout>

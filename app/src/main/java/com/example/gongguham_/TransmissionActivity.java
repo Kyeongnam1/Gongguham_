@@ -2,12 +2,18 @@ package com.example.gongguham_;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class TransmissionActivity extends AppCompatActivity {
 
@@ -36,14 +42,32 @@ public class TransmissionActivity extends AppCompatActivity {
         finishbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                db.collection("posts").document(dbTitle)
+                        .update("curSituation", "배달진행상황페이지")
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Log.d("pda", "pda");
+                                //Toast.makeText(view.getContext(),"신청이 완료됐습니다.", Toast.LENGTH_SHORT).show();
+                            }
+
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.e("pda", "Error update curSituation" + e);
+
+                            }
+                        });
                 Intent intent = new Intent(TransmissionActivity.this, DeliveryProgressActivity.class);
                 intent.putExtra("dbTitle", dbTitle);
+                intent.putExtra("role", "글쓴이");
                 startActivity(intent);
             }
         });
-
-
     }
+
 
 
 }
