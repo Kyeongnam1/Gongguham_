@@ -22,6 +22,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -32,6 +34,11 @@ public class HostFragment extends Fragment {
     private Button finish_Button;
     String state;
     public HostFragment(){}
+
+    // 채팅방 완료시 삭제
+    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    private DatabaseReference chatRef;
+    String chat_name;
 
     @Nullable
     @Override
@@ -54,6 +61,8 @@ public class HostFragment extends Fragment {
         pstate2.setTextColor(Color.parseColor("#D3D3D3"));
         pstate3.setTextColor(Color.parseColor("#D3D3D3"));
 
+
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("posts").document(dbTitle)
                 .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -62,7 +71,9 @@ public class HostFragment extends Fragment {
                 if(task.isSuccessful()){
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()){
-                       state = document.getData().get("curSituation").toString();
+                        state = document.getData().get("curSituation").toString();
+                        // 연관 채팅방 이름 가져오
+                        chat_name = document.getData().get("chatTitle").toString();
                     }
                     else {
                         Log.d(TAG, "No such document");
@@ -162,6 +173,11 @@ public class HostFragment extends Fragment {
                 Toast.makeText(view.getContext(),"이용해주셔서 감사합니다.", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(),ReviewActivity.class);
                 intent.putExtra("dbTitle", dbTitle);
+
+                // 채팅방 삭제
+                chatRef = firebaseDatabase.getReference("chat");
+                chatRef.child(chat_name).removeValue();
+
                 getActivity().startActivity(intent);
 
             }

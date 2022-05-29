@@ -109,7 +109,7 @@ public class memberInitActivity extends AppCompatActivity {
         Spinner accountS = (Spinner) findViewById(R.id.spinner_account);
         String accountValue = accountS.getSelectedItem().toString();
 
-        if (name.length() > 0 /*&& phoneNumber.length() > 9*/ && gender.length() > 0 && accountValue.length() >0 && account.length()>0  && birthday.length() > 5) {
+        if (name.length() > 0  && gender.length() > 0 && accountValue.length() >0 && account.length()>0  && birthday.length() > 5) {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             FirebaseFirestore db = FirebaseFirestore.getInstance();
 
