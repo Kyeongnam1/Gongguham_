@@ -103,7 +103,7 @@ public class TransmissionGuestActivity extends AppCompatActivity {
                         int foodPrice = Integer.parseInt(document.getData().get(food_Price).toString());
 
                         int price = foodPrice + curFee;
-                        String priceText_source = foodName +"값: "+ Integer.toString(foodPrice)+" +배달요금 값: "+ Integer.toString(curFee)+" ="+Integer.toString(price)+"원";
+                        String priceText_source = Integer.toString(price)+"원("+Integer.toString(foodPrice)+"원+배달비:"+ Integer.toString(curFee)+"원)";
                         priceText.setText(priceText_source);
                     }
                     else {
