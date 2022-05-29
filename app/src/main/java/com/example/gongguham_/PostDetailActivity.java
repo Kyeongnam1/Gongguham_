@@ -323,7 +323,6 @@ public class PostDetailActivity extends AppCompatActivity {
                             Long.parseLong(closeTime_minute) * 60 * 1000 - (calendar.get(Calendar.HOUR_OF_DAY) * 60 * 60 * 1000 +
                             calendar.get(Calendar.MINUTE) * 60 * 1000);
                     Toast.makeText(getApplicationContext(),"남시"+leftsecondmillis,Toast.LENGTH_SHORT).show();
-
                     // 1초 = 1000 * 10
 
                     alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + leftsecondmillis ,pendingIntent);

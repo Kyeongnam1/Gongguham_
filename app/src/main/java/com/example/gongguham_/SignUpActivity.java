@@ -124,6 +124,7 @@ public class SignUpActivity extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("phonenumber",phoneNumberTextE.getText().toString());
         startActivity(intent);
+
     }
 
 }

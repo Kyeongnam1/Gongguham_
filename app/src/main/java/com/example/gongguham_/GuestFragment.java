@@ -1,9 +1,15 @@
 package com.example.gongguham_;
 
 import static android.content.ContentValues.TAG;
+import static android.content.Context.ALARM_SERVICE;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,6 +33,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Calendar;
+
 public class GuestFragment extends Fragment {
 
     private ProgressBar mProgressBar;
@@ -42,6 +50,8 @@ public class GuestFragment extends Fragment {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String name_tmCheck;
     String tmCheck;
+
+
     public GuestFragment(){}
 
     @Nullable
@@ -90,6 +100,8 @@ public class GuestFragment extends Fragment {
                         name_tmCheck= userName+"tmCheck";
                         tmCheck = document.getData().get(name_tmCheck).toString();
                         Log.d("zz", tmCheck);
+
+
 
                         if(state.equals("주문접수") && tmCheck.equals("true"))
                         {
@@ -151,7 +163,15 @@ public class GuestFragment extends Fragment {
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 ((DeliveryProgressActivity)getActivity()).refresh();
+
+                Intent intent = new Intent(getContext(),ReminderBroadcast.class);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(),0,intent,0);
+
+                AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
+                alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),pendingIntent);
+
             }
         });
         finishButton.setOnClickListener(new View.OnClickListener() {
@@ -166,6 +186,20 @@ public class GuestFragment extends Fragment {
         });
 
         return rootView;
+    }
+
+    // 푸쉬 알림 채널 설정
+    private void createNotificationChannel(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            CharSequence name = "LemubitReminderChannel";
+            String description = "Channel for Lemubit Reminder";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("notifyLemubit",name,importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getActivity().getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
 }
