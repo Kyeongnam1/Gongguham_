@@ -22,8 +22,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -32,6 +35,7 @@ public class HostFragment extends Fragment {
     private ProgressBar mProgressBar;
     private TextView state1, state2, state3, pstate1, pstate2, pstate3;
     private Button finish_Button;
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String state;
     public HostFragment(){}
 
@@ -193,7 +197,22 @@ public class HostFragment extends Fragment {
                                 Log.e("HostFragment", "push menu in db fail" + e);
                             }
                         });
+                DocumentReference documentUserReference = FirebaseFirestore.getInstance().collection("users").document(user.getEmail());
+                documentUserReference.update("curPost", "null").
+                        addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Log.d("hf", "pda");
+                            }
 
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.e("hf", "Error update curPost" + e);
+
+                            }
+                        });
 
             }
         });

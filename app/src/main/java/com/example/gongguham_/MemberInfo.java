@@ -1,7 +1,5 @@
 package com.example.gongguham_;
 
-import android.widget.EditText;
-
 public class MemberInfo {
     private String name;
     private String phoneNumber;
@@ -13,8 +11,9 @@ public class MemberInfo {
     private int ReviewTotalScore;
     private int ReviewAvScore;
     private int ReviewNumber;
+    private String curPost;
 
-    MemberInfo(String name, String phoneNumber, String gender,String accountValue, String account, String birthday, int point, int ReviewTotalScore, int ReviewAvScore, int ReviewNumber){
+    MemberInfo(String name, String phoneNumber, String gender,String accountValue, String account, String birthday, int point, int ReviewTotalScore, int ReviewAvScore, int ReviewNumber, String curPost){
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.gender = gender;
@@ -25,6 +24,7 @@ public class MemberInfo {
         this.ReviewTotalScore = ReviewTotalScore;
         this.ReviewAvScore = ReviewAvScore;
         this.ReviewNumber = ReviewNumber;
+        this.curPost = curPost;
     }
 
     public int getReviewNumber() {
@@ -95,4 +95,11 @@ public class MemberInfo {
 
     public int getPoint(){ return this.point;}
     public void setPoint(int point){ this.point = point; }
+
+    public String getCurPost(){
+        return this.curPost;
+    }
+    public void setCurPost(String curPost){
+        this.curPost = curPost;
+    }
 }

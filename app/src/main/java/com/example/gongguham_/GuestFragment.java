@@ -26,6 +26,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -48,6 +50,7 @@ public class GuestFragment extends Fragment {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String name_tmCheck;
     String tmCheck;
+    String curNum;
 
 
     public GuestFragment(){}
@@ -72,21 +75,7 @@ public class GuestFragment extends Fragment {
         state3.setTextColor(Color.parseColor("#D3D3D3"));
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        DocumentReference documentUserReference = FirebaseFirestore.getInstance().collection("users").document(user.getEmail());
-        documentUserReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful())
-                {
-                    DocumentSnapshot document = task.getResult();
-                    if (document != null) {
-                        if (document.exists()) {
-                            userName = document.getData().get("name").toString();
-                        }
-                    }
-                }
-            }
-        });
+
         db.collection("posts").document(dbTitle)
                 .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -95,58 +84,72 @@ public class GuestFragment extends Fragment {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()){
                         state = document.getData().get("curSituation").toString();
-                        name_tmCheck= userName+"tmCheck";
-                        tmCheck = document.getData().get(name_tmCheck).toString();
-                        Log.d("zz", tmCheck);
+                        DocumentReference documentUserReference = FirebaseFirestore.getInstance().collection("users").document(user.getEmail());
+                        documentUserReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if (task.isSuccessful())
+                                {
+                                    DocumentSnapshot document1 = task.getResult();
+                                    if (document1 != null) {
+                                        if (document1.exists()) {
+                                            userName = document1.getData().get("name").toString();
+                                            curNum = document.getData().get(userName).toString();
+                                            name_tmCheck= curNum+"tmCheck";
+                                            tmCheck = document.getData().get(name_tmCheck).toString();
+                                            if(state.equals("주문접수") && tmCheck.equals("true"))
+                                            {
+                                                mTextView.setText("주문접수");
+                                                state0.setTextColor(Color.parseColor("#D3D3D3"));
+                                                state1.setTextColor(Color.parseColor("#000000"));
+                                                state2.setTextColor(Color.parseColor("#D3D3D3"));
+                                                state3.setTextColor(Color.parseColor("#D3D3D3"));
+                                                mProgressBar.setProgress(34);
+                                            }
+                                            else if(state.equals("배달시작") && tmCheck.equals("true"))
+                                            {
+                                                mTextView.setText("배달시작");
+                                                state0.setTextColor(Color.parseColor("#D3D3D3"));
+                                                state1.setTextColor(Color.parseColor("#D3D3D3"));
+                                                state2.setTextColor(Color.parseColor("#000000"));
+                                                state3.setTextColor(Color.parseColor("#D3D3D3"));
+                                                mProgressBar.setProgress(67);
+                                            }
+                                            else if(state.equals("배달완료") && tmCheck.equals("true"))
+                                            {
+                                                mTextView.setText("배달완료");
+                                                state0.setTextColor(Color.parseColor("#D3D3D3"));
+                                                state1.setTextColor(Color.parseColor("#D3D3D3"));
+                                                state2.setTextColor(Color.parseColor("#D3D3D3"));
+                                                state3.setTextColor(Color.parseColor("#000000"));
+                                                mProgressBar.setProgress(100);
+                                                finishButton.setVisibility(View.VISIBLE);
+                                            }
+                                            else if(tmCheck.equals("true"))
+                                            {
+                                                mTextView.setText("송금확인");
+                                                state0.setTextColor(Color.parseColor("#000000"));
+                                                state1.setTextColor(Color.parseColor("#D3D3D3"));
+                                                state2.setTextColor(Color.parseColor("#D3D3D3"));
+                                                state3.setTextColor(Color.parseColor("#D3D3D3"));
+                                                mProgressBar.setProgress(1);
+                                            }
+                                            else if(tmCheck.equals("false"))
+                                            {
+                                                mTextView.setText("송금확인중");
+                                                state0.setTextColor(Color.parseColor("#D3D3D3"));
+                                                state1.setTextColor(Color.parseColor("#D3D3D3"));
+                                                state2.setTextColor(Color.parseColor("#D3D3D3"));
+                                                state3.setTextColor(Color.parseColor("#D3D3D3"));
+                                                mProgressBar.setProgress(0);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        });
 
 
-
-                        if(state.equals("주문접수") && tmCheck.equals("true"))
-                        {
-                            mTextView.setText("주문접수");
-                            state0.setTextColor(Color.parseColor("#D3D3D3"));
-                            state1.setTextColor(Color.parseColor("#000000"));
-                            state2.setTextColor(Color.parseColor("#D3D3D3"));
-                            state3.setTextColor(Color.parseColor("#D3D3D3"));
-                            mProgressBar.setProgress(34);
-                        }
-                        else if(state.equals("배달시작") && tmCheck.equals("true"))
-                        {
-                            mTextView.setText("배달시작");
-                            state0.setTextColor(Color.parseColor("#D3D3D3"));
-                            state1.setTextColor(Color.parseColor("#D3D3D3"));
-                            state2.setTextColor(Color.parseColor("#000000"));
-                            state3.setTextColor(Color.parseColor("#D3D3D3"));
-                            mProgressBar.setProgress(67);
-                        }
-                        else if(state.equals("배달완료") && tmCheck.equals("true"))
-                        {
-                            mTextView.setText("배달완료");
-                            state0.setTextColor(Color.parseColor("#D3D3D3"));
-                            state1.setTextColor(Color.parseColor("#D3D3D3"));
-                            state2.setTextColor(Color.parseColor("#D3D3D3"));
-                            state3.setTextColor(Color.parseColor("#000000"));
-                            mProgressBar.setProgress(100);
-                            finishButton.setVisibility(View.VISIBLE);
-                        }
-                        else if(tmCheck.equals("true"))
-                        {
-                            mTextView.setText("송금확인");
-                            state0.setTextColor(Color.parseColor("#000000"));
-                            state1.setTextColor(Color.parseColor("#D3D3D3"));
-                            state2.setTextColor(Color.parseColor("#D3D3D3"));
-                            state3.setTextColor(Color.parseColor("#D3D3D3"));
-                            mProgressBar.setProgress(1);
-                        }
-                        else if(tmCheck.equals("false"))
-                        {
-                            mTextView.setText("송금확인중");
-                            state0.setTextColor(Color.parseColor("#D3D3D3"));
-                            state1.setTextColor(Color.parseColor("#D3D3D3"));
-                            state2.setTextColor(Color.parseColor("#D3D3D3"));
-                            state3.setTextColor(Color.parseColor("#D3D3D3"));
-                            mProgressBar.setProgress(0);
-                        }
 
 
                     }
@@ -176,6 +179,22 @@ public class GuestFragment extends Fragment {
         finishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                DocumentReference documentUserReference = FirebaseFirestore.getInstance().collection("users").document(user.getEmail());
+                documentUserReference.update("curPost", "null").
+                        addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Log.d("gf", "pda");
+                            }
+
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.e("gf", "Error update curPost" + e);
+
+                            }
+                        });
                 Toast.makeText(view.getContext(),"이용해주셔서 감사합니다.", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(),ReviewActivity.class);
                 intent.putExtra("dbTitle", dbTitle);

@@ -78,7 +78,8 @@ public class TransmissionGuestActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()){
-                        if(document.getData().get(userName+"tmCheck").toString().equals("true"))
+                        String curNum = document.getData().get(userName).toString();
+                        if(document.getData().get(curNum+"tmCheck").toString().equals("true"))
                         {
                             Intent intent = new Intent(TransmissionGuestActivity.this, DeliveryProgressActivity.class);
                             intent.putExtra("dbTitle", dbTitle);

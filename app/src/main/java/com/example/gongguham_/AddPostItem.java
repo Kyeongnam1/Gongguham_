@@ -13,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -254,6 +253,22 @@ public class AddPostItem extends AppCompatActivity {
                 }
             }
         });
+        documentUserReference.update("curPost", postInfo.getPostTitle()+postInfo.getPostContent()+postInfo.getMeetingArea()).
+                addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d("api", "pda");
+                //Toast.makeText(view.getContext(),"신청이 완료됐습니다.", Toast.LENGTH_SHORT).show();
+            }
+
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("api", "Error update curPost" + e);
+
+                    }
+                });
 
     }
 
