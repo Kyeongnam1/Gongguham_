@@ -118,7 +118,7 @@ public class AddPostItem extends AppCompatActivity {
                 long leftsecondmillis = Long.parseLong(closeTime_hour) * 60 * 60 * 1000 +
                         Long.parseLong(closeTime_minute) * 60 * 1000 - (calendar.get(Calendar.HOUR_OF_DAY) * 60 * 60 * 1000 +
                         calendar.get(Calendar.MINUTE) * 60 * 1000);
-                Toast.makeText(getApplicationContext(),"남시"+leftsecondmillis,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),"남시"+leftsecondmillis,Toast.LENGTH_SHORT).show();
 
                 // 1초 = 1000 * 10
 

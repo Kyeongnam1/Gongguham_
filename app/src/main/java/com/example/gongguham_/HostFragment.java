@@ -71,9 +71,9 @@ public class HostFragment extends Fragment {
                 if(task.isSuccessful()){
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()){
-                       state = document.getData().get("curSituation").toString();
-                       // 연관 채팅방 이름 가져오
-                       chat_name = document.getData().get("chatTitle").toString();
+                        state = document.getData().get("curSituation").toString();
+                        // 연관 채팅방 이름 가져오
+                        chat_name = document.getData().get("chatTitle").toString();
                     }
                     else {
                         Log.d(TAG, "No such document");
