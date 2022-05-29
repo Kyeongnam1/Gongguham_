@@ -3,7 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/drawable/btn_add_post.xml" value="0.268" />
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/drawable/btn_select.xml" value="0.1955" />
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/drawable/custom_progress.xml" value="0.196" />
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/drawable/ic_main_background.xml" value="0.1955" />
@@ -14,13 +13,9 @@
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/activity_post.xml" value="0.19270833333333334" />
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/activity_post_detail.xml" value="0.16" />
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/activity_transmission.xml" value="0.22" />
-        <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/activity_transmission_guest.xml" value="0.17806484295845998" />
-        <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/fragment_chat_starter.xml" value="0.1" />
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/fragment_guest.xml" value="0.33" />
-        <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/fragment_home.xml" value="0.17806484295845998" />
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/fragment_host.xml" value="0.22" />
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/fragment_transmission.xml" value="0.1875" />
-        <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/fragment_user.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/fragment_viewmore.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/item_applicant.xml" value="0.33" />
         <entry key="..\:/Users/FAMILY/StudioProjects/Gongguham_/app/src/main/res/layout/post_item.xml" value="0.36141304347826086" />
@@ -71,7 +66,7 @@
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/activity_pay.xml" value="0.25769927536231885" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/activity_payinfo.xml" value="0.20697463768115942" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/activity_phone_authentication.xml" value="0.25407608695652173" />
-        <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/activity_post_detail.xml" value="0.22" />
+        <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/activity_post_detail.xml" value="0.33" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/activity_rating.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/activity_review.xml" value="0.21739130434782608" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/activity_sign_up1.xml" value="0.3292572463768116" />
@@ -87,7 +82,6 @@
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/chat_password_check.xml" value="0.20697463768115942" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/chat_password_create.xml" value="0.20697463768115942" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/chat_password_roomdel.xml" value="0.20697463768115942" />
-        <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/delete_verification.xml" value="0.25815217391304346" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/food_send.xml" value="0.21739130434782608" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/fragment_chat_starter.xml" value="0.33" />
         <entry key="..\:/Users/nam43/StudioProjects/Gongguham_/app/src/main/res/layout/fragment_guest.xml" value="0.21739130434782608" />
@@ -121,7 +115,7 @@
         <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/drawable/round_button.xml" value="0.205" />
         <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/drawable/square_button.xml" value="0.3455" />
         <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/drawable/stroke.xml" value="0.1205" />
-        <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/activity_add_post_item.xml" value="0.3734375" />
+        <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/activity_add_post_item.xml" value="0.2" />
         <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/activity_chat_chatting.xml" value="0.2" />
         <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/androidStudioTest/Gongguham_/app/src/main/res/layout/activity_main.xml" value="0.1641337386018237" />
