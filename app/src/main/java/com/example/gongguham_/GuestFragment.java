@@ -33,8 +33,6 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.Calendar;
-
 public class GuestFragment extends Fragment {
 
     private ProgressBar mProgressBar;
@@ -129,6 +127,7 @@ public class GuestFragment extends Fragment {
                             state2.setTextColor(Color.parseColor("#D3D3D3"));
                             state3.setTextColor(Color.parseColor("#000000"));
                             mProgressBar.setProgress(100);
+                            finishButton.setVisibility(View.VISIBLE);
                         }
                         else if(tmCheck.equals("true"))
                         {

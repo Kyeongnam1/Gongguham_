@@ -155,6 +155,7 @@ public class HostFragment extends Fragment {
                                 pstate2.setTextColor(Color.parseColor("#D3D3D3"));
                                 pstate3.setTextColor(Color.parseColor("#000000"));
                                 Log.d("HostFragment", "Success");
+                                finish_Button.setVisibility(View.VISIBLE);
                             }
 
                         })
@@ -170,15 +171,29 @@ public class HostFragment extends Fragment {
         finish_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(),"이용해주셔서 감사합니다.", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getActivity(),ReviewActivity.class);
-                intent.putExtra("dbTitle", dbTitle);
+                db.collection("posts").document(dbTitle)
+                        .update("curSituation", "공구완료")
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(view.getContext(),"이용해주셔서 감사합니다.", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getActivity(),ReviewActivity.class);
+                                intent.putExtra("dbTitle", dbTitle);
 
-                // 채팅방 삭제
-                chatRef = firebaseDatabase.getReference("chat");
-                chatRef.child(chat_name).removeValue();
+                                // 채팅방 삭제
+                                chatRef = firebaseDatabase.getReference("chat");
+                                chatRef.child(chat_name).removeValue();
+                                getActivity().startActivity(intent);
+                            }
 
-                getActivity().startActivity(intent);
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.e("HostFragment", "push menu in db fail" + e);
+                            }
+                        });
+
 
             }
         });

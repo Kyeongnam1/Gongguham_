@@ -142,7 +142,13 @@ public class PostDetailActivity extends AppCompatActivity {
 
                             if(sCurTime>=pTime)
                             {
-                                if(state.equals("계좌중계페이지")) //계좌중계페이지까지 진행됐을경우
+                                if(state.equals("공구완료"))
+                                {
+                                    contentTextView.setText("공동구매가 완료된 글입니다.");
+                                    enterChat.setVisibility(View.INVISIBLE);
+                                    Toast.makeText(PostDetailActivity.this,"공동구매가 완료된 글입니다.",Toast.LENGTH_SHORT).show();
+                                }
+                                else if(state.equals("계좌중계페이지")) //계좌중계페이지까지 진행됐을경우
                                 {
                                     if(user.getEmail().toString().equals(document.getData().get("postEmail").toString()))
                                     {
@@ -291,7 +297,7 @@ public class PostDetailActivity extends AppCompatActivity {
                 {
                     doc = titleTextView.getText().toString()+contentTextView.getText().toString()+placeTextView.getText().toString();
                     db.collection("posts").document(doc)
-                            .update(email, user.getEmail(),account,userInfo.getAccount(),accountValue, userInfo.getAccountValue(),"curPerson",userInfo.getCurPerson(), userInfo.getName(), curPerson, userInfo.getName()+"tmCheck", "false")
+                            .update(email, user.getEmail(),account,userInfo.getAccount(),accountValue, userInfo.getAccountValue(),"curPerson",userInfo.getCurPerson(), userInfo.getName(), curPerson, curPerson+"tmCheck", "false")
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {

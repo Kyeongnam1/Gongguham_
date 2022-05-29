@@ -29,12 +29,11 @@ public class ApplicantAdapter extends RecyclerView.Adapter<ApplicantAdapter.View
     String dbTitle;
     String userName;
     String tmCheck;
-    String check;
-    public ApplicantAdapter(Context context, ArrayList<Applicant> applicantList, String dbTitle, String check){
+
+    public ApplicantAdapter(Context context, ArrayList<Applicant> applicantList, String dbTitle){
         this.mContext = context;
         this.ApplicantList = applicantList;
         this.dbTitle = dbTitle;
-        this.check = check;
     }
 
     @NonNull
@@ -83,6 +82,8 @@ public class ApplicantAdapter extends RecyclerView.Adapter<ApplicantAdapter.View
             applicantPosition.setText((applicant.applicantPosition));
             accountNumber.setText((applicant.accountNumber));
             bankName.setText((applicant.bankName));
+            String check = applicant.check;
+            int curNum = applicant.curNum;
             if(check.equals("true"))
             {
                 checkBox.setChecked(true);
@@ -109,8 +110,8 @@ public class ApplicantAdapter extends RecyclerView.Adapter<ApplicantAdapter.View
                                 DocumentSnapshot document = task.getResult();
                                 if (document != null) {
                                     if (document.exists()) {
-                                        userName = document.getData().get("name").toString();
-                                        tmCheck = userName+"tmCheck";
+                                        //userName = document.getData().get("name").toString();
+                                        tmCheck = curNum+"tmCheck";
                                         FirebaseFirestore db = FirebaseFirestore.getInstance();
                                         db.collection("posts").document(dbTitle)
                                                 .update(tmCheck, "true")
