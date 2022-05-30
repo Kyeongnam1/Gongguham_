@@ -13,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,7 +29,6 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -119,7 +117,7 @@ public class AddPostItem extends AppCompatActivity {
                 long leftsecondmillis = Long.parseLong(closeTime_hour) * 60 * 60 * 1000 +
                         Long.parseLong(closeTime_minute) * 60 * 1000 - (calendar.get(Calendar.HOUR_OF_DAY) * 60 * 60 * 1000 +
                         calendar.get(Calendar.MINUTE) * 60 * 1000);
-                Toast.makeText(getApplicationContext(),"남시"+leftsecondmillis,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),"남시"+leftsecondmillis,Toast.LENGTH_SHORT).show();
 
                 // 1초 = 1000 * 10
 
@@ -233,7 +231,7 @@ public class AddPostItem extends AppCompatActivity {
                             String accountValue1 = "accountValue"+Integer.toString(curPerson);
                             UserInfo userInfo = new UserInfo(name, accountValue, account, curPerson);
                             db.collection("posts").document(postInfo.getPostTitle()+postInfo.getPostContent()+postInfo.getMeetingArea())
-                                    .update("email1", user.getEmail(),account1,userInfo.getAccount(),accountValue1, userInfo.getAccountValue(),"curPerson",userInfo.getCurPerson(),"curSituation", "모집중", "chatPass", post_chatPassword.getText().toString())
+                                    .update("email1", user.getEmail(),account1,userInfo.getAccount(),accountValue1, userInfo.getAccountValue(),"curPerson",userInfo.getCurPerson(),"curSituation", "모집중", "chatPass", post_chatPassword.getText().toString(), "1tmCheck", "true", "foodName1", "null", "foodPrice1", "null")
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
@@ -255,6 +253,22 @@ public class AddPostItem extends AppCompatActivity {
                 }
             }
         });
+        documentUserReference.update("curPost", postInfo.getPostTitle()+postInfo.getPostContent()+postInfo.getMeetingArea()).
+                addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d("api", "pda");
+                //Toast.makeText(view.getContext(),"신청이 완료됐습니다.", Toast.LENGTH_SHORT).show();
+            }
+
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("api", "Error update curPost" + e);
+
+                    }
+                });
 
     }
 

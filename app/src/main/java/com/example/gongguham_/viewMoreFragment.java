@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -103,6 +104,32 @@ public class viewMoreFragment extends Fragment {
                     editor.commit();
                     startMainActivity();
                     break;
+                case R.id.myDeliveryButton:
+                    FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getEmail())
+                            .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document != null) {
+                                if (document.exists()) {
+                                    String key = document.getData().get("curPost").toString();
+                                    if(key.equals("null"))
+                                        Toast.makeText(getContext(),"진행중인 공동구매가 없습니다.", Toast.LENGTH_SHORT).show();
+                                    else
+                                        startPostDetailActivity(key);
+                                } else {
+                                    Log.e(TAG, "No such document");
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Log.d(TAG, "get failed with ", task.getException());
+                        }
+                    }
+                            });
+                    break;
 
                 case R.id.changesButton:
                     startpasswordChangeActivity();
@@ -143,6 +170,11 @@ public class viewMoreFragment extends Fragment {
     };
 
 
+    private void startPostDetailActivity(String key){
+        Intent intent = new Intent(getContext(), PostDetailActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("KEY", key);
+        startActivity(intent);
+    }
     private  void startMainActivity(){
         Intent intent=new Intent(getContext(),MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

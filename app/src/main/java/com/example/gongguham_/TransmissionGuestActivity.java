@@ -78,7 +78,8 @@ public class TransmissionGuestActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()){
-                        if(document.getData().get(userName+"tmCheck").toString().equals("true"))
+                        String curNum = document.getData().get(userName).toString();
+                        if(document.getData().get(curNum+"tmCheck").toString().equals("true"))
                         {
                             Intent intent = new Intent(TransmissionGuestActivity.this, DeliveryProgressActivity.class);
                             intent.putExtra("dbTitle", dbTitle);
@@ -102,7 +103,7 @@ public class TransmissionGuestActivity extends AppCompatActivity {
                         int foodPrice = Integer.parseInt(document.getData().get(food_Price).toString());
 
                         int price = foodPrice + curFee;
-                        String priceText_source = foodName +"값: "+ Integer.toString(foodPrice)+" +배달요금 값: "+ Integer.toString(curFee)+" ="+Integer.toString(price)+"원";
+                        String priceText_source = Integer.toString(price)+"원("+Integer.toString(foodPrice)+"원+배달비:"+ Integer.toString(curFee)+"원)";
                         priceText.setText(priceText_source);
                     }
                     else {

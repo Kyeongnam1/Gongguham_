@@ -29,12 +29,11 @@ public class ApplicantAdapter extends RecyclerView.Adapter<ApplicantAdapter.View
     String dbTitle;
     String userName;
     String tmCheck;
-    String check;
-    public ApplicantAdapter(Context context, ArrayList<Applicant> applicantList, String dbTitle, String check){
+
+    public ApplicantAdapter(Context context, ArrayList<Applicant> applicantList, String dbTitle){
         this.mContext = context;
         this.ApplicantList = applicantList;
         this.dbTitle = dbTitle;
-        this.check = check;
     }
 
     @NonNull
@@ -63,7 +62,7 @@ public class ApplicantAdapter extends RecyclerView.Adapter<ApplicantAdapter.View
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView applicantName, applicantPosition, accountNumber, bankName;
+        TextView applicantName, applicantPosition, accountNumber, bankName, foodName, foodPrice;
         CheckBox checkBox;
 
         public ViewHolder(@NonNull View itemView) {
@@ -73,7 +72,8 @@ public class ApplicantAdapter extends RecyclerView.Adapter<ApplicantAdapter.View
             accountNumber = (TextView) itemView.findViewById(R.id.account_number_text);
             bankName = (TextView) itemView.findViewById(R.id.bank_name_text);
             checkBox = (CheckBox) itemView.findViewById(R.id.complited_check_box);
-
+            foodName=(TextView) itemView.findViewById(R.id.food_Name_text);
+            foodPrice=(TextView) itemView.findViewById(R.id.food_Price_text);
         }
         public TextView getApplicantName(String name){
             return (TextView) itemView.findViewById(R.id.applicant_name_text);
@@ -83,6 +83,18 @@ public class ApplicantAdapter extends RecyclerView.Adapter<ApplicantAdapter.View
             applicantPosition.setText((applicant.applicantPosition));
             accountNumber.setText((applicant.accountNumber));
             bankName.setText((applicant.bankName));
+            if(applicant.foodName.equals("null"))
+            {
+                foodName.setVisibility(View.INVISIBLE);
+                foodPrice.setVisibility(View.INVISIBLE);
+            }
+            else
+            {
+                foodName.setText((applicant.foodName));
+                foodPrice.setText((applicant.foodPrice));
+            }
+            String check = applicant.check;
+            int curNum = applicant.curNum;
             if(check.equals("true"))
             {
                 checkBox.setChecked(true);
@@ -109,8 +121,8 @@ public class ApplicantAdapter extends RecyclerView.Adapter<ApplicantAdapter.View
                                 DocumentSnapshot document = task.getResult();
                                 if (document != null) {
                                     if (document.exists()) {
-                                        userName = document.getData().get("name").toString();
-                                        tmCheck = userName+"tmCheck";
+                                        //userName = document.getData().get("name").toString();
+                                        tmCheck = curNum+"tmCheck";
                                         FirebaseFirestore db = FirebaseFirestore.getInstance();
                                         db.collection("posts").document(dbTitle)
                                                 .update(tmCheck, "true")

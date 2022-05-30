@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -38,13 +40,14 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
 
-public class PostDetailActivity extends AppCompatActivity {
+public class PostDetailActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
-    Button tmBtn;
+    Button tmBtn, deleteBtn;
 
     // 채팅방 관련 선언
     private DatabaseReference chatRef;
     private ImageButton back, enterChat;
+    SwipeRefreshLayout swipeRefreshLayout;
     private String chatTitle;
     String cr_pass = null, ck_pass = null;
     String name;
@@ -55,6 +58,7 @@ public class PostDetailActivity extends AppCompatActivity {
     int curPerson;
     UserInfo userInfo;
     String user_Name;
+    String pwdDB;
 
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -81,13 +85,19 @@ public class PostDetailActivity extends AppCompatActivity {
         final TextView maxPersonTextView = findViewById(R.id.post_detail_maxperson);
         final TextView curPersonTextView = findViewById(R.id.post_detail_curperson);
         tmBtn = findViewById(R.id.tmbtn);
+        deleteBtn = findViewById(R.id.postDeleteButton);
 
         enterChat = findViewById(R.id.enterChat);
         back = findViewById(R.id.backButton);
 
+        swipeRefreshLayout = findViewById(R.id.swipe_layout);
+        Log.i("layout check", String.valueOf(swipeRefreshLayout));
+        swipeRefreshLayout.setOnRefreshListener(this);
+
 
         Intent intent = getIntent();
         String key = intent.getStringExtra("KEY");
+        pwdDB = key;
 
 //        // 푸쉬알림 선언
 //        createNotificationChannel();
@@ -142,7 +152,13 @@ public class PostDetailActivity extends AppCompatActivity {
 
                             if(sCurTime>=pTime)
                             {
-                                if(state.equals("계좌중계페이지")) //계좌중계페이지까지 진행됐을경우
+                                if(state.equals("공구완료"))
+                                {
+                                    contentTextView.setText("공동구매가 완료된 글입니다.");
+                                    enterChat.setVisibility(View.INVISIBLE);
+                                    Toast.makeText(PostDetailActivity.this,"공동구매가 완료된 글입니다.",Toast.LENGTH_SHORT).show();
+                                }
+                                else if(state.equals("계좌중계페이지")) //계좌중계페이지까지 진행됐을경우
                                 {
                                     if(user.getEmail().toString().equals(document.getData().get("postEmail").toString()))
                                     {
@@ -180,6 +196,7 @@ public class PostDetailActivity extends AppCompatActivity {
                                     }
                                     else
                                     {
+                                        tmBtn.setVisibility(View.INVISIBLE);
                                         Toast.makeText(PostDetailActivity.this,"신청이 마감된 글입니다.",Toast.LENGTH_SHORT).show();
                                     }
                                 }
@@ -234,6 +251,7 @@ public class PostDetailActivity extends AppCompatActivity {
                                     }
                                     else
                                     {
+                                        tmBtn.setVisibility(View.INVISIBLE);
                                         Toast.makeText(PostDetailActivity.this,"신청이 마감된 글입니다.",Toast.LENGTH_SHORT).show();
                                     }
                                 }
@@ -275,6 +293,52 @@ public class PostDetailActivity extends AppCompatActivity {
             }
         });
 
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               // deleteVerification();
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                DocumentReference documentUserReference = FirebaseFirestore.getInstance().collection("posts").document(key);
+                documentUserReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful())
+                        {
+                            DocumentSnapshot document = task.getResult();
+                            if (document != null) {
+                                if (document.exists()) {
+                                    if(user.getEmail().equals(document.getData().get("email1").toString())){
+                                        FirebaseFirestore.getInstance().collection("posts").document(key)
+                                                .delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                startMainActivity();
+                                                Toast.makeText(view.getContext(),"게시글을 삭제했습니다.", Toast.LENGTH_SHORT).show();
+
+                                                chatRef = firebaseDatabase.getReference("chat");
+                                                chatRef.child(chatTitle).removeValue();
+                                            }
+                                        })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+
+                                                    }
+                                                });
+                                    }else{
+                                        Toast.makeText(view.getContext(),"글 게시자가 아닙니다.", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+
+
+            }
+        });
 
         //신청하기 버튼 클릭시
         tmBtn.setOnClickListener(new View.OnClickListener() {
@@ -291,7 +355,7 @@ public class PostDetailActivity extends AppCompatActivity {
                 {
                     doc = titleTextView.getText().toString()+contentTextView.getText().toString()+placeTextView.getText().toString();
                     db.collection("posts").document(doc)
-                            .update(email, user.getEmail(),account,userInfo.getAccount(),accountValue, userInfo.getAccountValue(),"curPerson",userInfo.getCurPerson(), userInfo.getName(), curPerson, userInfo.getName()+"tmCheck", "false")
+                            .update(email, user.getEmail(),account,userInfo.getAccount(),accountValue, userInfo.getAccountValue(),"curPerson",userInfo.getCurPerson(), userInfo.getName(), curPerson, curPerson+"tmCheck", "false")
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
@@ -322,11 +386,27 @@ public class PostDetailActivity extends AppCompatActivity {
                     long leftsecondmillis = Long.parseLong(closeTime_hour) * 60 * 60 * 1000 +
                             Long.parseLong(closeTime_minute) * 60 * 1000 - (calendar.get(Calendar.HOUR_OF_DAY) * 60 * 60 * 1000 +
                             calendar.get(Calendar.MINUTE) * 60 * 1000);
-                    Toast.makeText(getApplicationContext(),"남시"+leftsecondmillis,Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(),"남시"+leftsecondmillis,Toast.LENGTH_SHORT).show();
 
                     // 1초 = 1000 * 10
 
                     alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + leftsecondmillis ,pendingIntent);
+                    DocumentReference documentUserReference = FirebaseFirestore.getInstance().collection("users").document(user.getEmail());
+                    documentUserReference.update("curPost", key).
+                            addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d("hf", "pda");
+                                }
+
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.e("hf", "Error update curPost" + e);
+
+                                }
+                            });
                 }
                 else
                 {
@@ -400,8 +480,10 @@ public class PostDetailActivity extends AppCompatActivity {
     private void menuReceive(String key, int curPerson){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         View dialogView = getLayoutInflater().inflate(R.layout.food_send, null);
+
         EditText food_send_name = (EditText) dialogView.findViewById(R.id.food_send_name);
         EditText food_send_price = (EditText) dialogView.findViewById(R.id.food_send_price);
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         String foodName = "foodName"+Integer.toString(curPerson);
         String foodPrice = "foodPrice"+Integer.toString(curPerson);
@@ -409,23 +491,22 @@ public class PostDetailActivity extends AppCompatActivity {
         builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                db.collection("posts").document(key)
-                        .update(foodName, food_send_name.getText().toString(), foodPrice, food_send_price.getText().toString())
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                showPw(key);
-                                Log.d("PostDetailActivity", "Success");
-                            }
+                    db.collection("posts").document(key)
+                            .update(foodName, food_send_name.getText().toString(), foodPrice, food_send_price.getText().toString())
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    showPw(key);
+                                    Log.d("PostDetailActivity", "Success");
+                                }
 
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.e("PostDetailActivity", "push menu in db fail" + e);
-                            }
-                        });
-
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.e("PostDetailActivity", "push menu in db fail" + e);
+                                }
+                            });
             }
         });
         builder.show();
@@ -569,5 +650,23 @@ public class PostDetailActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onRefresh() {
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                refresh();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        }, 500);
+
+    }
+
+    private  void startMainActivity(){
+        Intent intent=new Intent(this,MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
 
 }

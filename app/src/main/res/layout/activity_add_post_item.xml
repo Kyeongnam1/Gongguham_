@@ -169,7 +169,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="textPersonName"
+                        android:inputType="number"
                         android:hint="가격"/>
 
                 </LinearLayout>
@@ -207,6 +207,7 @@
                         android:id="@+id/textView14"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:inputType="number"
                         android:text="공구함은 깨끗한 커뮤니티 환경을 만들기 위하여 커뮤니티 이용규칙을 제정하고 있습니다. 위반 시 게시물이 삭제되고 서비스 이용이 제한될 수 있습니다." />
 
                     <TextView
