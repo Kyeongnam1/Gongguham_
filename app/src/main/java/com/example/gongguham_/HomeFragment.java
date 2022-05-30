@@ -146,8 +146,8 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                                             Log.e(TAG, "테스트: " + document.getData().get("postCategory").toString());
                                             if(curUserLocation.equals(slicingLocation(document.getData().get("userLocation").toString()))) {
                                                 if(selectedOption.equals(document.getData().get("postCategory").toString())) {
-                                                    String hour = document.getData().get("closeTime_hour").toString();
-                                                    String minute = document.getData().get("closeTime_minute").toString();
+                                                    String hour = document.getData().get("closeTime_hour").toString() + "시 ";
+                                                    String minute = document.getData().get("closeTime_minute").toString() + "분";
                                                     String time = hour + minute;
 
                                                     postInfo.add(new PostInfo(
@@ -255,8 +255,8 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                                             Log.e(TAG, "테스트: " + document.getData().get("postCategory").toString());
                                             if(curUserLocation.equals(slicingLocation(document.getData().get("userLocation").toString()))) {
                                                 if(selectedOption.equals(document.getData().get("postCategory").toString())) {
-                                                    String hour = document.getData().get("closeTime_hour").toString();
-                                                    String minute = document.getData().get("closeTime_minute").toString();
+                                                    String hour = document.getData().get("closeTime_hour").toString()+"시 ";
+                                                    String minute = document.getData().get("closeTime_minute").toString()+"분";
                                                     String time = hour + minute;
 
                                                     postInfo.add(new PostInfo(
