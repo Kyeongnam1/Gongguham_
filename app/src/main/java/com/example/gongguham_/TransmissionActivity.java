@@ -69,5 +69,4 @@ public class TransmissionActivity extends AppCompatActivity {
     }
 
 
-
 }
