@@ -279,6 +279,7 @@ public class ChatStarterFragment extends Fragment {
                         intent.putExtra("chatName", chat_name.getText().toString());
                         intent.putExtra("userName", user_name.getText().toString());
                         intent.putExtra("password",cr_pass);
+                        G.username = user_name.getText().toString();
                         // sharedpreferences 테스트
                         saveData();
                         startActivity(intent);
