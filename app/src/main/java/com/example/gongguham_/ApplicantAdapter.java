@@ -121,7 +121,6 @@ public class ApplicantAdapter extends RecyclerView.Adapter<ApplicantAdapter.View
                                 DocumentSnapshot document = task.getResult();
                                 if (document != null) {
                                     if (document.exists()) {
-                                        //userName = document.getData().get("name").toString();
                                         tmCheck = curNum+"tmCheck";
                                         FirebaseFirestore db = FirebaseFirestore.getInstance();
                                         db.collection("posts").document(dbTitle)

@@ -146,7 +146,7 @@ public class ChatStarterFragment extends Fragment {
             public void onClick(View view) {
                 if(name.getText().toString().equals("") || chat_name.getText().toString().equals("")){
                     Toast.makeText(getContext(),"채팅방 이름을 입력해주세요.",Toast.LENGTH_SHORT).show();
-                }else{ //방폭
+                }else{
                     deleteRoom();
                 }
             }
@@ -159,7 +159,6 @@ public class ChatStarterFragment extends Fragment {
 
 
     private void showChatList() {
-        //final String[] clicked_chat_room = new String[1];
         // 리스트 어댑터 생성 및 세팅
         // shared preferences 테스트
         SharedPreferences preferences = this.getActivity().getSharedPreferences("account", MODE_PRIVATE);
@@ -204,7 +203,6 @@ public class ChatStarterFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 chat_name.setText(adapter.getItem(i));
                 CHAT_NAME = adapter.getItem(i);
-//                Toast.makeText(getContext(),CHAT_NAME,Toast.LENGTH_SHORT).show();
                 chatRef = firebaseDatabase.getReference("chat");
                 chatRef.child(CHAT_NAME).addChildEventListener(new ChildEventListener() {
                     //새로 추가된 것만 줌 ValueListener는 하나의 값만 바뀌어도 처음부터 다시 값을 줌
@@ -320,7 +318,6 @@ public class ChatStarterFragment extends Fragment {
                             ck_pass = null;
                         }else{
                             Toast.makeText(getContext(),"비밀번호가 일치하지 않습니다.",Toast.LENGTH_SHORT).show();
-                            //Toast.makeText(getContext(),cr_pass,Toast.LENGTH_SHORT).show();
                         }
                         dialog.dismiss();
                     }

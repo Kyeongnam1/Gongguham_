@@ -109,7 +109,6 @@ public class AddPostItem extends AppCompatActivity {
 
                 AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
-                //long timeAtButtonClick = System.currentTimeMillis();
                 // 1밀리초 -> 1초 = 1000 * 1밀초 -> 1분 = 60 * 1초 -> 1시간 = 60 * 1분
                 // 마감시간 밀리초로 closeTime_hour, closeTime_minute 사용
                 Calendar calendar= Calendar.getInstance();
@@ -117,7 +116,6 @@ public class AddPostItem extends AppCompatActivity {
                 long leftsecondmillis = Long.parseLong(closeTime_hour) * 60 * 60 * 1000 +
                         Long.parseLong(closeTime_minute) * 60 * 1000 - (calendar.get(Calendar.HOUR_OF_DAY) * 60 * 60 * 1000 +
                         calendar.get(Calendar.MINUTE) * 60 * 1000);
-                //Toast.makeText(getApplicationContext(),"남시"+leftsecondmillis,Toast.LENGTH_SHORT).show();
 
                 // 1초 = 1000 * 10
 
@@ -258,7 +256,6 @@ public class AddPostItem extends AppCompatActivity {
             @Override
             public void onSuccess(Void aVoid) {
                 Log.d("api", "pda");
-                //Toast.makeText(view.getContext(),"신청이 완료됐습니다.", Toast.LENGTH_SHORT).show();
             }
 
         })
@@ -278,9 +275,6 @@ public class AddPostItem extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
-
-//    private void getUserLocation(){
-//    }
 
     // 채팅방 추가 테스트
     private void chatCreate(){

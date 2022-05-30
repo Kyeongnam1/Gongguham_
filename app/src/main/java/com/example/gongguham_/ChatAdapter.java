@@ -44,7 +44,6 @@ public class ChatAdapter extends BaseAdapter {
         //재활용할 뷰는 사용하지 않음!!
         View itemView = null;
 
-        // 이거 시발 왜안되는거야??
         if(item.getUserName().equals(G.username)){
             itemView= layoutInflater.inflate(R.layout.my_chatbox,viewGroup,false);
         }else{

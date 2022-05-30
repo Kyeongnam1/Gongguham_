@@ -37,7 +37,6 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
 
     private Button phone_auth_btn, request_auth_num_btn;
 
-    //private Button gotoLoginButton, gotoSignupButton;
 
     // string for storing our verification ID
     private String verificationId;

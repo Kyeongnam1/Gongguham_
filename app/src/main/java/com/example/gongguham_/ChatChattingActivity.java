@@ -90,9 +90,6 @@ public class ChatChattingActivity extends AppCompatActivity {
 
                 adapter.notifyDataSetChanged();
                 chat_view.setSelection(chatDTOS.size()-1);
-
-                // child가 바뀌면 알림 뜨게?
-
             }
 
             @Override
@@ -143,27 +140,6 @@ public class ChatChattingActivity extends AppCompatActivity {
 
         InputMethodManager imm=(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
-
-//        FirebaseMessaging.getInstance().getToken()
-//                .addOnCompleteListener(new OnCompleteListener<String>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<String> task) {
-//                        if (!task.isSuccessful()) {
-//                            System.out.println("Fetching FCM registration token failed");
-//                            return;
-//                        }
-//
-//                        // Get new FCM registration token
-//                        String token = task.getResult();
-//
-//                        // Log and toast
-//                        System.out.println(token);
-//                        Toast.makeText(getApplicationContext(), "Your device registration token is" + token
-//                                , Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-
-
     }
 
 

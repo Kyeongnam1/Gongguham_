@@ -85,7 +85,6 @@ public class memberInitActivity extends AppCompatActivity {
         EditText nameE = (EditText) findViewById(R.id.nameEditText);
         String name = nameE.getText().toString();
         TextView phoneNumberE = (TextView) findViewById(R.id.phoneNumberText);
-        //String phoneNumber = phoneNumberE.getText().toString();
         phoneNumberE.setText(phonenumber);
         EditText accountE = (EditText) findViewById(R.id.accountEditText);
         String account = accountE.getText().toString();

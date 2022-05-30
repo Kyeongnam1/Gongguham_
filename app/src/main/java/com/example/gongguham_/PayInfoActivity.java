@@ -331,7 +331,6 @@ public class PayInfoActivity extends AppCompatActivity {
         View dialogView = getLayoutInflater().inflate(R.layout.cash_send, null);
         TextView cash_send_username = (TextView) dialogView.findViewById(R.id.cash_send_username);
 
-        //cash_return_amount.setText(username);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(dialogView);
         DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getEmail());

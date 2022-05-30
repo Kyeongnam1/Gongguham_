@@ -156,7 +156,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                                                             document.getData().get("postContent").toString(),
                                                             document.getData().get("meetingArea").toString(),
                                                             document.getData().get("closeTime_hour").toString(),
-                                                            //document.getData().get("closeTime_minute").toString(),
                                                             time,
                                                             Integer.parseInt(document.getData().get("maxPerson").toString()),
                                                             Integer.parseInt(document.getData().get("deliveryFee").toString()),
@@ -204,8 +203,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                     DocumentSnapshot document = task.getResult();
                     if (document != null) {
                         if (document.exists()) {
-                            //Log.e(TAG, "DocumentSnapshot data: " + document.getData());
-
                             curUserLocation = slicingLocation(document.getData().get("curLoc").toString());
                             Log.e(TAG, "제발" + curUserLocation );
 
@@ -265,7 +262,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                                                             document.getData().get("postContent").toString(),
                                                             document.getData().get("meetingArea").toString(),
                                                             document.getData().get("closeTime_hour").toString(),
-                                                            //document.getData().get("closeTime_minute").toString(),
                                                             time,
                                                             Integer.parseInt(document.getData().get("maxPerson").toString()),
                                                             Integer.parseInt(document.getData().get("deliveryFee").toString()),

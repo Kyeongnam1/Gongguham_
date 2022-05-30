@@ -99,8 +99,7 @@ public class PostDetailActivity extends AppCompatActivity implements SwipeRefres
         String key = intent.getStringExtra("KEY");
         pwdDB = key;
 
-//        // 푸쉬알림 선언
-//        createNotificationChannel();
+      // 푸쉬알림 선언
 
         // post 정보
         DocumentReference documentReference = FirebaseFirestore.getInstance().collection("posts").document(key);
@@ -361,7 +360,6 @@ public class PostDetailActivity extends AppCompatActivity implements SwipeRefres
                                 public void onSuccess(Void aVoid) {
                                     menuReceive(titleTextView.getText().toString()+contentTextView.getText().toString()+placeTextView.getText().toString(), curPerson);
                                     Log.d("AddPost Activity", "DocumentSnapShot" + documentReference);
-                                    //Toast.makeText(view.getContext(),"신청이 완료됐습니다.", Toast.LENGTH_SHORT).show();
                                 }
 
                             })
@@ -378,7 +376,6 @@ public class PostDetailActivity extends AppCompatActivity implements SwipeRefres
 
                     AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
-                    //long timeAtButtonClick = System.currentTimeMillis();
                     // 1밀리초 -> 1초 = 1000 * 1밀초 -> 1분 = 60 * 1초 -> 1시간 = 60 * 1분
                     // 마감시간 밀리초로 closeTime_hour, closeTime_minute 사용
                     Calendar calendar= Calendar.getInstance();
@@ -386,7 +383,6 @@ public class PostDetailActivity extends AppCompatActivity implements SwipeRefres
                     long leftsecondmillis = Long.parseLong(closeTime_hour) * 60 * 60 * 1000 +
                             Long.parseLong(closeTime_minute) * 60 * 1000 - (calendar.get(Calendar.HOUR_OF_DAY) * 60 * 60 * 1000 +
                             calendar.get(Calendar.MINUTE) * 60 * 1000);
-                    //Toast.makeText(getApplicationContext(),"남시"+leftsecondmillis,Toast.LENGTH_SHORT).show();
 
                     // 1초 = 1000 * 10
 
@@ -456,7 +452,6 @@ public class PostDetailActivity extends AppCompatActivity implements SwipeRefres
     //이름 바탕으로 신청여부 검사하는 함수
 
     private boolean check(DocumentSnapshot document){
-        //get_user_name();
         int curNum = Integer.parseInt(document.getData().get("curPerson").toString());
         for(int i=2;i<=curNum;i++)
         {
@@ -619,21 +614,6 @@ public class PostDetailActivity extends AppCompatActivity implements SwipeRefres
         startActivity(intent); //액티비티 열기
         overridePendingTransition(0, 0);//인텐트 효과 없애기
     }
-
-
-    // 알림 채널 생성
-//    private void createNotificationChannel(){
-//        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-//            CharSequence name = "LemubitReminderChannel";
-//            String description = "Channel for Lemubit Reminder";
-//            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-//            NotificationChannel channel = new NotificationChannel("notifyLemubit",name,importance);
-//            channel.setDescription(description);
-//
-//            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-//            notificationManager.createNotificationChannel(channel);
-//        }
-//    }
 
     // 푸쉬 알림 채널 설정
     private void createNotificationChannel(){

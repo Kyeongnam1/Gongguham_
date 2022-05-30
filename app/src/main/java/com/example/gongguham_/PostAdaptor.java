@@ -82,13 +82,5 @@ public class PostAdaptor extends RecyclerView.Adapter<PostAdaptor.ViewHolder> {
 
 
         }
-
-//        void onBind(PostInfo item){
-//            postTitle.setText(item.getPostTitle());
-//            meetingArea.setText(item.getMeetingArea());
-//            closeTime.setText(item.getCloseTime());
-//            maxPerson.setText(item.getMaxPerson());
-//
-//        }
     }
 }
