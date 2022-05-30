@@ -111,12 +111,13 @@
         android:layout_height="59dp"
         android:layout_marginTop="100dp"
         android:layout_marginBottom="44dp"
-        android:text="공동구매 완료"
+        android:text="수령 완료"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/state1_textView"
-        app:layout_constraintVertical_bias="0.821" />
+        app:layout_constraintVertical_bias="0.821"
+        android:visibility="invisible"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

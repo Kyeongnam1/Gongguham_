@@ -12,8 +12,8 @@ public class ReminderBroadcast extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "notifyLemubit")
                 .setSmallIcon(R.drawable.icon)
-                .setContentTitle("공구진행상황")
-                .setContentText("배달 공구 진행상황을 확인해 주세요")
+                .setContentTitle("공구함 업데이트")
+                .setContentText("배달 진행상황을 확인해 주세요")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
 

@@ -22,6 +22,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -30,8 +35,14 @@ public class HostFragment extends Fragment {
     private ProgressBar mProgressBar;
     private TextView state1, state2, state3, pstate1, pstate2, pstate3;
     private Button finish_Button;
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String state;
     public HostFragment(){}
+
+    // 채팅방 완료시 삭제
+    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    private DatabaseReference chatRef;
+    String chat_name;
 
     @Nullable
     @Override
@@ -54,6 +65,8 @@ public class HostFragment extends Fragment {
         pstate2.setTextColor(Color.parseColor("#D3D3D3"));
         pstate3.setTextColor(Color.parseColor("#D3D3D3"));
 
+
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("posts").document(dbTitle)
                 .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -62,7 +75,9 @@ public class HostFragment extends Fragment {
                 if(task.isSuccessful()){
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()){
-                       state = document.getData().get("curSituation").toString();
+                        state = document.getData().get("curSituation").toString();
+                        // 연관 채팅방 이름 가져오
+                        chat_name = document.getData().get("chatTitle").toString();
                     }
                     else {
                         Log.d(TAG, "No such document");
@@ -144,6 +159,7 @@ public class HostFragment extends Fragment {
                                 pstate2.setTextColor(Color.parseColor("#D3D3D3"));
                                 pstate3.setTextColor(Color.parseColor("#000000"));
                                 Log.d("HostFragment", "Success");
+                                finish_Button.setVisibility(View.VISIBLE);
                             }
 
                         })
@@ -159,10 +175,44 @@ public class HostFragment extends Fragment {
         finish_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(),"이용해주셔서 감사합니다.", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getActivity(),ReviewActivity.class);
-                intent.putExtra("dbTitle", dbTitle);
-                getActivity().startActivity(intent);
+                db.collection("posts").document(dbTitle)
+                        .update("curSituation", "공구완료")
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(view.getContext(),"이용해주셔서 감사합니다.", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getActivity(),ReviewActivity.class);
+                                intent.putExtra("dbTitle", dbTitle);
+
+                                // 채팅방 삭제
+                                chatRef = firebaseDatabase.getReference("chat");
+                                chatRef.child(chat_name).removeValue();
+                                getActivity().startActivity(intent);
+                            }
+
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.e("HostFragment", "push menu in db fail" + e);
+                            }
+                        });
+                DocumentReference documentUserReference = FirebaseFirestore.getInstance().collection("users").document(user.getEmail());
+                documentUserReference.update("curPost", "null").
+                        addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Log.d("hf", "pda");
+                            }
+
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.e("hf", "Error update curPost" + e);
+
+                            }
+                        });
 
             }
         });
