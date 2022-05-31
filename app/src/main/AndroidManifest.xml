@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.gongguham_">
+    package="com.Gongguham.gongguham_">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -14,31 +14,31 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Gongguham_">
         <activity
-            android:name=".ReviewActivity"
+            android:name="com.Gongguham.gongguham_.ReviewActivity"
             android:exported="false" />
         <activity
-            android:name=".CashHistory"
+            android:name="com.Gongguham.gongguham_.CashHistory"
             android:exported="false" />
         <activity
-            android:name=".StateSelectActivity"
+            android:name="com.Gongguham.gongguham_.StateSelectActivity"
             android:exported="false" />
         <activity
-            android:name=".PostDetailActivity"
+            android:name="com.Gongguham.gongguham_.PostDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".AddPostItem"
+            android:name="com.Gongguham.gongguham_.AddPostItem"
             android:exported="false" />
         <activity
-            android:name=".TransmissionActivity"
+            android:name="com.Gongguham.gongguham_.TransmissionActivity"
             android:exported="false" />
         <activity
-            android:name=".TransmissionGuestActivity"
+            android:name="com.Gongguham.gongguham_.TransmissionGuestActivity"
             android:exported="false" />
         <activity
-            android:name=".DeliveryProgressActivity"
+            android:name="com.Gongguham.gongguham_.DeliveryProgressActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.Gongguham.gongguham_.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -57,31 +57,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".gpsActivity"
+            android:name="com.Gongguham.gongguham_.gpsActivity"
             android:requestLegacyExternalStorage="true" />
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".loginActivity" />
-        <activity android:name=".passwordResetActivity" />
-        <activity android:name=".memberInitActivity" />
-        <activity android:name=".ChatChattingActivity" />
-        <activity android:name=".PhoneAuthenticationActivity" />
-        <activity android:name=".TermsAgreeActivity" />
-        <activity android:name=".MyInfoActivity" />
+        <activity android:name="com.Gongguham.gongguham_.SignUpActivity" />
+        <activity android:name="com.Gongguham.gongguham_.loginActivity" />
+        <activity android:name="com.Gongguham.gongguham_.passwordResetActivity" />
+        <activity android:name="com.Gongguham.gongguham_.memberInitActivity" />
+        <activity android:name="com.Gongguham.gongguham_.ChatChattingActivity" />
+        <activity android:name="com.Gongguham.gongguham_.PhoneAuthenticationActivity" />
+        <activity android:name="com.Gongguham.gongguham_.TermsAgreeActivity" />
+        <activity android:name="com.Gongguham.gongguham_.MyInfoActivity" />
         <activity
-            android:name=".passwordChangeActivity"
+            android:name="com.Gongguham.gongguham_.passwordChangeActivity"
             android:usesCleartextTraffic="true" />
-        <activity android:name=".RatingActivity" />
-        <activity android:name=".TermsDetail" />
-        <activity android:name=".PayInfoActivity" />
-        <activity android:name=".userSearchActivity" />
-        <activity android:name=".FriendsListActivity" />
+        <activity android:name="com.Gongguham.gongguham_.RatingActivity" />
+        <activity android:name="com.Gongguham.gongguham_.TermsDetail" />
+        <activity android:name="com.Gongguham.gongguham_.PayInfoActivity" />
+        <activity android:name="com.Gongguham.gongguham_.userSearchActivity" />
+        <activity android:name="com.Gongguham.gongguham_.FriendsListActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDMqKQdI0GUOKdm6qSk2NkXf1hBhRsB6Fc" />
 
         <!--  푸쉬 알림 테스트   -->
-        <receiver android:name=".ReminderBroadcast"/>
+        <receiver android:name="com.Gongguham.gongguham_.ReminderBroadcast"/>
     </application>
 
 </manifest>
