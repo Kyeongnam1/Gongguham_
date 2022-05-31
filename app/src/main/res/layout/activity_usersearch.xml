@@ -7,15 +7,17 @@
     <TextView
         android:id="@+id/textView11"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         android:gravity="center"
         android:text="유저 검색"
         android:textColor="#000000"
-        android:textSize="34sp" />
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:orientation="horizontal">
 
         <EditText
@@ -26,7 +28,7 @@
             android:ems="10"
             android:gravity="center"
             android:hint="유저 이메일"
-            android:inputType="textEmailAddress"/>
+            android:inputType="textEmailAddress" />
 
         <Button
             android:id="@+id/userSearch"

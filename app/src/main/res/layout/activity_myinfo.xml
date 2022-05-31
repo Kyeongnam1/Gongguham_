@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
     android:orientation="vertical"
     android:textAlignment="center"
     tools:context=".MyInfoActivity">
@@ -21,12 +22,13 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_gravity="center">
 
         <LinearLayout
-            android:layout_margin="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="15dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -96,10 +98,10 @@
                         android:id="@+id/phoneNumberText"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
+                        android:layout_gravity="center|right"
                         android:layout_margin="10dp"
                         android:layout_marginBottom="10dp"
                         android:gravity="center"
-                        android:layout_gravity="center|right"
                         android:text="전화번호"
                         android:textColor="#000000"
                         android:textSize="16sp" />
@@ -115,8 +117,8 @@
                         android:id="@+id/genderText2"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:layout_margin="10dp"
                         android:layout_gravity="center|left"
+                        android:layout_margin="10dp"
                         android:gravity="center"
                         android:text="성별"
                         android:textColor="#000000"
@@ -131,10 +133,10 @@
                         android:id="@+id/genderText"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
+                        android:layout_gravity="center|right"
                         android:layout_margin="10dp"
                         android:gravity="center"
                         android:text="성별"
-                        android:layout_gravity="center|right"
                         android:textColor="#000000"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -155,6 +157,7 @@
                         android:text="계좌정보"
                         android:textColor="#000000"
                         android:textSize="16sp" />
+
                     <View
                         android:layout_width="0dp"
                         android:layout_height="0dp"
@@ -164,8 +167,8 @@
                         android:id="@+id/accountValueText"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:layout_margin="10dp"
                         android:layout_gravity="center|left"
+                        android:layout_margin="10dp"
                         android:gravity="center"
                         android:text="은행"
                         android:textColor="#000000"
@@ -176,8 +179,8 @@
                         android:id="@+id/accountText"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:layout_margin="10dp"
                         android:layout_gravity="center|right"
+                        android:layout_margin="10dp"
                         android:gravity="center"
                         android:text="계좌번호"
                         android:textColor="#000000"
@@ -194,8 +197,8 @@
                         android:id="@+id/emailText2"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:layout_margin="10dp"
                         android:layout_gravity="center|left"
+                        android:layout_margin="10dp"
                         android:gravity="center"
                         android:text="이메일"
                         android:textColor="#000000"
@@ -210,9 +213,9 @@
                         android:id="@+id/emailText"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
+                        android:layout_gravity="center|right"
                         android:layout_margin="10dp"
                         android:gravity="center"
-                        android:layout_gravity="center|right"
                         android:text="이메일"
                         android:textColor="#000000"
                         android:textSize="16sp" />
@@ -228,8 +231,8 @@
                         android:id="@+id/birthdayText2"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:layout_margin="10dp"
                         android:layout_gravity="center|left"
+                        android:layout_margin="10dp"
                         android:gravity="center"
                         android:text="생년월일"
                         android:textColor="#000000"
@@ -244,10 +247,10 @@
                         android:id="@+id/birthdayText"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
+                        android:layout_gravity="center|right"
                         android:layout_margin="10dp"
                         android:gravity="center"
                         android:text="생년월일"
-                        android:layout_gravity="center|right"
                         android:textColor="#000000"
                         android:textSize="16sp" />
 
