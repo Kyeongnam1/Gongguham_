@@ -97,6 +97,7 @@ public class viewMoreFragment extends Fragment {
 
                 case R.id.logoutButton:
                     FirebaseAuth.getInstance().signOut();
+                    Toast.makeText(getContext(),"로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
                     // sharedPreferences 비우기
                     SharedPreferences preferences = getContext().getSharedPreferences("account",MODE_PRIVATE);
                     SharedPreferences.Editor editor=preferences.edit();
@@ -104,6 +105,7 @@ public class viewMoreFragment extends Fragment {
                     editor.commit();
                     startMainActivity();
                     break;
+
                 case R.id.myDeliveryButton:
                     FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getEmail())
                             .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -164,6 +166,7 @@ public class viewMoreFragment extends Fragment {
                     FirebaseAuth.getInstance().getCurrentUser().delete();
                     FirebaseAuth.getInstance().signOut();
                     startMainActivity();
+                    Toast.makeText(getContext(),"회원탈퇴 되었습니다.", Toast.LENGTH_SHORT).show();
                     break;
             }
         }

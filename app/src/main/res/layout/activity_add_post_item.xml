@@ -26,6 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginRight="22dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="글쓰기"
@@ -37,7 +38,7 @@
                 android:id="@+id/btn_close"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center|right"
+                android:layout_gravity="right"
                 android:background="@drawable/round_button"
                 android:text="완료" />
         </LinearLayout>
@@ -141,8 +142,8 @@
                         android:layout_width="130dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="배달공구 인원"
-                        android:textSize="20sp" />
+                        android:text="배달공구\n최대인원"
+                        android:textSize="16sp" />
 
                     <Spinner
                         android:id="@+id/spinner_add_post_max_person"

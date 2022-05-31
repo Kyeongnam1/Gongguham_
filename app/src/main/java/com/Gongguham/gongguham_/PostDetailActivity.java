@@ -295,9 +295,8 @@ public class PostDetailActivity extends AppCompatActivity implements SwipeRefres
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // deleteVerification();
+                // deleteVerification();
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
                 DocumentReference documentUserReference = FirebaseFirestore.getInstance().collection("posts").document(key);
                 documentUserReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
@@ -314,9 +313,28 @@ public class PostDetailActivity extends AppCompatActivity implements SwipeRefres
                                             public void onSuccess(Void aVoid) {
                                                 startMainActivity();
                                                 Toast.makeText(view.getContext(),"게시글을 삭제했습니다.", Toast.LENGTH_SHORT).show();
-
                                                 chatRef = firebaseDatabase.getReference("chat");
                                                 chatRef.child(chatTitle).removeValue();
+                                                for(int i=1;i<=Integer.parseInt(document.getData().get("curPerson").toString());i++)
+                                                {
+                                                    String userEmail = document.getData().get("email"+Integer.toString(i)).toString();
+                                                    DocumentReference documentUserReference1 = FirebaseFirestore.getInstance().collection("users").document(userEmail);
+                                                    documentUserReference1.update("curPost", "null").
+                                                            addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                @Override
+                                                                public void onSuccess(Void aVoid) {
+                                                                    Log.d("pdd", "pdd");
+                                                                }
+
+                                                            })
+                                                            .addOnFailureListener(new OnFailureListener() {
+                                                                @Override
+                                                                public void onFailure(@NonNull Exception e) {
+                                                                    Log.e("pdd", "Error update curPost" + e);
+
+                                                                }
+                                                            });
+                                                }
                                             }
                                         })
                                                 .addOnFailureListener(new OnFailureListener() {
@@ -333,9 +351,6 @@ public class PostDetailActivity extends AppCompatActivity implements SwipeRefres
                         }
                     }
                 });
-
-
-
             }
         });
 
@@ -547,42 +562,44 @@ public class PostDetailActivity extends AppCompatActivity implements SwipeRefres
         TextView chat_name_ck = (TextView) dialogView.findViewById(R.id.chat_name_ck);
         EditText check_password = (EditText) dialogView.findViewById(R.id.check_password);
         chat_name_ck.setText(chatTitle);
+
+        chatRef = firebaseDatabase.getReference("chat");
+        chatRef.child(chatTitle).addChildEventListener(new ChildEventListener() {
+            //새로 추가된 것만 줌 ValueListener는 하나의 값만 바뀌어도 처음부터 다시 값을 줌
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                ChatDTO chatDTO = dataSnapshot.getValue(ChatDTO.class);
+                cr_pass = chatDTO.getPassword();
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(dialogView);
         builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 ck_pass = check_password.getText().toString();
                 // 채팅방 비밀번호 가져오기
-                chatRef = firebaseDatabase.getReference("chat");
-                chatRef.child(chatTitle).addChildEventListener(new ChildEventListener() {
-                    //새로 추가된 것만 줌 ValueListener는 하나의 값만 바뀌어도 처음부터 다시 값을 줌
-                    @Override
-                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                        ChatDTO chatDTO = dataSnapshot.getValue(ChatDTO.class);
-                        cr_pass = chatDTO.getPassword();
-
-                    }
-
-                    @Override
-                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                    }
-
-                    @Override
-                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-                    }
-
-                    @Override
-                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
                 if(ck_pass.equals(cr_pass)){
                     Toast.makeText(PostDetailActivity.this,"채팅방에 입장하였습니다.",Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(PostDetailActivity.this, ChatChattingActivity.class);
@@ -591,7 +608,6 @@ public class PostDetailActivity extends AppCompatActivity implements SwipeRefres
                     intent.putExtra("password",ck_pass);
                     G.username = username;
                     startActivity(intent);
-                    ck_pass = null;
                 }else{
                     Toast.makeText(PostDetailActivity.this,"비밀번호가 일치하지 않습니다.",Toast.LENGTH_SHORT).show();
                 }

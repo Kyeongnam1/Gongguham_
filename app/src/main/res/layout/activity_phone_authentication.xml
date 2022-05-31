@@ -35,7 +35,7 @@
             android:id="@+id/user_phonenumber_edt"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:hint="+8201011111111"
+            android:hint="+821012345678"
             android:textSize="16dp" />
 
         <Button
