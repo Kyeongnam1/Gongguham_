@@ -8,9 +8,54 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:738809970906:android:9b4a709efc16e1723225e3",
+        "android_client_info": {
+          "package_name": "com.Gongguham.gongguham_"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "738809970906-528duhu1tg2ig8ea5espf9av66rjrlhb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.Gongguham.gongguham_",
+            "certificate_hash": "154111a5392629c6cac78bc9bc6ebcb4d01f5549"
+          }
+        },
+        {
+          "client_id": "738809970906-jfmcpo7e7l3e0mqckh5mrgbqsmbepovn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.Gongguham.gongguham_",
+            "certificate_hash": "78d52e8a5b74622365bb8119d861b25c8e3024b9"
+          }
+        },
+        {
+          "client_id": "738809970906-0ckliba3nf2m8gn6muet7sb67cg59s06.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcsC6uQnLZIe1lIuCPTuL1GYmEClt7ce8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "738809970906-0ckliba3nf2m8gn6muet7sb67cg59s06.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:738809970906:android:d9a85c788e9364bd3225e3",
         "android_client_info": {
-          "package_name": "com.Gonguham.gongguham_"
+          "package_name": "com.example.gongguham_"
         }
       },
       "oauth_client": [
@@ -18,7 +63,7 @@
           "client_id": "738809970906-0inehsu35kserj0p68tpcum2dldpiov4.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.Gonguham.gongguham_",
+            "package_name": "com.example.gongguham_",
             "certificate_hash": "3ffab3814e0feb7a93d423e9f1b84860a7cd9567"
           }
         },
@@ -26,7 +71,7 @@
           "client_id": "738809970906-apl7v0si265u1fuummeodam9qit8l3j5.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.Gonguham.gongguham_",
+            "package_name": "com.example.gongguham_",
             "certificate_hash": "154111a5392629c6cac78bc9bc6ebcb4d01f5549"
           }
         },
@@ -34,7 +79,7 @@
           "client_id": "738809970906-eolcrd11sbd9ph71jpapmohcvdfh0vi8.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.Gonguham.gongguham_",
+            "package_name": "com.example.gongguham_",
             "certificate_hash": "ddff8df8c70c7b018e493c48b88bb46e8ae29505"
           }
         },
@@ -42,7 +87,7 @@
           "client_id": "738809970906-ovdj11igv1vsvcsnthb1kuq41bfmr4o3.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.Gonguham.gongguham_",
+            "package_name": "com.example.gongguham_",
             "certificate_hash": "e641684e6c57f99a91da58bbee1b022057130806"
           }
         },
@@ -50,7 +95,7 @@
           "client_id": "738809970906-sc8iril502ngj00iub0lfdrpendbs73j.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.Gonguham.gongguham_",
+            "package_name": "com.example.gongguham_",
             "certificate_hash": "48cb45e2f35751738f48b57bf1e7d43311f0ea8b"
           }
         },
@@ -58,7 +103,7 @@
           "client_id": "738809970906-ujrt3uhh5nfuqahqvbcq1u4apg5mo89a.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.Gonguham.gongguham_",
+            "package_name": "com.example.gongguham_",
             "certificate_hash": "da5552f21f60f9de929c7b079f31dd54e4f97bcc"
           }
         },
@@ -66,7 +111,7 @@
           "client_id": "738809970906-vhhbnfg10aourlm1l85vog02u7g6r06d.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.Gonguham.gongguham_",
+            "package_name": "com.example.gongguham_",
             "certificate_hash": "78d52e8a5b74622365bb8119d861b25c8e3024b9"
           }
         },
