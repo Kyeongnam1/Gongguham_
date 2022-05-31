@@ -315,9 +315,11 @@ public class PostDetailActivity extends AppCompatActivity implements SwipeRefres
                                             public void onSuccess(Void aVoid) {
                                                 startMainActivity();
                                                 Toast.makeText(view.getContext(),"게시글을 삭제했습니다.", Toast.LENGTH_SHORT).show();
-
                                                 chatRef = firebaseDatabase.getReference("chat");
                                                 chatRef.child(chatTitle).removeValue();
+
+
+
                                             }
                                         })
                                                 .addOnFailureListener(new OnFailureListener() {

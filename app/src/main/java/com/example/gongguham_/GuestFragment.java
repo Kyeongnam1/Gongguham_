@@ -169,7 +169,7 @@ public class GuestFragment extends Fragment {
                 ((DeliveryProgressActivity)getActivity()).refresh();
 
                 Intent intent = new Intent(getContext(),ReminderBroadcast.class);
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(),0,intent,0);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(),0,intent,PendingIntent.FLAG_IMMUTABLE);
 
                 AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
                 alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),pendingIntent);
