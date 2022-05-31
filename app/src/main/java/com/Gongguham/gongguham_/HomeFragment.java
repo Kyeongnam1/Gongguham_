@@ -296,8 +296,8 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         String temp = "";
 
         String[] slicedLocation = curUserLocation.split(" ");
-        slicedLocation[0] = null;
-        for(int i = 1 ; i < slicedLocation.length; i++){
+        slicedLocation[slicedLocation.length-1] = null;
+        for(int i = 0 ; i < slicedLocation.length-1; i++){
             temp += slicedLocation[i];
         }
 

@@ -105,19 +105,18 @@ public class AddPostItem extends AppCompatActivity {
 
                 // 알림 계산하고 알람 설정
                 Intent intent = new Intent(AddPostItem.this,ReminderBroadcast.class);
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(AddPostItem.this,0,intent,PendingIntent.FLAG_IMMUTABLE);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(AddPostItem.this,0,intent,PendingIntent.FLAG_MUTABLE);
 
                 AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
                 // 1밀리초 -> 1초 = 1000 * 1밀초 -> 1분 = 60 * 1초 -> 1시간 = 60 * 1분
                 // 마감시간 밀리초로 closeTime_hour, closeTime_minute 사용
-                Calendar calendar= Calendar.getInstance();
+                Calendar calendar = Calendar.getInstance();
 
                 long leftsecondmillis = Long.parseLong(closeTime_hour) * 60 * 60 * 1000 +
-                        Long.parseLong(closeTime_minute) * 60 * 1000 - (calendar.get(Calendar.HOUR_OF_DAY) * 60 * 60 * 1000 +
-                        calendar.get(Calendar.MINUTE) * 60 * 1000);
-
-                // 1초 = 1000 * 10
+                        Long.parseLong(closeTime_minute) * 60 * 1000 - calendar.get(Calendar.HOUR_OF_DAY) * 60 * 60 * 1000
+                        -  calendar.get(Calendar.MINUTE) * 60 * 1000 - calendar.get(Calendar.SECOND) * 1000
+                        - calendar.get(Calendar.MILLISECOND);
 
                 alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + leftsecondmillis ,pendingIntent);
 
