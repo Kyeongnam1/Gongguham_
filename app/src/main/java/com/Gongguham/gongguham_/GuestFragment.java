@@ -105,6 +105,11 @@ public class GuestFragment extends Fragment {
                                                 state2.setTextColor(Color.parseColor("#D3D3D3"));
                                                 state3.setTextColor(Color.parseColor("#D3D3D3"));
                                                 mProgressBar.setProgress(34);
+                                                Intent intent = new Intent(getContext(),ReminderBroadcast.class);
+                                                PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(),0,intent, PendingIntent.FLAG_IMMUTABLE);
+
+                                                AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
+                                                alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),pendingIntent);
                                             }
                                             else if(state.equals("배달시작") && tmCheck.equals("true"))
                                             {
@@ -114,6 +119,11 @@ public class GuestFragment extends Fragment {
                                                 state2.setTextColor(Color.parseColor("#000000"));
                                                 state3.setTextColor(Color.parseColor("#D3D3D3"));
                                                 mProgressBar.setProgress(67);
+                                                Intent intent = new Intent(getContext(),ReminderBroadcast.class);
+                                                PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(),0,intent, PendingIntent.FLAG_IMMUTABLE);
+
+                                                AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
+                                                alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),pendingIntent);
                                             }
                                             else if(state.equals("배달완료") && tmCheck.equals("true"))
                                             {
@@ -124,6 +134,11 @@ public class GuestFragment extends Fragment {
                                                 state3.setTextColor(Color.parseColor("#000000"));
                                                 mProgressBar.setProgress(100);
                                                 finishButton.setVisibility(View.VISIBLE);
+                                                Intent intent = new Intent(getContext(),ReminderBroadcast.class);
+                                                PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(),0,intent, PendingIntent.FLAG_IMMUTABLE);
+
+                                                AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
+                                                alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),pendingIntent);
                                             }
                                             else if(tmCheck.equals("true"))
                                             {
@@ -133,6 +148,11 @@ public class GuestFragment extends Fragment {
                                                 state2.setTextColor(Color.parseColor("#D3D3D3"));
                                                 state3.setTextColor(Color.parseColor("#D3D3D3"));
                                                 mProgressBar.setProgress(1);
+                                                Intent intent = new Intent(getContext(),ReminderBroadcast.class);
+                                                PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(),0,intent, PendingIntent.FLAG_IMMUTABLE);
+
+                                                AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
+                                                alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),pendingIntent);
                                             }
                                             else if(tmCheck.equals("false"))
                                             {
@@ -167,12 +187,6 @@ public class GuestFragment extends Fragment {
             public void onClick(View v) {
 
                 ((DeliveryProgressActivity)getActivity()).refresh();
-
-                Intent intent = new Intent(getContext(),ReminderBroadcast.class);
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(),0,intent, PendingIntent.FLAG_IMMUTABLE);
-
-                AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
-                alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),pendingIntent);
 
             }
         });
