@@ -10,7 +10,7 @@ android {
         applicationId "com.Gongguham.gongguham_"
         minSdk 21
         targetSdk 32
-        versionCode 6
+        versionCode 7
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
