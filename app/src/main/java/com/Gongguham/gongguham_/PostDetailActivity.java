@@ -316,9 +316,26 @@ public class PostDetailActivity extends AppCompatActivity implements SwipeRefres
                                                 Toast.makeText(view.getContext(),"게시글을 삭제했습니다.", Toast.LENGTH_SHORT).show();
                                                 chatRef = firebaseDatabase.getReference("chat");
                                                 chatRef.child(chatTitle).removeValue();
+                                                for(int i=1;i<=Integer.parseInt(document.getData().get("curPerson").toString());i++)
+                                                {
+                                                    String userEmail = document.getData().get("email"+Integer.toString(i)).toString();
+                                                    DocumentReference documentUserReference1 = FirebaseFirestore.getInstance().collection("users").document(userEmail);
+                                                    documentUserReference1.update("curPost", "null").
+                                                            addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                @Override
+                                                                public void onSuccess(Void aVoid) {
+                                                                    Log.d("pdd", "pdd");
+                                                                }
 
+                                                            })
+                                                            .addOnFailureListener(new OnFailureListener() {
+                                                                @Override
+                                                                public void onFailure(@NonNull Exception e) {
+                                                                    Log.e("pdd", "Error update curPost" + e);
 
-
+                                                                }
+                                                            });
+                                                }
                                             }
                                         })
                                                 .addOnFailureListener(new OnFailureListener() {
