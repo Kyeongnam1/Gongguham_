@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:738809970906:android:d9a85c788e9364bd3225e3",
         "android_client_info": {
-          "package_name": "com.example.gongguham_"
+          "package_name": "com.Gongguham.gongguham_"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "738809970906-eolcrd11sbd9ph71jpapmohcvdfh0vi8.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.gongguham_",
+            "package_name": "com.Gongguham.gongguham_",
             "certificate_hash": "ddff8df8c70c7b018e493c48b88bb46e8ae29505"
           }
         },
