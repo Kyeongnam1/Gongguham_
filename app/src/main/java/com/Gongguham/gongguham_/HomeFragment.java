@@ -142,8 +142,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
                                     if(curUserLocation != null){
                                         for(QueryDocumentSnapshot document : task.getResult()) {
-                                            Log.e(TAG, "테스트: " + document.getData().get("userLocation").toString());
-                                            Log.e(TAG, "테스트: " + document.getData().get("postCategory").toString());
                                             if(curUserLocation.equals(slicingLocation(document.getData().get("userLocation").toString()))) {
                                                 if(selectedOption.equals(document.getData().get("postCategory").toString())) {
                                                     String hour = document.getData().get("closeTime_hour").toString() + "시 ";
@@ -204,7 +202,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                     if (document != null) {
                         if (document.exists()) {
                             curUserLocation = slicingLocation(document.getData().get("curLoc").toString());
-                            Log.e(TAG, "제발" + curUserLocation );
+                            Log.e(TAG,  curUserLocation );
 
                         }
                     }
@@ -248,8 +246,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
                                     if(curUserLocation != null){
                                         for(QueryDocumentSnapshot document : task.getResult()) {
-                                            Log.e(TAG, "테스트: " + document.getData().get("userLocation").toString());
-                                            Log.e(TAG, "테스트: " + document.getData().get("postCategory").toString());
                                             if(curUserLocation.equals(slicingLocation(document.getData().get("userLocation").toString()))) {
                                                 if(selectedOption.equals(document.getData().get("postCategory").toString())) {
                                                     String hour = document.getData().get("closeTime_hour").toString()+"시 ";
@@ -296,8 +292,8 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         String temp = "";
 
         String[] slicedLocation = curUserLocation.split(" ");
-        slicedLocation[0] = null;
-        for(int i = 1 ; i < slicedLocation.length; i++){
+        slicedLocation[slicedLocation.length-1] = null;
+        for(int i = 0 ; i < slicedLocation.length-1; i++){
             temp += slicedLocation[i];
         }
 
